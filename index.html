@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mytux Corp. | Ingeniería, Software & Sostenibilidad</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0f172a',
+              card: '#1e293b',
+              accent: '#38bdf8',
+              green: '#4ade80',
+              copper: '#f97316'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- Navegación -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded bg-gradient-to-br from-sky-500 to-emerald-500 flex items-center justify-center font-bold text-slate-950">M</div>
+        <span class="font-bold text-lg tracking-wider text-slate-100">MYTUX<span class="text-sky-400">.CORP</span></span>
+      </div>
+      <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-300">
+        <a href="#inicio" class="hover:text-sky-400 transition">Inicio</a>
+        <a href="#servicios" class="hover:text-sky-400 transition">Servicios</a>
+        <a href="#proyectos" class="hover:text-sky-400 transition">Material Ilustrativo</a>
+        <a href="#nota-verde" class="hover:text-emerald-400 transition">Nota Verde</a>
+        <a href="#contacto" class="hover:text-sky-400 transition">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="flex-grow max-w-6xl mx-auto px-4 py-16 space-y-24">
+    <section id="inicio" class="space-y-6 max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Sostenibilidad · Transformación Digital · Ingeniería
+      </div>
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+        Soluciones de Software e Ingeniería con Enfoque Ambiental.
+      </h1>
+      <p class="text-slate-400 text-lg">
+        Desarrollamos herramientas de software, automatización y análisis de datos aplicados a procesos industriales, minero-metalúrgicos y proyectos de impacto sostenible.
+      </p>
+      <div class="flex flex-wrap gap-4 pt-4">
+        <a href="#contacto" class="px-6 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold transition">Hablemos de tu Proyecto</a>
+        <a href="#servicios" class="px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">Explorar Servicios</a>
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="space-y-8">
+      <h2 class="text-2xl font-bold border-l-4 border-sky-400 pl-3">Servicios & Áreas de Trabajo</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+          <div class="text-sky-400 text-2xl font-mono">01</div>
+          <h3 class="font-bold text-xl">Desarrollo de Software</h3>
+          <p class="text-slate-400 text-sm">Aplicaciones web, herramientas interactivas y utilidades de código abierto a la medida de problemas reales.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+          <div class="text-orange-400 text-2xl font-mono">02</div>
+          <h3 class="font-bold text-xl">Ingeniería & Procesos</h3>
+          <p class="text-slate-400 text-sm">Optimización de procesos mineros, metalúrgicos e industriales mediante analítica de datos y automatización.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+          <div class="text-emerald-400 text-2xl font-mono">03</div>
+          <h3 class="font-bold text-xl">Nota Verde & Sostenibilidad</h3>
+          <p class="text-slate-400 text-sm">Investigación aplicada, análisis ambiental y divulgación técnica orientada a la reducción del impacto ecológico.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Material Ilustrativo / Proyectos -->
+    <section id="proyectos" class="space-y-8">
+      <h2 class="text-2xl font-bold border-l-4 border-emerald-400 pl-3">Material Ilustrativo & Proyectos</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
+          <div class="flex justify-between items-start">
+            <h3 class="font-bold text-xl text-slate-100">Guías Estudiantiles & Herramientas UNAL</h3>
+            <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-1 rounded">Operativo</span>
+          </div>
+          <p class="text-slate-400 text-sm">Simuladores interactivos de mallas curriculares, calculadoras de créditos y directorios comunitarios creados para la facultad.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
+          <div class="flex justify-between items-start">
+            <h3 class="font-bold text-xl text-slate-100">Simuladores & Modelos Biológicos</h3>
+            <span class="text-xs font-mono bg-sky-500/10 text-sky-400 border border-sky-500/20 px-2 py-1 rounded">Open Source</span>
+          </div>
+          <p class="text-slate-400 text-sm">Herramientas de simulación poblacional y análisis evolutivo desarrolladas en Python y plataformas web.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="space-y-8 p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800">
+      <div class="max-w-xl space-y-4">
+        <h2 class="text-3xl font-bold">¿Tienes un proyecto en mente?</h2>
+        <p class="text-slate-400">Ponte en contacto con Mytux Corp. para colaborar en soluciones de software, ingeniería o proyectos ambientales.</p>
+        <div class="pt-4">
+          <a href="https://github.com/Mytux" target="_blank" class="inline-flex items-center gap-2 text-sky-400 font-medium hover:underline">
+            Visitar perfil de GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 py-8 bg-slate-900 text-center text-slate-500 text-sm">
+    <p>© 2026 Mytux Corp. · Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
