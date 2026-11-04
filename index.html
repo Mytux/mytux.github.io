@@ -1,117 +1,238 @@
 <!DOCTYPE html>
-<html lang="es" class="dark scroll-smooth">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mytux Corp. | Ingeniería, Software & Sostenibilidad</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              dark: '#0f172a',
-              card: '#1e293b',
-              accent: '#38bdf8',
-              green: '#4ade80',
-              copper: '#f97316'
-            }
-          }
-        }
-      }
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --border-color: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-green: #4ade80;
+      --accent-orange: #fb923c;
     }
-  </script>
-</head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    
+    header {
+      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(15, 23, 42, 0.9);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+      z-index: 50;
+    }
+    .nav-container {
+      max-w: 1150px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+    nav ul { display: flex; gap: 1.5rem; list-style: none; font-size: 0.9rem; }
+    nav a:hover { color: var(--accent-blue); transition: 0.2s; }
 
-  <!-- Navegación -->
-  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded bg-gradient-to-br from-sky-500 to-emerald-500 flex items-center justify-center font-bold text-slate-950">M</div>
-        <span class="font-bold text-lg tracking-wider text-slate-100">MYTUX<span class="text-sky-400">.CORP</span></span>
+    main { max-width: 1150px; margin: 0 auto; padding: 4rem 1.5rem; display: flex; flex-direction: column; gap: 5rem; }
+
+    .hero { max-width: 800px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      color: var(--accent-green);
+      font-size: 0.8rem;
+      font-family: monospace;
+      width: fit-content;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green); }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; }
+    .hero-text { color: var(--text-muted); font-size: 1.2rem; }
+    
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .btn-primary {
+      background-color: var(--accent-blue);
+      color: #0f172a;
+      font-weight: 700;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+    }
+    .btn-primary:hover { background-color: #7dd3fc; }
+    .btn-secondary {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-left: 4px solid var(--accent-blue);
+      padding-left: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 1.75rem;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .card-num { font-family: monospace; font-size: 1.5rem; font-weight: bold; }
+    .card-title { font-size: 1.25rem; font-weight: 700; }
+    .card-desc { color: var(--text-muted); font-size: 0.95rem; }
+
+    .tag {
+      font-size: 0.75rem;
+      font-family: monospace;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      width: fit-content;
+    }
+    .tag-green { background: rgba(74, 222, 128, 0.1); color: var(--accent-green); border: 1px solid rgba(74, 222, 128, 0.2); }
+    .tag-blue { background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.2); }
+
+    .contact-box {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 1px solid var(--border-color);
+      padding: 2.5rem;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-logo">M</div>
+        <span>MYTUX<span style="color: var(--accent-blue);">.CORP</span></span>
       </div>
-      <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-300">
-        <a href="#inicio" class="hover:text-sky-400 transition">Inicio</a>
-        <a href="#servicios" class="hover:text-sky-400 transition">Servicios</a>
-        <a href="#proyectos" class="hover:text-sky-400 transition">Material Ilustrativo</a>
-        <a href="#nota-verde" class="hover:text-emerald-400 transition">Nota Verde</a>
-        <a href="#contacto" class="hover:text-sky-400 transition">Contacto</a>
+      <nav>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#proyectos">Ilustrativo</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <main class="flex-grow max-w-6xl mx-auto px-4 py-16 space-y-24">
-    <section id="inicio" class="space-y-6 max-w-3xl">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Sostenibilidad · Transformación Digital · Ingeniería
+  <main>
+    <section id="inicio" class="hero">
+      <div class="badge">
+        <span class="dot"></span> Sostenibilidad · Transformación Digital · Ingeniería
       </div>
-      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
-        Soluciones de Software e Ingeniería con Enfoque Ambiental.
-      </h1>
-      <p class="text-slate-400 text-lg">
+      <h1>Soluciones de Software e Ingeniería con Enfoque Ambiental.</h1>
+      <p class="hero-text">
         Desarrollamos herramientas de software, automatización y análisis de datos aplicados a procesos industriales, minero-metalúrgicos y proyectos de impacto sostenible.
       </p>
-      <div class="flex flex-wrap gap-4 pt-4">
-        <a href="#contacto" class="px-6 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold transition">Hablemos de tu Proyecto</a>
-        <a href="#servicios" class="px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">Explorar Servicios</a>
+      <div class="cta-group">
+        <a href="#contacto" class="btn-primary">Hablemos de tu Proyecto</a>
+        <a href="#servicios" class="btn-secondary">Explorar Servicios</a>
       </div>
     </section>
 
-    <!-- Servicios -->
-    <section id="servicios" class="space-y-8">
-      <h2 class="text-2xl font-bold border-l-4 border-sky-400 pl-3">Servicios & Áreas de Trabajo</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
-          <div class="text-sky-400 text-2xl font-mono">01</div>
-          <h3 class="font-bold text-xl">Desarrollo de Software</h3>
-          <p class="text-slate-400 text-sm">Aplicaciones web, herramientas interactivas y utilidades de código abierto a la medida de problemas reales.</p>
+    <section id="servicios">
+      <h2 class="section-title">Servicios & Áreas de Trabajo</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-num" style="color: var(--accent-blue);">01</div>
+          <h3 class="card-title">Desarrollo de Software</h3>
+          <p class="card-desc">Aplicaciones web, herramientas interactivas y utilidades de código abierto a la medida de problemas reales.</p>
         </div>
-        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
-          <div class="text-orange-400 text-2xl font-mono">02</div>
-          <h3 class="font-bold text-xl">Ingeniería & Procesos</h3>
-          <p class="text-slate-400 text-sm">Optimización de procesos mineros, metalúrgicos e industriales mediante analítica de datos y automatización.</p>
+        <div class="card">
+          <div class="card-num" style="color: var(--accent-orange);">02</div>
+          <h3 class="card-title">Ingeniería & Procesos</h3>
+          <p class="card-desc">Optimización de procesos mineros, metalúrgicos e industriales mediante analítica de datos y automatización.</p>
         </div>
-        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
-          <div class="text-emerald-400 text-2xl font-mono">03</div>
-          <h3 class="font-bold text-xl">Nota Verde & Sostenibilidad</h3>
-          <p class="text-slate-400 text-sm">Investigación aplicada, análisis ambiental y divulgación técnica orientada a la reducción del impacto ecológico.</p>
+        <div class="card">
+          <div class="card-num" style="color: var(--accent-green);">03</div>
+          <h3 class="card-title">Nota Verde & Sostenibilidad</h3>
+          <p class="card-desc">Investigación aplicada, análisis ambiental y divulgación técnica orientada a la reducción del impacto ecológico.</p>
         </div>
       </div>
     </section>
 
-    <!-- Material Ilustrativo / Proyectos -->
-    <section id="proyectos" class="space-y-8">
-      <h2 class="text-2xl font-bold border-l-4 border-emerald-400 pl-3">Material Ilustrativo & Proyectos</h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
-          <div class="flex justify-between items-start">
-            <h3 class="font-bold text-xl text-slate-100">Guías Estudiantiles & Herramientas UNAL</h3>
-            <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-1 rounded">Operativo</span>
+    <section id="proyectos">
+      <h2 class="section-title" style="border-left-color: var(--accent-green);">Material Ilustrativo & Proyectos</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 class="card-title">Guías Estudiantiles & Herramientas UNAL</h3>
+            <span class="tag tag-green">Operativo</span>
           </div>
-          <p class="text-slate-400 text-sm">Simuladores interactivos de mallas curriculares, calculadoras de créditos y directorios comunitarios creados para la facultad.</p>
+          <p class="card-desc">Simuladores interactivos de mallas curriculares, calculadoras de créditos y directorios comunitarios creados para la facultad.</p>
         </div>
-        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-4">
-          <div class="flex justify-between items-start">
-            <h3 class="font-bold text-xl text-slate-100">Simuladores & Modelos Biológicos</h3>
-            <span class="text-xs font-mono bg-sky-500/10 text-sky-400 border border-sky-500/20 px-2 py-1 rounded">Open Source</span>
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 class="card-title">Simuladores & Modelos Biológicos</h3>
+            <span class="tag tag-blue">Open Source</span>
           </div>
-          <p class="text-slate-400 text-sm">Herramientas de simulación poblacional y análisis evolutivo desarrolladas en Python y plataformas web.</p>
+          <p class="card-desc">Herramientas de simulación poblacional y análisis evolutivo desarrolladas en Python y plataformas web.</p>
         </div>
       </div>
     </section>
 
-    <!-- Contacto -->
-    <section id="contacto" class="space-y-8 p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800">
-      <div class="max-w-xl space-y-4">
-        <h2 class="text-3xl font-bold">¿Tienes un proyecto en mente?</h2>
-        <p class="text-slate-400">Ponte en contacto con Mytux Corp. para colaborar en soluciones de software, ingeniería o proyectos ambientales.</p>
-        <div class="pt-4">
-          <a href="https://github.com/Mytux" target="_blank" class="inline-flex items-center gap-2 text-sky-400 font-medium hover:underline">
+    <section id="contacto">
+      <div class="contact-box">
+        <h2 style="font-size: 1.8rem;">¿Tienes un proyecto en mente?</h2>
+        <p class="card-desc">Ponte en contacto con Mytux Corp. para colaborar en soluciones de software, ingeniería o proyectos ambientales.</p>
+        <div>
+          <a href="https://github.com/Mytux" target="_blank" style="color: var(--accent-blue); font-weight: bold;">
             Visitar perfil de GitHub ↗
           </a>
         </div>
@@ -119,9 +240,9 @@
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-slate-800 py-8 bg-slate-900 text-center text-slate-500 text-sm">
+  <footer>
     <p>© 2026 Mytux Corp. · Todos los derechos reservados.</p>
   </footer>
+
 </body>
 </html>
