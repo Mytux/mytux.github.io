@@ -56,7 +56,7 @@
     nav ul { display: flex; gap: 1.25rem; flex-wrap: wrap; list-style: none; font-size: 0.9rem; }
     nav a:hover { color: var(--accent-green); transition: 0.2s; }
 
-    main { max-width: 1150px; margin: 0 auto; padding: 4rem 1.5rem; display: flex; flex-direction: column; gap: 5rem; }
+    main { display: block; counter-reset: sec; }
 
     .hero { max-width: 800px; display: flex; flex-direction: column; gap: 1.5rem; }
     .badge {
@@ -132,9 +132,101 @@
     @media (max-width: 720px) {
       .about { grid-template-columns: 1fr; gap: 1.5rem; }
       .about-photo { width: 11rem; }
-      main { gap: 4rem; padding-top: 3rem; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    /* ===== Secciones diferenciadas ===== */
+    section { padding: 5rem max(1.5rem, calc((100% - 1150px) / 2)); position: relative; }
+    .hero { max-width: none; min-height: 82vh; justify-content: center;
+      background: radial-gradient(ellipse at 75% 20%, rgba(134,188,217,.16), transparent 55%), radial-gradient(ellipse at 15% 85%, rgba(143,207,163,.14), transparent 50%); }
+    .hero > * { max-width: 800px; }
+    #sobre-mi { background: #141715; border-block: 1px solid var(--border-color); }
+    #proyectos { background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 44px 44px; }
+    #material { background: linear-gradient(180deg, #0f1110, #121c17 50%, #0f1110); border-top: 1px solid var(--border-color); }
+    #contacto { background: #0b0c0b; border-top: 1px solid var(--border-color); }
+    .section-title { font-size: 2rem; letter-spacing: -.02em; }
+    .section-title::before { counter-increment: sec; content: "0" counter(sec); display: block; font: 700 .8rem monospace; letter-spacing: .15em; color: var(--accent-green); }
+    .sub-h { font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin: 0 0 1.25rem; }
+    .sub-h:not(:first-of-type) { margin-top: 3.5rem; }
+    nav a.active { color: var(--accent-green); }
+    .card { transition: border-color .2s, transform .2s; }
+    .card:hover { border-color: rgba(143,207,163,.55); }
+
+    /* ===== Animaciones al hacer scroll ===== */
+    .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease, border-color .2s; }
+    .js .reveal.in { opacity: 1; transform: none; }
+    .js .card.reveal.in:hover { transform: translateY(-4px); transition: transform .2s, border-color .2s; }
+
+    /* ===== Simulador ===== */
+    .sim { margin-top: 2.5rem; padding: 2rem; }
+    .sim-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+    .sim-body { display: grid; grid-template-columns: minmax(220px, 290px) 1fr; gap: 2rem; margin-top: 1rem; }
+    .sim-controls { display: flex; flex-direction: column; gap: 1.1rem; }
+    .sim-controls label { display: flex; flex-direction: column; gap: .35rem; font-size: .9rem; color: var(--text-muted); }
+    .lbl { display: flex; justify-content: space-between; }
+    .lbl output { color: var(--text-main); font-family: monospace; }
+    input[type=range] { accent-color: var(--accent-green); width: 100%; }
+    .sim-controls .cta-group { margin-top: .25rem; }
+    .sim-controls button { font: inherit; cursor: pointer; border: 0; }
+    .sim-controls .btn-secondary { border: 1px solid var(--border-color); }
+    #chart { width: 100%; height: 320px; display: block; background: rgba(0,0,0,.28); border-radius: 8px; }
+    .legend { display: flex; gap: 1.25rem; font-size: .85rem; color: var(--text-muted); margin-top: .6rem; flex-wrap: wrap; }
+    .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: .4rem; }
+    #readout { font-family: monospace; font-size: .85rem; color: var(--text-main); margin-top: .4rem; }
+
+    /* ===== Galeria ===== */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+    .shot { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .shot-btn { all: unset; cursor: zoom-in; display: block; aspect-ratio: 4 / 3; overflow: hidden; position: relative; }
+    .shot-btn:focus-visible { outline: 3px solid var(--accent-green); outline-offset: -3px; }
+    .shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+    .shot-btn:hover img { transform: scale(1.06); }
+    .ph { display: none; position: absolute; inset: 0; place-items: center; text-align: center; color: var(--text-muted); font-size: .9rem; background: linear-gradient(135deg, rgba(143,207,163,.18), rgba(134,188,217,.18)); }
+    .shot.empty .ph { display: grid; }
+    .shot.empty img { display: none; }
+    .shot.empty .shot-btn { cursor: default; }
+    .shot figcaption { padding: 1rem 1.1rem 1.25rem; display: flex; flex-direction: column; gap: .3rem; }
+    .shot figcaption span { color: var(--text-muted); font-size: .9rem; }
+    .lightbox { position: fixed; inset: 0; background: rgba(5,6,5,.92); z-index: 100; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .5rem; padding: 1rem; }
+    .lightbox[hidden] { display: none; }
+    .lightbox figure { display: flex; flex-direction: column; align-items: center; gap: .75rem; min-width: 0; }
+    .lightbox img { max-width: 100%; max-height: 74vh; border-radius: 8px; }
+    .lightbox figcaption { text-align: center; max-width: 42rem; color: var(--text-muted); }
+    .lightbox figcaption strong { display: block; color: var(--text-main); font-size: 1.15rem; }
+    .lightbox button { all: unset; cursor: pointer; color: var(--text-main); font-size: 2.2rem; padding: .5rem 1rem; border-radius: 8px; }
+    .lightbox button:hover, .lightbox button:focus-visible { background: rgba(255,255,255,.12); }
+    .lb-close { position: absolute; top: .5rem; right: .75rem; font-size: 1.5rem !important; }
+
+    @media (max-width: 720px) {
+      section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+      .hero { min-height: 70vh; }
+      .sim-body { grid-template-columns: 1fr; }
+      .sim { padding: 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; transition: none; } .shot img { transition: none; } }
+
+    /* ===== Simulador: pestañas y paneles ===== */
+    .tabs { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.25rem; }
+    .tab { font: inherit; font-size: .9rem; cursor: pointer; border: 1px solid var(--border-color); background: transparent; color: var(--text-muted); padding: .5rem 1.05rem; border-radius: 9999px; transition: .2s; }
+    .tab:hover { border-color: var(--accent-green); color: var(--text-main); }
+    .tab[aria-selected="true"] { background: var(--accent-green); border-color: var(--accent-green); color: #0f1110; font-weight: 700; }
+    .panel { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .panel[hidden] { display: none; }
+    .ctrl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem 2rem; }
+    .grp { display: flex; flex-direction: column; gap: .9rem; }
+    .grp h4, .panel h4 { font-size: .95rem; }
+    .metric { font-family: monospace; font-size: .85rem; color: var(--text-main); }
+    input[type=number] { font: inherit; padding: .4rem .6rem; border-radius: 6px; border: 1px solid var(--border-color); background: #0f1110; color: var(--text-main); width: 100%; }
+    .cv { width: 100%; height: 300px; display: block; background: rgba(0,0,0,.28); border-radius: 8px; }
+    .chart2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; }
+    .chart2 > div { display: flex; flex-direction: column; gap: .6rem; }
+    .cap { color: var(--text-muted); font-size: .85rem; }
+    .sp { border: 1px solid var(--border-color); border-radius: 10px; padding: 1.25rem; background: rgba(0,0,0,.2); display: flex; flex-direction: column; gap: .5rem; }
+    .sp ul { list-style: none; color: var(--text-muted); font-size: .92rem; display: flex; flex-direction: column; gap: .3rem; }
+    .sp code { color: var(--text-main); font-family: monospace; }
+    .note { font-size: .9rem; padding: .7rem .9rem; border-radius: 8px; }
+    .note.ok { background: rgba(143,207,163,.12); border: 1px solid rgba(143,207,163,.3); color: #c3e8d0; }
+    .note.warn { background: rgba(217,178,124,.12); border: 1px solid rgba(217,178,124,.35); color: #ecd2a9; }
   </style>
 </head>
 <body>
@@ -183,9 +275,10 @@
             <li class="env">PMA y SGA</li>
             <li class="env">Matrices legales y ASPI</li>
             <li class="env">Informes de caracterización</li>
-            <li class="env">Manejo de PTARI (plantas de tratamiento de aguas residuales industriales)</li>
-            <li class="env">Digitalización del RUA (Registro Único Ambiental)</li>
+            <li class="env">Operación de PTARI (plantas de tratamiento de aguas residuales industriales)</li>
+            <li class="env">Digitalización del RUA</li>
             <li class="env">Capacitaciones ambientales empresariales</li>
+            <li>Analítica de Datos &amp; Business Intelligence</li>
             <li>Coordinación de proyectos</li>
             <li>Herramientas digitales</li>
           </ul>
@@ -229,10 +322,63 @@
           <p class="card-desc">Elaboración de planes de manejo ambiental, sistemas de gestión, matrices legales y de aspectos e impactos, e informes de caracterización.</p>
         </div>
       </div>
+
+      <div class="card env sim" id="sim">
+        <div class="sim-head">
+          <h3 class="card-title">Simulador de ecología de poblaciones</h3>
+          <span class="tag tag-green">Interactivo</span>
+        </div>
+        <p class="card-desc">Modelado de la tasa intrínseca de crecimiento y su sensibilidad demográfica (Cole, 1954). Ajusta R₀ (tasa neta reproductiva) y T (tiempo generacional) para ver cómo cambia r = ln(R₀) / T.</p>
+        <div class="tabs" role="tablist" aria-label="Secciones del simulador">
+          <button type="button" class="tab" role="tab" aria-selected="true" data-p="0">Escenarios</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-p="1">Sensibilidad</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-p="2">Mosquitos vs ballenas</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-p="3">Elasticidad %Δr</button>
+        </div>
+
+        <div class="panel" role="tabpanel">
+          <div class="ctrl-grid">
+            <div class="grp"><h4 style="color:var(--accent-green)">Escenario 1 · Población A (plagas)</h4>
+              <label><span class="lbl">R₀ (tasa neta) <output id="o-r01"></output></span><input type="range" id="r01" min="0.01" max="50" step="0.1" value="5"></label>
+              <label><span class="lbl">T (tiempo generacional) <output id="o-t1"></output></span><input type="range" id="t1" min="0.1" max="50" step="0.1" value="15"></label>
+              <p class="metric" id="m1"></p></div>
+            <div class="grp"><h4 style="color:var(--accent-blue)">Escenario 2 · Población B (conservación)</h4>
+              <label><span class="lbl">R₀ (tasa neta) <output id="o-r02"></output></span><input type="range" id="r02" min="0.01" max="50" step="0.01" value="0.75"></label>
+              <label><span class="lbl">T (tiempo generacional) <output id="o-t2"></output></span><input type="range" id="t2" min="0.1" max="50" step="0.1" value="12"></label>
+              <p class="metric" id="m2"></p></div>
+            <div class="grp"><h4>Configuración global</h4>
+              <label><span class="lbl">Población inicial (N₀)</span><input type="number" id="n0" min="1" step="10" value="100"></label>
+              <label><span class="lbl">Tiempo máximo <output id="o-tm"></output></span><input type="range" id="tm" min="10" max="100" value="50"></label>
+              <div class="cta-group"><button type="button" class="btn-primary" id="play">▶ Reproducir</button><button type="button" class="btn-secondary" id="reset">Reiniciar</button></div></div>
+          </div>
+          <canvas class="cv" id="c1" role="img" aria-label="Tamaño poblacional contra tiempo para dos escenarios"></canvas>
+          <div class="legend"><span><i style="background:#8fcfa3"></i>Escenario 1</span><span><i style="background:#86bcd9"></i>Escenario 2</span><span>Eje X: tiempo · Eje Y: tamaño poblacional (N)</span></div>
+          <p id="readout" aria-live="polite"></p>
+        </div>
+
+        <div class="panel" role="tabpanel" hidden>
+          <div class="chart2">
+            <div><h4>r en función de R₀, para distintos T</h4><canvas class="cv" id="c21" role="img" aria-label="Tasa intrínseca r contra R0"></canvas><div class="legend" id="lg21"></div></div>
+            <div><h4>Caída de la elasticidad de R₀: ε = 1 / ln(R₀)</h4><canvas class="cv" id="c22" role="img" aria-label="Elasticidad de R0"></canvas><p class="cap">Por encima de R₀ = e la elasticidad baja de 1: la población se vuelve inelástica a cambios en la fecundidad.</p></div>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" hidden>
+          <p class="card-desc">¿Es mejor reducir la natalidad (R₀) o modificar el tiempo generacional (T)? Depende de la especie.</p>
+          <div class="chart2" id="species"></div>
+        </div>
+
+        <div class="panel" role="tabpanel" hidden>
+          <p class="card-desc">Reducción porcentual de r al dividir R₀ a la mitad: %Δr = [ln(2) / ln(R₀)] × 100</p>
+          <canvas class="cv" id="c4" role="img" aria-label="Reducción porcentual de r contra R0 en escala logarítmica"></canvas>
+          <p class="cap">Eje X: R₀ (escala logarítmica) · Eje Y: reducción porcentual en r. Para R₀ ≥ 100 la curva cae por debajo de 15 %: atacar solo la fecundidad es poco eficaz en especies muy reproductivas.</p>
+        </div>
+      </div>
     </section>
 
     <section id="material">
       <h2 class="section-title">Material ilustrativo</h2>
+      <h3 class="sub-h">Recursos y herramientas</h3>
       <div class="grid-3">
         <div class="card env">
           <div class="card-head">
@@ -257,6 +403,14 @@
           <p class="card-desc">Investigación aplicada y divulgación técnica sobre sostenibilidad y reducción del impacto ecológico.</p>
         </div>
       </div>
+    <h3 class="sub-h">Galería</h3>
+      <div class="gallery" id="gallery"></div>
+      <div class="lightbox" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
+        <button type="button" class="lb-close" id="lb-x" aria-label="Cerrar">✕</button>
+        <button type="button" id="lb-p" aria-label="Foto anterior">‹</button>
+        <figure><img id="lb-img" alt=""><figcaption><strong id="lb-t"></strong><span id="lb-d"></span></figcaption></figure>
+        <button type="button" id="lb-n" aria-label="Foto siguiente">›</button>
+      </div>
     </section>
 
     <section id="contacto">
@@ -278,5 +432,151 @@
     <p>© 2026 Mytux Corp. · Todos los derechos reservados.</p>
   </footer>
 
+<script>
+document.documentElement.classList.add('js');
+
+/* ===== GALERIA: agrega tus fotos aqui (sube las imagenes a la carpeta img/) ===== */
+const FOTOS = [
+  { src: 'img/foto-1.jpg', titulo: 'Título de la primera foto', descripcion: 'Describe qué se ve, dónde y cuándo fue tomada.' },
+  { src: 'img/foto-2.jpg', titulo: 'Título de la segunda foto', descripcion: 'Cuenta qué proyecto o actividad muestra.' },
+  { src: 'img/foto-3.jpg', titulo: 'Título de la tercera foto', descripcion: 'Agrega el contexto: lugar, equipo o resultado.' }
+];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const gal = document.getElementById('gallery');
+FOTOS.forEach((f, i) => {
+  const fig = document.createElement('figure');
+  fig.className = 'shot empty';
+  fig.innerHTML = '<button type="button" class="shot-btn" aria-label="Ampliar: ' + esc(f.titulo) + '"><img loading="lazy" alt="' + esc(f.titulo) + '"><span class="ph">Foto de ejemplo<br>Sube tu imagen a img/</span></button><figcaption><strong>' + esc(f.titulo) + '</strong><span>' + esc(f.descripcion) + '</span></figcaption>';
+  const img = fig.querySelector('img');
+  img.onload = () => fig.classList.remove('empty');
+  img.onerror = () => fig.classList.add('empty');
+  img.src = f.src;
+  fig.querySelector('button').onclick = () => { if (!fig.classList.contains('empty')) show(i); };
+  gal.appendChild(fig);
+});
+const lb = document.getElementById('lb');
+let idx = 0;
+function show(i) {
+  idx = (i + FOTOS.length) % FOTOS.length;
+  const f = FOTOS[idx];
+  document.getElementById('lb-img').src = f.src;
+  document.getElementById('lb-img').alt = f.titulo;
+  document.getElementById('lb-t').textContent = f.titulo;
+  document.getElementById('lb-d').textContent = f.descripcion;
+  lb.hidden = false; document.body.style.overflow = 'hidden';
+}
+function hide() { lb.hidden = true; document.body.style.overflow = ''; }
+document.getElementById('lb-x').onclick = hide;
+document.getElementById('lb-p').onclick = () => show(idx - 1);
+document.getElementById('lb-n').onclick = () => show(idx + 1);
+lb.onclick = e => { if (e.target === lb) hide(); };
+document.addEventListener('keydown', e => {
+  if (lb.hidden) return;
+  if (e.key === 'Escape') hide();
+  if (e.key === 'ArrowLeft') show(idx - 1);
+  if (e.key === 'ArrowRight') show(idx + 1);
+});
+
+/* ===== SIMULADOR DE ECOLOGIA DE POBLACIONES ===== */
+(function () {
+  const $ = id => document.getElementById(id);
+  const C = { g: '#8fcfa3', b: '#86bcd9', mut: '#9aa49d', line: '#2e3430' };
+  const range = (a, b, n, lg) => Array.from({ length: n }, (_, i) => { const t = i / (n - 1); return lg ? a * Math.pow(b / a, t) : a + (b - a) * t; });
+  const nf = v => v >= 1e7 ? v.toExponential(2) : Math.round(v).toLocaleString('es-CO');
+
+  function chart(cv, o) {
+    const W = cv.clientWidth, H = 300, d = window.devicePixelRatio || 1;
+    if (!W) return;
+    cv.width = W * d; cv.height = H * d;
+    const c = cv.getContext('2d'); c.setTransform(d, 0, 0, d, 0, 0);
+    const m = { l: 50, r: 14, t: 16, b: 30 }, [x0, x1] = o.x, [y0, y1] = o.y;
+    const fx = o.xlog ? Math.log10 : (v => v), a = fx(x0), b = fx(x1);
+    const X = v => m.l + (W - m.l - m.r) * (fx(v) - a) / (b - a);
+    const Y = v => H - m.b - (H - m.t - m.b) * (v - y0) / (y1 - y0);
+    c.font = '12px system-ui'; c.lineWidth = 1; c.strokeStyle = C.line; c.fillStyle = C.mut;
+    for (let i = 0; i <= 4; i++) { const v = y0 + (y1 - y0) * i / 4, yy = Y(v); c.beginPath(); c.moveTo(m.l, yy); c.lineTo(W - m.r, yy); c.stroke(); c.fillText(+v.toPrecision(3), 4, yy + 4); }
+    const xt = o.xlog ? [1, 10, 100, 1000].filter(v => v >= x0 && v <= x1) : range(x0, x1, 6);
+    xt.forEach(v => c.fillText(+v.toPrecision(3), X(v) - 8, H - 10));
+    c.setLineDash([6, 4]); c.strokeStyle = '#6f7a73';
+    (o.hl || []).forEach(h => { c.beginPath(); c.moveTo(m.l, Y(h.y)); c.lineTo(W - m.r, Y(h.y)); c.stroke(); c.fillText(h.t, m.l + 6, Y(h.y) - 5); });
+    (o.vl || []).forEach(v => { c.beginPath(); c.moveTo(X(v.x), m.t); c.lineTo(X(v.x), H - m.b); c.stroke(); c.fillText(v.t, X(v.x) + 5, m.t + 12); });
+    c.setLineDash([]);
+    (o.series || []).forEach(s => {
+      c.strokeStyle = s.color; c.lineWidth = 2.5; c.beginPath(); let pen = false;
+      s.pts.forEach(([px, py]) => { if (py > y1 || py < y0) { pen = false; return; } pen ? c.lineTo(X(px), Y(py)) : c.moveTo(X(px), Y(py)); pen = true; });
+      c.stroke();
+    });
+    (o.marks || []).forEach(k => { c.fillStyle = C.b; c.beginPath(); c.arc(X(k.x), Y(k.y), 4, 0, 7); c.fill(); c.fillStyle = C.mut; c.fillText(k.t, X(k.x) + 7, Y(k.y) - 6); });
+  }
+
+  /* Panel 1: escenarios */
+  let prog = 1, raf = 0;
+  function p1() {
+    ['r01', 't1', 'r02', 't2', 'tm'].forEach(id => $('o-' + id).textContent = $(id).value);
+    const n0 = Math.max(1, +$('n0').value || 1), tm = +$('tm').value;
+    const r1 = Math.log(+$('r01').value) / +$('t1').value, r2 = Math.log(+$('r02').value) / +$('t2').value;
+    $('m1').textContent = 'r₁ = ' + r1.toFixed(4) + ' · λ₁ = ' + Math.exp(r1).toFixed(4);
+    $('m2').textContent = 'r₂ = ' + r2.toFixed(4) + ' · λ₂ = ' + Math.exp(r2).toFixed(4);
+    const te = Math.max(tm * prog, 1e-6), ts = range(0, te, 100);
+    const N = r => ts.map(t => [t, n0 * Math.exp(r * t)]);
+    chart($('c1'), { x: [0, tm], y: [0, n0 * Math.exp(Math.max(r1, r2, 0) * tm) * 1.05],
+      series: [{ pts: N(r1), color: C.g }, { pts: N(r2), color: C.b }] });
+    $('readout').textContent = 'Tiempo ' + te.toFixed(0) + ' · Escenario 1: N = ' + nf(n0 * Math.exp(r1 * te)) + ' · Escenario 2: N = ' + nf(n0 * Math.exp(r2 * te));
+  }
+  const live = () => { cancelAnimationFrame(raf); prog = 1; p1(); };
+  ['r01', 't1', 'r02', 't2', 'n0', 'tm'].forEach(id => $(id).addEventListener('input', live));
+  $('play').onclick = () => { cancelAnimationFrame(raf); const t0 = performance.now(); const st = now => { prog = Math.min(1, (now - t0) / 3500); p1(); if (prog < 1) raf = requestAnimationFrame(st); }; raf = requestAnimationFrame(st); };
+  $('reset').onclick = () => { cancelAnimationFrame(raf); prog = 0; p1(); };
+
+  /* Panel 2: sensibilidad y elasticidad */
+  function p2() {
+    const R = range(1.01, 50, 400), Ts = [1, 2, 5, 10, 20, 50], col = ['#8fcfa3', '#86bcd9', '#b8bfba', '#5fae82', '#5f9dbf', '#e8ece9'];
+    chart($('c21'), { x: [1, 50], y: [0, 4], vl: [{ x: Math.E, t: 'R₀ = e' }],
+      series: Ts.map((T, i) => ({ pts: R.map(r => [r, Math.log(r) / T]), color: col[i] })) });
+    $('lg21').innerHTML = Ts.map((T, i) => '<span><i style="background:' + col[i] + '"></i>T = ' + T + '</span>').join('');
+    chart($('c22'), { x: [1, 50], y: [0, 3], hl: [{ y: 1, t: 'Umbral inelástico (ε = 1)' }], vl: [{ x: Math.E, t: 'R₀ = e' }],
+      series: [{ pts: R.map(r => [r, 1 / Math.log(r)]), color: C.g }] });
+  }
+
+  /* Panel 3: mosquitos vs ballenas */
+  function p3() {
+    const f = v => v.toFixed(4);
+    const m0 = Math.log(5) / 15, mA = Math.log(2.5) / 15, mB = Math.log(5) / 30;
+    const w0 = Math.log(1.5) / 12, wA = Math.log(0.75) / 12, wB = Math.log(2.25) / 12;
+    $('species').innerHTML =
+      '<div class="sp"><h4>🦟 Mosquito (<i>Aedes aegypti</i>)</h4><p class="card-desc">R₀ = 5,0 · T = 15 días</p><ul>' +
+      '<li>r inicial: <code>' + f(m0) + '</code> día⁻¹</li>' +
+      '<li>Estrategia A, reducir R₀ a 2,5: r = <code>' + f(mA) + '</code></li>' +
+      '<li>Estrategia B, duplicar T a 30 días: r = <code>' + f(mB) + '</code></li></ul>' +
+      (mB < mA ? '<p class="note ok">Es más efectivo duplicar T (por ejemplo con larvicidas) que reducir R₀ a la mitad.</p>' : '') + '</div>' +
+      '<div class="sp"><h4>🐋 Ballena azul (<i>Balaenoptera musculus</i>)</h4><p class="card-desc">R₀ = 1,5 · T = 12 años</p><ul>' +
+      '<li>r inicial: <code>' + f(w0) + '</code> año⁻¹</li>' +
+      '<li>Efecto caza, reducir R₀ a 0,75: r = <code>' + f(wA) + '</code></li>' +
+      '<li>Conservación, aumentar R₀ a 2,25: r = <code>' + f(wB) + '</code></li></ul>' +
+      (wA < 0 ? '<p class="note warn">Reducir R₀ un 50 % hace negativo a r y lleva a la población hacia la extinción.</p>' : '') + '</div>';
+  }
+
+  /* Panel 4: curva de elasticidad %Δr */
+  function p4() {
+    const pct = R => Math.log(2) / Math.log(R) * 100;
+    chart($('c4'), { x: [1, 2000], y: [0, 150], xlog: true,
+      series: [{ pts: range(1.05, 2000, 300, true).map(r => [r, pct(r)]), color: C.g }],
+      marks: [[Math.E, 'R₀ = e'], [4, 'R₀ = 4'], [10, 'R₀ = 10'], [100, 'R₀ = 100'], [1000, 'R₀ = 1000']].map(([x, t]) => ({ x, y: pct(x), t: t + ' (' + pct(x).toFixed(1) + '%)' })) });
+  }
+
+  const draw = [p1, p2, p3, p4], tabs = [...document.querySelectorAll('.tab')], panels = [...document.querySelectorAll('#sim .panel')];
+  let cur = 0;
+  tabs.forEach((t, i) => t.onclick = () => { cur = i; tabs.forEach((b, j) => b.setAttribute('aria-selected', j === i)); panels.forEach((p, j) => p.hidden = j !== i); draw[i](); });
+  window.addEventListener('resize', () => draw[cur]());
+  p3(); p1();
+})();
+
+/* ===== Animaciones de entrada y menu activo ===== */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
+document.querySelectorAll('.hero > *, .section-title, .sub-h, .about, .card, .shot, .contact-box').forEach(el => { el.classList.add('reveal'); io.observe(el); });
+const links = [...document.querySelectorAll('nav a')];
+const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
+</script>
 </body>
 </html>
