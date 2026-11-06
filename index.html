@@ -518,6 +518,16 @@ document.querySelectorAll('.hero > *, .section-title, .sub-h, .about, .skillgrid
 const links = [...document.querySelectorAll('nav a')];
 const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
 document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
+
+const hoverSound = new Audio('assets/select.mp3');
+hoverSound.volume = 0.3;
+const hoverTargets = 'a, button, .section-title, .card, input, select, textarea, [role="tab"]';
+document.addEventListener('mouseover', event => {
+  const target = event.target instanceof Element ? event.target.closest(hoverTargets) : null;
+  if (!target || (event.relatedTarget instanceof Node && target.contains(event.relatedTarget))) return;
+  hoverSound.currentTime = 0;
+  hoverSound.play().catch(error => console.error('No se pudo reproducir el sonido hover:', error));
+});
 </script>
 </body>
 </html>
