@@ -225,7 +225,12 @@
 document.documentElement.classList.add('js');
 
 /* ===== GALERIA ===== */
-const FOTOS = [];
+const FOTOS = [
+  { src: 'assets/galeria-compensacion-copacabana.jpg', titulo: 'Compensación forestal en Copacabana · 2021', descripcion: 'Sembrando un árbol en una jornada de compensación forestal.', pos: 'center 55%' },
+  { src: 'assets/galeria-herbivoria-los-monos.jpg', titulo: 'Segundo muestreo de herbivoría en la Reserva Agroecológica Los Monos, San Francisco · 2026', descripcion: 'Trabajo de campo en el bosque: con una garrocha se alcanzan las hojas de la copa de los árboles para el muestreo.', pos: 'center 90%' },
+  { src: 'assets/galeria-sensibilizacion-tumaco.jpg', titulo: 'Sensibilización con la comunidad de Tumaco · 2021', descripcion: 'Charla de sensibilización ambiental con la comunidad de Tumaco.', pos: 'center 50%' },
+  { src: 'assets/galeria-paramo-santurban.jpg', titulo: 'Visita al páramo de Santurbán, Vetas, Santander · 2022', descripcion: 'En la entrada del sendero Lagunas Negras, durante la visita al páramo de Santurbán.', pos: 'center 40%' }
+];
 if (FOTOS.length) document.getElementById('galeria').hidden = false;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const gal = document.getElementById('gallery');
@@ -238,6 +243,7 @@ FOTOS.forEach((f, i) => {
   img.onerror = () => fig.classList.add('empty');
   if (f.srcset) img.srcset = f.srcset;
   if (f.sizes) img.sizes = f.sizes;
+  if (f.pos) img.style.objectPosition = f.pos;
   img.src = f.src;
   fig.querySelector('button').onclick = e => { if (!fig.classList.contains('empty')) show(i, e.currentTarget); };
   gal.appendChild(fig);
