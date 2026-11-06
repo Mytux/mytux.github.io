@@ -11,7 +11,7 @@
   <meta property="og:locale" content="es_CO">
   <meta property="og:title" content="Mytux Corp. · Brahian Camilo Muñoz López">
   <meta property="og:description" content="Proyectos, simuladores y notas sobre ambiente, datos y atmósfera.">
-  <meta property="og:image" content="https://mytux.github.io/og-image.png">
+  <meta property="og:image" content="https://mytux.github.io/assets/og-image.png">
   <meta property="og:url" content="https://mytux.github.io/">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Brahian Camilo Muñoz López","jobTitle":"Tecnólogo en Sistemas de Gestión Ambiental","affiliation":{"@type":"Organization","name":"Mytux Corp."},"sameAs":["https://www.linkedin.com/in/camilo-munoz-projects/","https://github.com/Mytux","https://www.instagram.com/xmytux/"]}</script>
@@ -25,7 +25,9 @@
   <header>
     <div class="nav-container">
       <a href="#inicio" class="brand">
-        <picture class="brand-picture"><source type="image/webp" srcset="assets/logo-80.webp 80w, assets/logo-160.webp 160w" sizes="40px"><img class="brand-logo" src="assets/logo.png" srcset="assets/logo.png 160w" sizes="40px" alt="Logo de Mytux Corp." width="40" height="40"></picture>
+        <picture class="brand-picture">
+          <img class="brand-logo" src="assets/logo.png" alt="Logo de Mytux Corp." width="40" height="40">
+        </picture>
         <span>MYTUX<span style="color: var(--accent-green);">.CORP</span></span>
       </a>
       <nav aria-label="Principal">
@@ -44,7 +46,12 @@
   <main id="contenido">
     <section id="inicio" class="hero">
       <div class="hero-copy">
-        <div class="who"><picture class="avatar-picture"><source type="image/webp" srcset="assets/avatar-112.webp 112w, assets/avatar-224.webp 224w" sizes="56px"><img class="avatar" id="hero-avatar" src="assets/portrait.jpg" srcset="assets/portrait.jpg 480w" sizes="56px" alt="" width="56" height="56" fetchpriority="high" decoding="async"></picture><span>Brahian Camilo Muñoz López<small>Estudiante de Ingeniería Ambiental · Mytux Corp.</small></span></div>
+        <div class="who">
+          <picture class="avatar-picture">
+            <img class="avatar" id="hero-avatar" src="assets/portrait.jpg" alt="Foto de Brahian Camilo" width="56" height="56" fetchpriority="high" decoding="async">
+          </picture>
+          <span>Brahian Camilo Muñoz López<small>Estudiante de Ingeniería Ambiental · Mytux Corp.</small></span>
+        </div>
         <h1>Aprendo, mido y comparto <em>cómo cuidar el ambiente</em>.</h1>
         <p class="hero-text">Soy Brahian, estudiante de Ingeniería Ambiental en Medellín. Me interesan los datos, la meteorología y la atmósfera, y aquí dejo lo que voy aprendiendo: proyectos, simuladores, plantillas y notas para entenderlo todo un poco mejor.</p>
         <div class="cta-group">
@@ -53,13 +60,14 @@
           <a href="#material" class="btn-secondary">Leer Nota Verde</a>
         </div>
       </div>
-      
     </section>
 
     <section id="sobre-mi">
       <h2 class="section-title">Sobre mí</h2>
       <div class="about">
-        <picture class="about-picture"><source type="image/webp" srcset="assets/portrait-320.webp 320w, assets/portrait-480.webp 480w" sizes="(max-width: 720px) 176px, 240px"><img class="about-photo" alt="Retrato de Brahian Camilo Muñoz López" width="480" height="600" loading="lazy" decoding="async" src="assets/portrait.jpg" srcset="assets/portrait.jpg 480w" sizes="(max-width: 720px) 176px, 240px"></picture>
+        <picture class="about-picture">
+          <img class="about-photo" alt="Retrato de Brahian Camilo Muñoz López" width="480" height="600" loading="lazy" decoding="async" src="assets/portrait.jpg">
+        </picture>
         <div class="about-body">
           <p><strong>Soy Brahian Camilo Muñoz López</strong>: estudiante de Ingeniería Ambiental, tecnólogo en Sistemas de Gestión Ambiental y técnico en sistemas, con alta experiencia en gestión ambiental y coordinación de proyectos.</p>
           <p>Mi enfoque está en el análisis de datos, la sostenibilidad, la meteorología y las ciencias de la atmósfera, con interés en desarrollar soluciones innovadoras que integren la tecnología y los recursos naturales.</p>
@@ -123,15 +131,15 @@
               <div class="cta-group"><button type="button" class="btn-primary" id="play">▶ Reproducir</button><button type="button" class="btn-secondary" id="reset">Reiniciar</button></div></div>
           </div>
           <canvas class="cv" id="c1" role="img" aria-label="Gráfico del tamaño poblacional en función del tiempo para dos escenarios" aria-describedby="c1-description c1-legend readout"></canvas>
-          <p class="sr-only" id="c1-description">Gráfico de líneas que compara el crecimiento poblacional de los escenarios 1 y 2. El eje horizontal representa el tiempo y el vertical el tamaño de la población. Los valores actuales de ambos escenarios se anuncian a continuación.</p>
+          <p class="sr-only" id="c1-description">Gráfico de líneas que compara el crecimiento poblacional de los escenarios 1 y 2.</p>
           <div class="legend" id="c1-legend"><span><i aria-hidden="true" style="background:#8fcfa3"></i>Escenario 1</span><span><i aria-hidden="true" style="background:#86bcd9"></i>Escenario 2 (punteada)</span><span>Eje X: tiempo · Eje Y: tamaño poblacional (N)</span></div>
           <p id="readout" aria-live="polite"></p>
         </div>
 
         <div class="panel" role="tabpanel" hidden>
           <div class="chart2">
-            <div><h4>r en función de R₀, para distintos T</h4><canvas class="cv" id="c21" role="img" aria-label="Tasa intrínseca de crecimiento r en función de la tasa reproductiva R cero, para seis tiempos generacionales" aria-describedby="c21-description lg21"></canvas><p class="sr-only" id="c21-description">Gráfico de líneas: el eje horizontal representa R cero y el vertical la tasa intrínseca r. Cada línea muestra un tiempo generacional distinto: 1, 2, 5, 10, 20 o 50.</p><div class="legend" id="lg21"></div></div>
-            <div><h4>Caída de la elasticidad de R₀: ε = 1 / ln(R₀)</h4><canvas class="cv" id="c22" role="img" aria-label="Elasticidad de la tasa reproductiva según R cero" aria-describedby="c22-description c22-caption"></canvas><p class="sr-only" id="c22-description">Gráfico de línea de la elasticidad, calculada como uno dividido por el logaritmo natural de R cero. El eje horizontal representa R cero y el vertical la elasticidad.</p><p class="cap" id="c22-caption">Por encima de R₀ = e la elasticidad baja de 1: la población se vuelve inelástica a cambios en la fecundidad.</p></div>
+            <div><h4>r en función de R₀, para distintos T</h4><canvas class="cv" id="c21" role="img" aria-label="Tasa intrínseca de crecimiento r" aria-describedby="c21-description lg21"></canvas><p class="sr-only" id="c21-description">Gráfico de líneas.</p><div class="legend" id="lg21"></div></div>
+            <div><h4>Caída de la elasticidad de R₀: ε = 1 / ln(R₀)</h4><canvas class="cv" id="c22" role="img" aria-label="Elasticidad de la tasa reproductiva" aria-describedby="c22-description c22-caption"></canvas><p class="sr-only" id="c22-description">Gráfico de línea de la elasticidad.</p><p class="cap" id="c22-caption">Por encima de R₀ = e la elasticidad baja de 1: la población se vuelve inelástica a cambios en la fecundidad.</p></div>
           </div>
         </div>
 
@@ -142,9 +150,9 @@
 
         <div class="panel" role="tabpanel" hidden>
           <p class="card-desc">Reducción porcentual de r al dividir R₀ a la mitad: %Δr = [ln(2) / ln(R₀)] × 100</p>
-          <canvas class="cv" id="c4" role="img" aria-label="Reducción porcentual de la tasa intrínseca r al reducir R cero a la mitad, en escala logarítmica" aria-describedby="c4-description c4-caption"></canvas>
-          <p class="sr-only" id="c4-description">Gráfico de línea: el eje horizontal muestra R cero en escala logarítmica y el vertical la reducción porcentual de r al dividir R cero a la mitad.</p>
-          <p class="cap" id="c4-caption">Eje X: R₀ (escala logarítmica) · Eje Y: reducción porcentual en r. Para R₀ ≥ 100 la curva cae por debajo de 15 %: atacar solo la fecundidad es poco eficaz en especies muy reproductivas.</p>
+          <canvas class="cv" id="c4" role="img" aria-label="Reducción porcentual de la tasa intrínseca r" aria-describedby="c4-description c4-caption"></canvas>
+          <p class="sr-only" id="c4-description">Gráfico de línea.</p>
+          <p class="cap" id="c4-caption">Eje X: R₀ (escala logarítmica) · Eje Y: reducción porcentual en r.</p>
         </div>
       </div>
       <h3 class="sub-h">Calculadoras ambientales</h3>
@@ -162,10 +170,10 @@
         <a class="card dl" href="https://ambiental-beta.vercel.app/info.html" target="_blank" rel="noopener">
           <div class="card-head"><h3 class="card-title">Guía estudiantil de Ingeniería Ambiental</h3><span class="tag tag-green">Operativo</span></div>
           <p class="card-desc">Información general, simulador de promedio, preguntas frecuentes y enlaces oficiales para estudiantes de la facultad.</p><span class="card-link">Abrir la guía ↗</span></a>
-        <a class="card dl" href="matriz-legal-ambiental.xlsx" download>
+        <a class="card dl" href="assets/matriz-legal-ambiental.xlsx" download>
           <div class="card-head"><h3 class="card-title">Plantilla de matriz legal ambiental</h3><span class="tag tag-green">Excel</span></div>
           <p class="card-desc">Tabla lista para registrar normas, requisitos, responsables, evidencias y estado de cumplimiento.</p><span class="card-link">Descargar ↓</span></a>
-        <a class="card dl" href="lista-chequeo-rua.xlsx" download>
+        <a class="card dl" href="assets/lista-chequeo-rua.xlsx" download>
           <div class="card-head"><h3 class="card-title">Lista de chequeo para el RUA</h3><span class="tag tag-green">Excel</span></div>
           <p class="card-desc">Pasos para preparar el reporte del Registro Único Ambiental, con responsable, fecha y estado.</p><span class="card-link">Descargar ↓</span></a>
       </div>
@@ -194,7 +202,7 @@
           <a href="https://www.linkedin.com/in/camilo-munoz-projects/" target="_blank" rel="noopener">LinkedIn ↗</a>
           <a href="https://www.instagram.com/xmytux/" target="_blank" rel="noopener">Instagram: @xmytux ↗</a>
           <a href="https://github.com/Mytux" target="_blank" rel="noopener">Perfil de GitHub ↗</a>
-          <a href="CV-Brahian-Munoz.pdf" download>Hoja de vida ↓</a>
+          <a href="assets/CV-Brahian-Munoz.pdf" download>Hoja de vida ↓</a>
         </div>
         <form id="cform" class="cform">
           <label>Nombre<input type="text" name="nom" required autocomplete="name"></label>
@@ -216,17 +224,15 @@
 <script>
 document.documentElement.classList.add('js');
 
-/* ===== GALERIA: agrega tus fotos aqui (sube las imagenes a la carpeta img/) ===== */
-const FOTOS = [
-  // { src: 'img/mi-foto.jpg', srcset: 'img/mi-foto-480.webp 480w, img/mi-foto-960.webp 960w', sizes: '(max-width: 720px) 100vw, 50vw', titulo: 'Título', descripcion: 'Descripción.' },
-];
+/* ===== GALERIA ===== */
+const FOTOS = [];
 if (FOTOS.length) document.getElementById('galeria').hidden = false;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const gal = document.getElementById('gallery');
 FOTOS.forEach((f, i) => {
   const fig = document.createElement('figure');
   fig.className = 'shot empty';
-  fig.innerHTML = '<button type="button" class="shot-btn" aria-label="Ampliar: ' + esc(f.titulo) + '"><img loading="lazy" decoding="async" alt="' + esc(f.titulo) + '"><span class="ph">Foto de ejemplo<br>Sube tu imagen a img/</span></button><figcaption><strong>' + esc(f.titulo) + '</strong><span>' + esc(f.descripcion) + '</span></figcaption>';
+  fig.innerHTML = '<button type="button" class="shot-btn" aria-label="Ampliar: ' + esc(f.titulo) + '"><img loading="lazy" decoding="async" alt="' + esc(f.titulo) + '"><span class="ph">Foto de ejemplo</span></button><figcaption><strong>' + esc(f.titulo) + '</strong><span>' + esc(f.descripcion) + '</span></figcaption>';
   const img = fig.querySelector('img');
   img.onload = () => fig.classList.remove('empty');
   img.onerror = () => fig.classList.add('empty');
@@ -271,27 +277,14 @@ document.getElementById('lb-n').onclick = () => show(idx + 1);
 lb.onclick = e => { if (e.target === lb) hide(); };
 document.addEventListener('keydown', e => {
   if (lb.hidden) return;
-  if (e.key === 'Escape') {
-    e.preventDefault();
-    hide();
-    return;
-  }
-  if (e.key === 'ArrowLeft') {
-    e.preventDefault();
-    show(idx - 1);
-  } else if (e.key === 'ArrowRight') {
-    e.preventDefault();
-    show(idx + 1);
-  } else if (e.key === 'Tab') {
+  if (e.key === 'Escape') { e.preventDefault(); hide(); return; }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1); } 
+  else if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1); } 
+  else if (e.key === 'Tab') {
     const controls = [...lb.querySelectorAll('button:not([disabled])')];
     const first = controls[0], last = controls[controls.length - 1];
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } 
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 });
 
@@ -327,7 +320,6 @@ document.addEventListener('keydown', e => {
     (o.marks || []).forEach(k => { c.fillStyle = C.b; c.beginPath(); c.arc(X(k.x), Y(k.y), 4, 0, 7); c.fill(); c.fillStyle = C.mut; c.fillText(k.t, X(k.x) + 7, Y(k.y) - 6); });
   }
 
-  /* Panel 1: escenarios */
   let prog = 1, raf = 0;
   function p1() {
     ['r01', 't1', 'r02', 't2', 'tm'].forEach(id => $('o-' + id).textContent = $(id).value);
@@ -358,16 +350,10 @@ document.addEventListener('keydown', e => {
     raf = requestAnimationFrame(st);
   };
   motionPreference.addEventListener('change', event => {
-    if (event.matches && raf) {
-      cancelAnimationFrame(raf);
-      raf = 0;
-      prog = 1;
-      p1();
-    }
+    if (event.matches && raf) { cancelAnimationFrame(raf); raf = 0; prog = 1; p1(); }
   });
   $('reset').onclick = () => { cancelAnimationFrame(raf); raf = 0; prog = 0; p1(); };
 
-  /* Panel 2: sensibilidad y elasticidad */
   function p2() {
     const R = range(1.01, 50, 400), Ts = [1, 2, 5, 10, 20, 50], col = ['#8fcfa3', '#86bcd9', '#b8bfba', '#5fae82', '#5f9dbf', '#e8ece9'];
     chart($('c21'), { x: [1, 50], y: [0, 4], vl: [{ x: Math.E, t: 'R₀ = e' }],
@@ -377,7 +363,6 @@ document.addEventListener('keydown', e => {
       series: [{ pts: R.map(r => [r, 1 / Math.log(r)]), color: C.g }] });
   }
 
-  /* Panel 3: mosquitos vs ballenas */
   function p3() {
     const f = v => v.toFixed(4);
     const m0 = Math.log(5) / 15, mA = Math.log(2.5) / 15, mB = Math.log(5) / 30;
@@ -395,7 +380,6 @@ document.addEventListener('keydown', e => {
       (wA < 0 ? '<p class="note warn">Reducir R₀ un 50 % hace negativo a r y lleva a la población hacia la extinción.</p>' : '') + '</div>';
   }
 
-  /* Panel 4: curva de elasticidad %Δr */
   function p4() {
     const pct = R => Math.log(2) / Math.log(R) * 100;
     chart($('c4'), { x: [1, 2000], y: [0, 150], xlog: true,
@@ -410,16 +394,14 @@ document.addEventListener('keydown', e => {
   p3(); p1();
 })();
 
-/* ===== RECOMENDACIONES: agrega las tuyas aqui; la seccion aparece sola ===== */
-const TESTIMONIOS = [
-  // { texto: 'Lo que dijo la persona sobre tu trabajo.', nombre: 'Nombre Apellido', cargo: 'Cargo · Organización' },
-];
+/* ===== TESTIMONIOS ===== */
+const TESTIMONIOS = [];
 if (TESTIMONIOS.length) {
   document.getElementById('recomendaciones').hidden = false;
   document.getElementById('quotes').innerHTML = TESTIMONIOS.map(t => '<blockquote class="card env quote"><p>“' + esc(t.texto) + '”</p><cite>' + esc(t.nombre) + ' · ' + esc(t.cargo) + '</cite></blockquote>').join('');
 }
 
-/* ===== BLOG NOTA VERDE: agrega articulos a esta lista ===== */
+/* ===== BLOG NOTA VERDE ===== */
 const ARTICULOS = [
   { t: '¿Qué es una matriz legal ambiental y para qué sirve?', f: 'Noviembre de 2026', r: 'La lista ordenada de normas que tu empresa debe cumplir.',
     x: ['Una matriz legal ambiental es una tabla donde se reúnen las normas ambientales que aplican a una actividad o empresa. Para cada una se anota qué exige, quién responde por cumplirla, con qué evidencia se demuestra y en qué estado está.',
@@ -432,15 +414,15 @@ const ARTICULOS = [
 ];
 document.getElementById('posts').innerHTML = ARTICULOS.map(a => '<details class="card post"><summary><h3 class="card-title">' + esc(a.t) + '</h3><span class="card-meta">' + esc(a.f) + '</span><span class="card-desc">' + esc(a.r) + '</span></summary><div class="body">' + a.x.map(p => '<p>' + esc(p) + '</p>').join('') + '</div></details>').join('');
 
-/* ===== CALCULADORAS AMBIENTALES (los factores son aproximados y editables) ===== */
+/* ===== CALCULADORAS AMBIENTALES ===== */
 (function () {
   const F = v => (+v.toFixed(1)).toLocaleString('es-CO');
-  const FE = { elec: 0.126, gasolina: 2.3, gn: 1.9 };   // kg CO2e por kWh, litro y m3
+  const FE = { elec: 0.126, gasolina: 2.3, gn: 1.9 };
   const CALCS = [
     { n: 'Huella de carbono', f: [['kwh', 'Electricidad (kWh al mes)', 150], ['gas', 'Gasolina (litros al mes)', 20], ['gn', 'Gas natural (m³ al mes)', 10]],
       run: v => ['Emisiones estimadas', F((v.kwh * FE.elec + v.gas * FE.gasolina + v.gn * FE.gn) * 12) + ' kg CO₂e al año',
         'Electricidad ' + F(v.kwh * FE.elec * 12) + ' · Gasolina ' + F(v.gas * FE.gasolina * 12) + ' · Gas natural ' + F(v.gn * FE.gn * 12) + ' (kg CO₂e al año)'],
-      nota: 'Factores de referencia aproximados: electricidad 0,126 kg CO₂e/kWh, gasolina 2,3 kg/L y gas natural 1,9 kg/m³. Contrástalos con las cifras oficiales vigentes antes de usar el resultado en un informe.' },
+      nota: 'Factores de referencia aproximados: electricidad 0,126 kg CO₂e/kWh, gasolina 2,3 kg/L y gas natural 1,9 kg/m³.' },
     { n: 'Residuos', f: [['per', 'Personas', 10], ['kpd', 'Residuos por persona (kg al día)', 0.7], ['apr', 'Fracción aprovechable (%)', 30]],
       run: v => { const m = v.per * v.kpd * 30; return ['Generación estimada', F(m) + ' kg al mes', 'Aprovechables ' + F(m * v.apr / 100) + ' kg · No aprovechables ' + F(m * (100 - v.apr) / 100) + ' kg']; },
       nota: 'Los valores iniciales son supuestos editables. Para un diagnóstico real, pesa tus residuos durante una semana.' },
@@ -460,7 +442,7 @@ document.getElementById('posts').innerHTML = ARTICULOS.map(a => '<details class=
   });
 })();
 
-/* ===== Formulario de contacto (abre el correo con el mensaje listo) ===== */
+/* ===== FORMULARIO DE CONTACTO ===== */
 document.getElementById('cform').addEventListener('submit', e => {
   e.preventDefault();
   const g = n => e.target.elements[n].value.trim();
@@ -468,11 +450,10 @@ document.getElementById('cform').addEventListener('submit', e => {
   location.href = 'mailto:bmunozl@unal.edu.co?subject=' + encodeURIComponent('Contacto desde tu página: ' + g('nom')) + '&body=' + encodeURIComponent(cuerpo);
 });
 
-/* ===== Inicio: avatar, grafica viva, menu fijo, WhatsApp, pestañas con teclado ===== */
+/* ===== NAVEGACION Y ACCESIBILIDAD ===== */
 (function () {
   const hd = document.querySelector('header'), setH = () => document.documentElement.style.setProperty('--hh', hd.offsetHeight + 'px');
   setH(); window.addEventListener('resize', setH);
-  
 
   const wa = document.querySelector('.wa-float'), ct = document.getElementById('contacto');
   if (wa && ct) new IntersectionObserver(es => es.forEach(e => wa.classList.toggle('off', e.isIntersecting)), { threshold: .25 }).observe(ct);
@@ -512,22 +493,35 @@ document.getElementById('cform').addEventListener('submit', e => {
   });
 })();
 
-/* ===== Animaciones de entrada y menu activo ===== */
+/* ===== ANIMACIONES E INTERSECCIONES ===== */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
 document.querySelectorAll('.hero > *, .section-title, .sub-h, .about, .skillgrid, .tl, .cases, .sim, #calc, .grid-3, .posts, .gallery, .contact-box').forEach(el => { el.classList.add('reveal'); io.observe(el); });
 const links = [...document.querySelectorAll('nav a')];
 const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
 document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
 
-const hoverSound = new Audio('assets/select.mp3');
-hoverSound.volume = 0.3;
-const hoverTargets = 'a, button, .section-title, .card, input, select, textarea, [role="tab"]';
-document.addEventListener('mouseover', event => {
-  const target = event.target instanceof Element ? event.target.closest(hoverTargets) : null;
-  if (!target || (event.relatedTarget instanceof Node && target.contains(event.relatedTarget))) return;
-  hoverSound.currentTime = 0;
-  hoverSound.play().catch(error => console.error('No se pudo reproducir el sonido hover:', error));
-});
+/* ===== EFECTO DE SONIDO GTA SAN ANDREAS (CON DESBLOQUEO DE AUDIO) ===== */
+(function() {
+  const hoverSound = new Audio('assets/select.mp3');
+  hoverSound.volume = 0.3;
+
+  let audioUnlocked = false;
+  document.addEventListener('click', () => { 
+    audioUnlocked = true; 
+  }, { once: true });
+
+  const hoverTargets = 'a, button, .section-title, .card, input, select, textarea, [role="tab"]';
+  
+  document.addEventListener('mouseover', event => {
+    const target = event.target instanceof Element ? event.target.closest(hoverTargets) : null;
+    if (!target || (event.relatedTarget instanceof Node && target.contains(event.relatedTarget))) return;
+    
+    if (audioUnlocked) {
+      hoverSound.currentTime = 0;
+      hoverSound.play().catch(() => {});
+    }
+  });
+})();
 </script>
 </body>
 </html>
