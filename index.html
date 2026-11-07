@@ -113,6 +113,27 @@
     @media (max-width: 720px) { .theme-toggle { order: 1; margin-left: auto; padding: .35rem .75rem; } header nav { order: 2; } }
     .plat-ic { width: 2.6rem; height: 2.6rem; border-radius: 10px; border: 1px solid var(--border-color); display: grid; place-items: center; color: var(--accent-green); }
     a.plat:hover .plat-ic { border-color: var(--accent-green); }
+
+    /* ===== Introducción animada (video o animación propia) ===== */
+    .intro { position: fixed; inset: 0; z-index: 200; background: #05080a; display: grid; place-items: center; overflow: hidden; transition: opacity .7s ease; }
+    .intro.out { opacity: 0; pointer-events: none; }
+    .intro-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .intro-fallback { position: relative; display: grid; place-items: center; gap: 1.6rem; text-align: center; color: #fff; padding: 1rem; }
+    .intro-orb { position: relative; width: 8.5rem; height: 8.5rem; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff 0, #bfe6f5 18%, #86bcd9 42%, #2f7d9f 75%, #12394d 100%); box-shadow: 0 0 40px 10px rgba(134,188,217,.55), 0 0 120px 40px rgba(143,207,163,.25); animation: orbfloat 2.4s ease-in-out infinite; }
+    .intro-orb::before, .intro-orb::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(134,188,217,.7); animation: ringpulse 2s ease-out infinite; }
+    .intro-orb::after { animation-delay: 1s; }
+    .intro-title { font: 800 clamp(3.5rem, 14vw, 9rem)/1 "Playfair Display", Georgia, "Times New Roman", serif; letter-spacing: .02em; }
+    .intro-sub { font: 600 .8rem monospace; letter-spacing: .28em; color: #9fd8c0; }
+    .intro-skip, .intro-snd { position: absolute; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); font: inherit; font-size: .85rem; font-weight: 700; padding: .5rem 1rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,.4); background: rgba(0,0,0,.45); color: #fff; cursor: pointer; }
+    .intro-skip { right: 1rem; } .intro-snd { left: 1rem; }
+    .intro-skip:hover, .intro-snd:hover { border-color: #8fcfa3; }
+    .intro-flyer { position: fixed; left: 0; top: 0; width: 2.2rem; height: 2.2rem; z-index: 210; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 35% 30%, #fff 0, #bfe6f5 25%, #86bcd9 60%, #2f7d9f 100%); box-shadow: 0 0 18px 6px rgba(134,188,217,.8), 0 0 50px 14px rgba(143,207,163,.4); }
+    .xp.boot .xp-track { animation: xpglow 1.4s ease-out; }
+    .xp-scan { position: absolute; left: 0; right: 0; height: 22%; top: -22%; background: linear-gradient(to bottom, transparent, rgba(255,255,255,.9), transparent); animation: xpscan 1.3s ease-in-out; pointer-events: none; }
+    @keyframes orbfloat { 0%, 100% { transform: translateY(-6px) scale(1); } 50% { transform: translateY(6px) scale(1.05); } }
+    @keyframes ringpulse { 0% { transform: scale(.85); opacity: .9; } 100% { transform: scale(2); opacity: 0; } }
+    @keyframes xpglow { 0% { box-shadow: 0 0 0 0 rgba(143,207,163,.95); } 100% { box-shadow: 0 0 0 16px rgba(143,207,163,0); } }
+    @keyframes xpscan { from { top: -22%; } to { top: 100%; } }
   </style>
 </head>
 <body>
@@ -776,6 +797,53 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   }
   apply(root.dataset.theme === 'light' ? 'light' : 'dark', false);
   btn.onclick = () => apply(root.dataset.theme === 'dark' ? 'light' : 'dark', true);
+})();
+
+/* ===== INTRODUCCION ANIMADA: video propio (assets/intro.mp4) o animacion de respaldo ===== */
+(function () {
+  const CFG = { video: 'assets/intro.mp4', fallbackMs: 4200, maxMs: 15000 };
+  let seen = false; try { seen = sessionStorage.getItem('mytux-intro') === '1'; } catch (e) {}
+  if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const root = document.documentElement; root.style.overflow = 'hidden';
+  const ov = document.createElement('div');
+  ov.className = 'intro'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-label', 'Introducción animada');
+  ov.innerHTML = '<video class="intro-video" muted playsinline preload="auto" hidden></video><div class="intro-fallback"><div class="intro-orb"></div><div class="intro-title">Mytux</div><div class="intro-sub">SISTEMA DE EXPLORACIÓN EN LÍNEA</div></div><button type="button" class="intro-snd" hidden>🔊 Activar sonido</button><button type="button" class="intro-skip">Saltar intro ›</button>';
+  document.body.appendChild(ov);
+  const v = ov.querySelector('video'), fb = ov.querySelector('.intro-fallback'), orb = ov.querySelector('.intro-orb'), skip = ov.querySelector('.intro-skip'), snd = ov.querySelector('.intro-snd');
+  let done = false, started = false; const timers = [];
+  const later = (f, ms) => timers.push(setTimeout(f, ms));
+
+  function finish() {
+    if (done) return; done = true; timers.forEach(clearTimeout);
+    try { v.pause(); } catch (e) {}
+    try { sessionStorage.setItem('mytux-intro', '1'); } catch (e) {}
+    const track = document.querySelector('.xp-track'), xp = document.querySelector('.xp');
+    const r0 = (!started && orb) ? orb.getBoundingClientRect() : null;
+    const x0 = r0 ? r0.left + r0.width / 2 : window.innerWidth / 2, y0 = r0 ? r0.top + r0.height / 2 : window.innerHeight / 2;
+    ov.classList.add('out'); root.style.overflow = '';
+    setTimeout(() => ov.remove(), 800);
+    if (!track || !ov.animate) return;
+    const t = track.getBoundingClientRect(), x1 = t.left + t.width / 2, y1 = t.top + 8, w = 17.6;
+    const fly = document.createElement('div'); fly.className = 'intro-flyer'; document.body.appendChild(fly);
+    const xm = (x0 + x1) / 2, ym = Math.min(y0, y1) - 90;
+    const pos = (x, y, sc, op) => ({ transform: 'translate(' + (x - w) + 'px,' + (y - w) + 'px) scale(' + sc + ')', opacity: op });
+    const anim = fly.animate([Object.assign(pos(x0, y0, 3.2, 1), { offset: 0 }), Object.assign(pos(xm, ym, 1.8, 1), { offset: .5 }), Object.assign(pos(x1, y1, .45, .95), { offset: 1 })], { duration: 1300, easing: 'cubic-bezier(.45,0,.2,1)', fill: 'forwards' });
+    anim.onfinish = () => {
+      fly.remove();
+      if (xp) { xp.classList.add('boot'); const sc = document.createElement('div'); sc.className = 'xp-scan'; track.appendChild(sc); setTimeout(() => { sc.remove(); xp.classList.remove('boot'); }, 1500); }
+    };
+  }
+
+  skip.onclick = finish;
+  snd.onclick = () => { v.muted = !v.muted; snd.textContent = v.muted ? '🔊 Activar sonido' : '🔇 Silenciar'; };
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') finish(); });
+  v.addEventListener('playing', () => { if (done) return; started = true; fb.style.display = 'none'; v.hidden = false; snd.hidden = false; later(finish, CFG.maxMs); });
+  v.addEventListener('ended', finish);
+  v.addEventListener('error', () => {});
+  later(() => { if (!started) finish(); }, CFG.fallbackMs);
+  v.src = CFG.video;
+  const pr = v.play(); if (pr && pr.catch) pr.catch(() => {});
+  skip.focus();
 })();
 </script>
 </body>
