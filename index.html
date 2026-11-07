@@ -30,6 +30,49 @@
       mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
     }
     .hero .hero-text, .hero .who small { color: #e6ecef; }
+
+    /* ===== Barra de exploración (lateral izquierda) ===== */
+    .xp { position: fixed; left: 6px; top: 50%; transform: translateY(-50%); height: min(62vh, 30rem); width: 14px; z-index: 40; }
+    .xp-track { position: absolute; inset: 0; border: 2px solid rgba(255,255,255,.3); border-radius: 8px; background: rgba(10,14,12,.7); overflow: hidden; backdrop-filter: blur(4px); }
+    .xp-track::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, transparent 0, transparent calc(10% - 2px), rgba(0,0,0,.6) calc(10% - 2px), rgba(0,0,0,.6) 10%); }
+    .xp-fill { position: absolute; left: 0; right: 0; top: 0; height: 0; background: linear-gradient(to bottom, #8fcfa3, #86bcd9); box-shadow: 0 0 10px rgba(143,207,163,.65); transition: height .12s linear; }
+    .xp-lab { position: absolute; left: 50%; transform: translateX(-50%); font: 700 .65rem monospace; letter-spacing: .08em; color: #cfe7d8; white-space: nowrap; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+    .xp-t { top: -1.3rem; } .xp-b { bottom: -1.4rem; }
+    .xp-mark { position: absolute; left: 50%; width: 22px; height: 22px; transform: translate(-50%, -50%); display: grid; place-items: center; }
+    .xp-mark i { width: 10px; height: 10px; border-radius: 50%; border: 2px solid #7d8a82; background: #0f1110; transition: .25s; }
+    .xp-mark.done i { background: #8fcfa3; border-color: #8fcfa3; box-shadow: 0 0 6px rgba(143,207,163,.8); }
+    .xp-mark span { position: absolute; left: calc(100% + 6px); opacity: 0; pointer-events: none; transform: translateX(-4px); transition: .2s; font: 600 .75rem system-ui, sans-serif; color: #f3f5f3; background: rgba(10,14,12,.92); border: 1px solid #2e3430; padding: .15rem .55rem; border-radius: 6px; white-space: nowrap; }
+    .xp-mark:hover span, .xp-mark:focus-visible span { opacity: 1; transform: none; }
+    .xp-mark:focus-visible { outline: 2px solid #8fcfa3; border-radius: 50%; }
+    @media (max-width: 720px) {
+      .xp { left: 2px; width: 6px; height: min(55vh, 24rem); }
+      .xp-track { border-width: 1px; border-radius: 4px; }
+      .xp-lab, .xp-mark span { display: none; }
+      .xp-mark { width: 14px; height: 14px; } .xp-mark i { width: 7px; height: 7px; border-width: 1px; }
+    }
+
+    /* ===== Asistente flotante ===== */
+    .bot-fab { position: fixed; right: 1rem; bottom: calc(4.6rem + env(safe-area-inset-bottom, 0px)); z-index: 70; width: 3.1rem; height: 3.1rem; border-radius: 50%; border: 1px solid rgba(143,207,163,.55); background: #1a1d1b; color: #8fcfa3; font-size: 1.35rem; cursor: pointer; display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0,0,0,.45); transition: bottom .25s, background .2s; }
+    .bot-fab:hover { background: #232826; }
+    .bot-fab.low { bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+    .bot { position: fixed; right: 1rem; bottom: calc(8.2rem + env(safe-area-inset-bottom, 0px)); z-index: 70; width: min(22rem, calc(100vw - 2rem)); max-height: min(32rem, 64vh); display: flex; flex-direction: column; background: var(--bg-card, #1a1d1b); color: var(--text-main, #f3f5f3); border: 1px solid var(--border-color, #2e3430); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,.55); overflow: hidden; }
+    .bot[hidden] { display: none; }
+    .bot-head { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; padding: .8rem 1rem; border-bottom: 1px solid var(--border-color, #2e3430); }
+    .bot-head strong { display: block; }
+    .bot-head small { color: var(--text-muted, #9aa49d); font-size: .75rem; }
+    .bot-x { background: none; border: 0; color: inherit; font-size: 1.2rem; cursor: pointer; line-height: 1; padding: .2rem .4rem; }
+    .bot-log { flex: 1; overflow-y: auto; padding: .9rem 1rem; display: flex; flex-direction: column; gap: .6rem; }
+    .bot-msg { max-width: 90%; padding: .55rem .8rem; border-radius: 12px; font-size: .92rem; line-height: 1.5; }
+    .bot-msg.from-bot { background: rgba(143,207,163,.12); border: 1px solid rgba(143,207,163,.25); align-self: flex-start; }
+    .bot-msg.me { background: #8fcfa3; color: #0f1110; align-self: flex-end; }
+    .bot-msg a { color: #8fcfa3; font-weight: 700; }
+    .bot-chips { display: flex; flex-wrap: wrap; gap: .4rem; padding: 0 1rem .7rem; }
+    .bot-chips button { font: inherit; font-size: .8rem; padding: .3rem .7rem; border-radius: 9999px; border: 1px solid var(--border-color, #2e3430); background: transparent; color: inherit; cursor: pointer; }
+    .bot-chips button:hover { border-color: #8fcfa3; }
+    .bot-form { display: flex; gap: .5rem; padding: .7rem; border-top: 1px solid var(--border-color, #2e3430); }
+    .bot-form input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: .5rem .7rem; border-radius: 8px; border: 1px solid var(--border-color, #2e3430); background: #0f1110; color: inherit; }
+    .bot-form button { font: inherit; font-weight: 700; padding: .5rem .9rem; border-radius: 8px; border: 0; background: #8fcfa3; color: #0f1110; cursor: pointer; }
+    @media (prefers-reduced-motion: reduce) { .xp-fill, .xp-mark i, .xp-mark span, .bot-fab { transition: none; } }
   </style>
 </head>
 <body>
@@ -84,7 +127,8 @@
         <div class="about-body">
           <p><strong>Ingeniero Ambiental en formación</strong>, tecnólogo en Sistemas de Gestión Ambiental y técnico en sistemas, con alta experiencia en gestión ambiental y coordinación de proyectos.</p>
           <p>Mi enfoque está en el análisis de datos, la sostenibilidad, la meteorología y las ciencias de la atmósfera, con interés en desarrollar soluciones innovadoras que integren la tecnología y los recursos naturales.</p>
-          <p>Diseño capacitaciones ambientales a la medida de cada empresa, para personal administrativo, ejecutivo y operativo, en agua, suelos, aire, energía, residuos sólidos, fauna, flora, sostenibilidad y educación social.</p>
+          <p>Apasionado por la ciencia y su conexión con la naturaleza. Me fascina explorar la inteligencia artificial y el potencial de las tecnologías.</p>
+          <p>En mi tiempo libre me encuentras haciendo senderismo o jugando videojuegos. Me apasiona enseñar, intercambiar conocimientos, hábitos y saberes con los demás. Soy alguien parchado, curioso y siempre listo para aprender o colaborar en nuevos proyectos.</p>
         </div>
       </div>
       <div class="skillgrid" aria-label="Habilidades">
@@ -540,6 +584,104 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
       hoverSound.play().catch(() => {});
     }
   });
+})();
+
+/* ===== BARRA DE EXPLORACION ===== */
+(function () {
+  const SECS = [['inicio', 'Inicio'], ['sobre-mi', 'Sobre mí'], ['proyectos', 'Experiencias'], ['herramientas', 'Herramientas'], ['material', 'Material ilustrativo'], ['contacto', 'Contacto']];
+  const xp = document.createElement('div');
+  xp.className = 'xp'; xp.setAttribute('aria-hidden', 'true');
+  xp.innerHTML = '<span class="xp-lab xp-t">EXP</span><div class="xp-track"><div class="xp-fill"></div></div><span class="xp-lab xp-b">0%</span>';
+  const fill = xp.querySelector('.xp-fill'), pct = xp.querySelector('.xp-b');
+  const marks = SECS.map(([id, nombre]) => {
+    const a = document.createElement('a');
+    a.className = 'xp-mark'; a.href = '#' + id; a.tabIndex = -1;
+    a.innerHTML = '<i></i><span>' + nombre + '</span>';
+    xp.appendChild(a);
+    return { id, a, done: false };
+  });
+  document.body.appendChild(xp);
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  function layout() {
+    marks.forEach(m => {
+      const el = document.getElementById(m.id); if (!el) return;
+      const t = Math.min(1, Math.max(0, (el.getBoundingClientRect().top + window.scrollY) / maxScroll()));
+      m.a.style.top = (t * 100) + '%';
+    });
+  }
+  function update() {
+    const p = Math.min(1, Math.max(0, window.scrollY / maxScroll()));
+    fill.style.height = (p * 100) + '%';
+    pct.textContent = Math.round(p * 100) + '%';
+    marks.forEach(m => {
+      if (m.done) return;
+      const el = document.getElementById(m.id);
+      if (el && el.getBoundingClientRect().top < window.innerHeight * 0.6) { m.done = true; m.a.classList.add('done'); }
+    });
+  }
+  let tick = false;
+  window.addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(() => { update(); tick = false; }); } }, { passive: true });
+  window.addEventListener('resize', () => { layout(); update(); });
+  window.addEventListener('load', () => { layout(); update(); });
+  layout(); update();
+  setTimeout(() => { layout(); update(); }, 1200);
+})();
+
+/* ===== ASISTENTE FLOTANTE (respuestas preparadas, sin conexion a ninguna IA) ===== */
+(function () {
+  const norm = t => ' ' + t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9ñ ]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+  const KB = [
+    { k: ['hola', 'buenas', 'hey', 'saludos', 'buenos dias', 'buenas tardes', 'buenas noches'], a: '¡Hola! Soy el asistente de esta página. Puedo contarte sobre Brahian, sus experiencias, habilidades, herramientas, descargas o cómo contactarlo. ¿Qué te gustaría saber?' },
+    { k: ['quien', 'brahian', 'camilo', 'perfil', 'presentate', 'mytux', 'sobre mi', 'estudia', 'estudio', 'carrera', 'universidad'], a: 'Brahian Camilo Muñoz López es ingeniero ambiental en formación (Universidad Nacional de Colombia, sede Medellín), tecnólogo en Sistemas de Gestión Ambiental y técnico en sistemas. Su enfoque está en el análisis de datos, la sostenibilidad, la meteorología y las ciencias de la atmósfera. Lo cuenta todo en <a href="#sobre-mi">Sobre mí</a>.' },
+    { k: ['experiencia', 'experiencias', 'trabajo', 'trabajos', 'trabajado', 'empleo', 'cargo', 'amet', 'realidad virtual', 'deli', 'anne rose', 'soluciones integrales', 'aeronautica', 'trayectoria'], a: 'Entre 2025 y 2026 fue gestor ambiental en Deli - Anne Rose, operando la planta de tratamiento de aguas residuales industriales. Desde 2024 lidera el comité de planeación de AMET (capítulo estudiantil de Ingeniería Ambiental, UNAL Medellín), desde 2023 coordina la fundación Colombian Virtual Reality, y entre 2022 y 2023 coordinó proyectos socioambientales a nivel nacional en Soluciones Integrales TM SAS. Más detalles en <a href="#proyectos">Experiencias</a>.' },
+    { k: ['habilidad', 'habilidades', 'sabe', 'sabes', 'skills', 'capacidades', 'especialidad', 'servicios', 'pma', 'sga', 'rua', 'ptar', 'capacitaciones', 'capacitacion'], a: 'Maneja PMA y SGA, matrices legales y ASPI, informes de caracterización, digitalización del RUA, operación de plantas de tratamiento de aguas residuales industriales, coordinación de proyectos, capacitaciones ambientales empresariales y analítica de datos &amp; Business Intelligence. Míralas en <a href="#sobre-mi">Sobre mí</a>.' },
+    { k: ['herramienta', 'herramientas', 'simulador', 'simulacion', 'calculadora', 'calculadoras', 'huella', 'carbono', 'residuos', 'agua', 'poblacion', 'poblacional', 'ecologia'], a: 'En <a href="#herramientas">Herramientas</a> hay un simulador de ecología de poblaciones (trabajo universitario) y calculadoras de huella de carbono, residuos y agua. Las calculadoras dan estimaciones aproximadas, con valores que puedes cambiar.' },
+    { k: ['descarga', 'descargas', 'descargar', 'plantilla', 'plantillas', 'excel', 'matriz', 'chequeo', 'lista', 'cv', 'hoja de vida', 'curriculum', 'pdf'], a: 'Puedes descargar la <a href="assets/matriz-legal-ambiental.xlsx" download>plantilla de matriz legal ambiental</a>, la <a href="assets/lista-chequeo-rua.xlsx" download>lista de chequeo del RUA</a> y la <a href="assets/CV-Brahian-Munoz.pdf" download>hoja de vida</a>.' },
+    { k: ['contacto', 'contactar', 'escribir', 'escribirle', 'correo', 'email', 'whatsapp', 'telefono', 'celular', 'linkedin', 'instagram', 'github', 'redes', 'hablar'], a: 'Puedes escribirle a bmunozl@unal.edu.co, por <a href="https://wa.me/573164197518" target="_blank" rel="noopener">WhatsApp</a>, por LinkedIn o Instagram (@xmytux). También hay un formulario en <a href="#contacto">Contacto</a>.' },
+    { k: ['foto', 'fotos', 'galeria', 'imagenes', 'campo', 'salida', 'santurban', 'tumaco', 'copacabana', 'herbivoria', 'paramo'], a: 'En <a href="#material">Material ilustrativo</a> hay fotos de trabajo de campo: la compensación forestal en Copacabana, el muestreo de herbivoría en la Reserva Agroecológica Los Monos, la sensibilización en Tumaco y la visita al páramo de Santurbán.' },
+    { k: ['blog', 'nota verde', 'articulo', 'articulos', 'leer', 'noticias'], a: 'Nota Verde es el blog de la página, con artículos cortos como qué es una matriz legal ambiental o por qué capacitar al personal operativo. Está en <a href="#material">Material ilustrativo</a>.' },
+    { k: ['inteligencia artificial', 'ia', 'bot', 'robot', 'chatgpt', 'eres real', 'eres un', 'quien eres', 'que eres'], a: 'Soy un asistente automático con respuestas preparadas sobre esta página; no soy una inteligencia artificial conectada a internet. Si tu pregunta es más específica, lo mejor es escribirle a Brahian desde <a href="#contacto">Contacto</a>.' },
+    { k: ['gracias', 'genial', 'perfecto', 'excelente', 'chao', 'adios', 'hasta luego'], a: '¡Con gusto! Si te surge otra duda, aquí estaré.' }
+  ];
+  const FALLBACK = 'No tengo una respuesta preparada para eso. Prueba preguntando por Brahian, sus experiencias, habilidades, herramientas, descargas o contacto, o escríbele directamente desde <a href="#contacto">Contacto</a>.';
+  const CHIPS = ['¿Quién es Brahian?', 'Experiencias', 'Habilidades', 'Herramientas', 'Descargas', 'Contacto'];
+  function answer(q) {
+    const t = norm(q); let best = null, score = 0;
+    KB.forEach(e => { const n = e.k.filter(k => t.includes(' ' + k + ' ')).length; if (n > score) { score = n; best = e; } });
+    return best ? best.a : FALLBACK;
+  }
+  const fab = document.createElement('button');
+  fab.type = 'button'; fab.className = 'bot-fab'; fab.setAttribute('aria-label', 'Abrir el asistente de la página'); fab.setAttribute('aria-expanded', 'false'); fab.textContent = '💬';
+  const box = document.createElement('div');
+  box.className = 'bot'; box.hidden = true; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Asistente de Mytux');
+  box.innerHTML = '<div class="bot-head"><div><strong>Asistente de Mytux</strong><small>Asistente automático · respuestas preparadas</small></div><button type="button" class="bot-x" aria-label="Cerrar el asistente">✕</button></div><div class="bot-log" role="log" aria-live="polite"></div><div class="bot-chips"></div><form class="bot-form"><input type="text" placeholder="Escribe tu pregunta…" aria-label="Tu pregunta" autocomplete="off"><button type="submit">Enviar</button></form>';
+  document.body.appendChild(box); document.body.appendChild(fab);
+  const log = box.querySelector('.bot-log'), chips = box.querySelector('.bot-chips'), input = box.querySelector('input');
+  function add(html, who) {
+    const d = document.createElement('div'); d.className = 'bot-msg ' + who;
+    if (who === 'me') d.textContent = html; else d.innerHTML = html;
+    log.appendChild(d); log.scrollTop = log.scrollHeight;
+  }
+  function ask(q) {
+    q = q.trim(); if (!q) return;
+    add(q, 'me');
+    setTimeout(() => add(answer(q), 'from-bot'), 350);
+  }
+  CHIPS.forEach(c => { const b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.onclick = () => ask(c); chips.appendChild(b); });
+  add('¡Hola! Soy el asistente de esta página. Elige un tema o escribe tu pregunta.', 'from-bot');
+  function open(v) {
+    box.hidden = !v; fab.setAttribute('aria-expanded', String(v));
+    fab.textContent = v ? '✕' : '💬';
+    fab.setAttribute('aria-label', v ? 'Cerrar el asistente' : 'Abrir el asistente de la página');
+    if (v) input.focus(); else fab.focus();
+  }
+  fab.onclick = () => open(box.hidden);
+  box.querySelector('.bot-x').onclick = () => open(false);
+  box.querySelector('form').onsubmit = e => { e.preventDefault(); ask(input.value); input.value = ''; };
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) open(false); });
+  log.addEventListener('click', e => { if (e.target.closest('a[href^="#"]') && window.innerWidth < 720) open(false); });
+  const ct = document.getElementById('contacto');
+  if (ct) new IntersectionObserver(es => es.forEach(e => fab.classList.toggle('low', e.isIntersecting)), { threshold: .25 }).observe(ct);
 })();
 </script>
 </body>
