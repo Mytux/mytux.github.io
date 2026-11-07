@@ -134,6 +134,11 @@
     @keyframes ringpulse { 0% { transform: scale(.85); opacity: .9; } 100% { transform: scale(2); opacity: 0; } }
     @keyframes xpglow { 0% { box-shadow: 0 0 0 0 rgba(143,207,163,.95); } 100% { box-shadow: 0 0 0 16px rgba(143,207,163,0); } }
     @keyframes xpscan { from { top: -22%; } to { top: 100%; } }
+    #inicio.hero { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 2rem; }
+    .hero-globe { display: grid; place-items: center; }
+    .hero-globe img { width: 100%; max-width: 330px; height: auto; display: block; filter: drop-shadow(0 0 26px rgba(134,188,217,.4)); }
+    @media (max-width: 860px) { #inicio.hero { grid-template-columns: 1fr; } .hero-globe img { max-width: 210px; } }
+    @media (prefers-reduced-motion: reduce) { .hero-globe { display: none; } }
   </style>
 </head>
 <body>
@@ -177,6 +182,7 @@
           <a href="#material" class="btn-secondary">Leer Nota Verde</a>
         </div>
       </div>
+      <div class="hero-globe"><img src="assets/tierra.gif" alt="Globo terráqueo girando" width="256" height="256"></div>
     </section>
 
     <section id="sobre-mi">
@@ -204,6 +210,7 @@
       <h2 class="section-title">Experiencias</h2>
       <ol class="tl">
         <li><span class="yr">2025 a 2026</span><div><h3>Operación de la planta de tratamiento de aguas residuales industriales <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Deli - Anne Rose</p><p class="card-desc">Controles diarios de la calidad del agua, mantenimiento del sistema, indicadores del DGA, control de residuos y gestión de proveedores.</p></div></li>
+        <li><span class="yr">2025</span><div><h3>Control, rescate y ahuyentamiento de fauna silvestre <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Soluciones Integrales TM SAS · Relleno sanitario La Pradera · Corantioquia</p><p class="card-desc">Elaboración de actividades de muestreo, métodos de ahuyentamiento, acompañamiento en rescate y control de fauna silvestre, compilación de base de datos y elaboración de informes para Corantioquia en el relleno sanitario La Pradera.</p></div></li>
         <li><span class="yr">2024 a hoy</span><div><h3>AMET · Capítulo estudiantil de Ingeniería Ambiental <span class="tag tag-blue">En curso</span></h3><p class="card-meta">Universidad Nacional, sede Medellín</p><p class="card-desc">Planeación de eventos académicos, ambientales y culturales, y proyectos de sostenibilidad del campus.</p></div></li>
         <li><span class="yr">2023 a hoy</span><div><h3>Colombian Virtual Reality <span class="tag tag-blue">En curso</span></h3><p class="card-meta">Fundación</p><p class="card-desc">Coordinación de equipos, estrategia y recursos para generar un cambio positivo y sostenible en la comunidad.</p></div></li>
         <li><span class="yr">2022 a 2023</span><div><h3>Proyectos socioambientales a nivel nacional <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Soluciones Integrales TM SAS</p><p class="card-desc">Planificación, implementación y seguimiento de iniciativas para entidades públicas, con informes, planes de trabajo y cronogramas.</p></div></li>
@@ -730,7 +737,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   const KB = [
     { k: ['hola', 'buenas', 'hey', 'saludos', 'buenos dias', 'buenas tardes', 'buenas noches'], a: '¡Hola! Soy el asistente de esta página. Puedo contarte sobre Brahian, sus experiencias, habilidades, herramientas, descargas o cómo contactarlo. ¿Qué te gustaría saber?' },
     { k: ['quien', 'brahian', 'camilo', 'perfil', 'presentate', 'mytux', 'sobre mi', 'estudia', 'estudio', 'carrera', 'universidad'], a: 'Brahian Camilo Muñoz López es ingeniero ambiental en formación (Universidad Nacional de Colombia, sede Medellín), tecnólogo en Sistemas de Gestión Ambiental y técnico en sistemas. Su enfoque está en el análisis de datos, la sostenibilidad, la meteorología y las ciencias de la atmósfera. Lo cuenta todo en <a href="#sobre-mi">Sobre mí</a>.' },
-    { k: ['experiencia', 'experiencias', 'trabajo', 'trabajos', 'trabajado', 'empleo', 'cargo', 'amet', 'realidad virtual', 'deli', 'anne rose', 'soluciones integrales', 'aeronautica', 'trayectoria'], a: 'Entre 2025 y 2026 fue gestor ambiental en Deli - Anne Rose, operando la planta de tratamiento de aguas residuales industriales. Desde 2024 lidera el comité de planeación de AMET (capítulo estudiantil de Ingeniería Ambiental, UNAL Medellín), desde 2023 coordina la fundación Colombian Virtual Reality, y entre 2022 y 2023 coordinó proyectos socioambientales a nivel nacional en Soluciones Integrales TM SAS. Más detalles en <a href="#proyectos">Experiencias</a>.' },
+    { k: ['experiencia', 'experiencias', 'trabajo', 'trabajos', 'trabajado', 'empleo', 'cargo', 'amet', 'realidad virtual', 'deli', 'anne rose', 'soluciones integrales', 'aeronautica', 'trayectoria'], a: 'Entre 2025 y 2026 fue gestor ambiental en Deli - Anne Rose, operando la planta de tratamiento de aguas residuales industriales. Durante 2025 trabajó en control, rescate y ahuyentamiento de fauna silvestre en el relleno sanitario La Pradera, con Soluciones Integrales TM SAS. Desde 2024 lidera el comité de planeación de AMET (capítulo estudiantil de Ingeniería Ambiental, UNAL Medellín), desde 2023 coordina la fundación Colombian Virtual Reality, y entre 2022 y 2023 coordinó proyectos socioambientales a nivel nacional en Soluciones Integrales TM SAS. Más detalles en <a href="#proyectos">Experiencias</a>.' },
     { k: ['habilidad', 'habilidades', 'sabe', 'sabes', 'skills', 'capacidades', 'especialidad', 'servicios', 'pma', 'sga', 'rua', 'ptar', 'capacitaciones', 'capacitacion'], a: 'Maneja PMA y SGA, matrices legales y ASPI, informes de caracterización, digitalización del RUA, operación de plantas de tratamiento de aguas residuales industriales, coordinación de proyectos, capacitaciones ambientales empresariales y analítica de datos &amp; Business Intelligence. Míralas en <a href="#sobre-mi">Sobre mí</a>.' },
     { k: ['herramienta', 'herramientas', 'simulador', 'simulacion', 'calculadora', 'calculadoras', 'huella', 'carbono', 'residuos', 'agua', 'poblacion', 'poblacional', 'ecologia'], a: 'En <a href="#herramientas">Herramientas</a> hay un simulador de ecología de poblaciones (trabajo universitario) y calculadoras de huella de carbono, residuos y agua. Las calculadoras dan estimaciones aproximadas, con valores que puedes cambiar.' },
     { k: ['descarga', 'descargas', 'descargar', 'plantilla', 'plantillas', 'excel', 'matriz', 'chequeo', 'lista', 'cv', 'hoja de vida', 'curriculum', 'pdf'], a: 'Puedes descargar la <a href="assets/matriz-legal-ambiental.xlsx" download>plantilla de matriz legal ambiental</a>, la <a href="assets/lista-chequeo-rua.xlsx" download>lista de chequeo del RUA</a> y la <a href="assets/CV-Brahian-Munoz.pdf" download>hoja de vida</a>.' },
@@ -807,7 +814,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   const root = document.documentElement; root.style.overflow = 'hidden';
   const ov = document.createElement('div');
   ov.className = 'intro'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-label', 'Introducción animada');
-  ov.innerHTML = '<video class="intro-video" muted playsinline preload="auto" hidden></video><div class="intro-fallback"><div class="intro-orb"></div><div class="intro-title">Mytux</div><div class="intro-sub">SISTEMA DE EXPLORACIÓN EN LÍNEA</div></div><button type="button" class="intro-snd" hidden>🔊 Activar sonido</button><button type="button" class="intro-skip">Saltar intro ›</button>';
+  ov.innerHTML = '<video class="intro-video" muted playsinline preload="auto" hidden></video><div class="intro-fallback"><div class="intro-orb"></div><div class="intro-title">Mytux</div><div class="intro-sub">SITIO DE EXPLORACIÓN =)</div></div><button type="button" class="intro-snd" hidden>🔊 Activar sonido</button><button type="button" class="intro-skip">Saltar intro ›</button>';
   document.body.appendChild(ov);
   const v = ov.querySelector('video'), fb = ov.querySelector('.intro-fallback'), orb = ov.querySelector('.intro-orb'), skip = ov.querySelector('.intro-skip'), snd = ov.querySelector('.intro-snd');
   let done = false, started = false; const timers = [];
