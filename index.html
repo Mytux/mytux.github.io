@@ -16,8 +16,21 @@
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Brahian Camilo Muñoz López","jobTitle":"Tecnólogo en Sistemas de Gestión Ambiental","affiliation":{"@type":"Organization","name":"Mytux Corp."},"sameAs":["https://www.linkedin.com/in/camilo-munoz-projects/","https://github.com/Mytux","https://www.instagram.com/xmytux/"]}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .hero h1.brand-title { font-family: "Playfair Display", Georgia, "Times New Roman", serif; font-weight: 800; color: #ffffff; font-size: clamp(4rem, 13vw, 9rem); line-height: .95; letter-spacing: .01em; }
+    /* Fondo del inicio que se desvanece hacia abajo */
+    .hero { position: relative; isolation: isolate; min-height: min(86vh, 44rem); }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background-image: linear-gradient(rgba(8, 12, 10, .5), rgba(8, 12, 10, .5)), url("assets/hero-fondo.jpg");
+      background-size: cover; background-position: center 65%; background-repeat: no-repeat;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
+      mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
+    }
+    .hero .hero-text, .hero .who small { color: #e6ecef; }
+  </style>
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -34,7 +47,7 @@
         <ul>
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#sobre-mi">Sobre mí</a></li>
-          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#proyectos">Experiencias</a></li>
           <li><a href="#herramientas">Herramientas</a></li>
           <li><a href="#material">Material ilustrativo</a></li>
           <li><a href="#contacto">Contacto</a></li>
@@ -52,11 +65,11 @@
           </picture>
           <span>Brahian Camilo Muñoz López<small>Estudiante de Ingeniería Ambiental · Mytux Corp.</small></span>
         </div>
-        <h1>Aprendo, mido y comparto <em>cómo cuidar el ambiente</em>.</h1>
+        <h1 class="brand-title">Mytux</h1>
         <p class="hero-text">Soy Brahian, estudiante de Ingeniería Ambiental en Medellín. Me interesan los datos, la meteorología y la atmósfera, y aquí dejo lo que voy aprendiendo: proyectos, simuladores, plantillas y notas para entenderlo todo un poco mejor.</p>
         <div class="cta-group">
           <a href="#herramientas" class="btn-primary">Probar el simulador</a>
-          <a href="#proyectos" class="btn-secondary">Ver proyectos</a>
+          <a href="#proyectos" class="btn-secondary">Ver experiencias</a>
           <a href="#material" class="btn-secondary">Leer Nota Verde</a>
         </div>
       </div>
@@ -83,7 +96,7 @@
     </section>
 
     <section id="proyectos">
-      <h2 class="section-title">Proyectos</h2>
+      <h2 class="section-title">Experiencias</h2>
       <ol class="tl">
         <li><span class="yr">2025 a 2026</span><div><h3>Operación de la planta de tratamiento de aguas residuales industriales <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Deli - Anne Rose</p><p class="card-desc">Controles diarios de la calidad del agua, mantenimiento del sistema, indicadores del DGA, control de residuos y gestión de proveedores.</p></div></li>
         <li><span class="yr">2024 a hoy</span><div><h3>AMET · Capítulo estudiantil de Ingeniería Ambiental <span class="tag tag-blue">En curso</span></h3><p class="card-meta">Universidad Nacional, sede Medellín</p><p class="card-desc">Planeación de eventos académicos, ambientales y culturales, y proyectos de sostenibilidad del campus.</p></div></li>
@@ -237,7 +250,7 @@ const gal = document.getElementById('gallery');
 FOTOS.forEach((f, i) => {
   const fig = document.createElement('figure');
   fig.className = 'shot empty';
-  fig.innerHTML = '<button type="button" class="shot-btn" aria-label="Ampliar: ' + esc(f.titulo) + '"><img loading="lazy" decoding="async" alt="' + esc(f.titulo) + '"><span class="ph">Foto de ejemplo</span></button><figcaption><strong>' + esc(f.titulo) + '</strong></figcaption>';
+  fig.innerHTML = '<button type="button" class="shot-btn" aria-label="Ampliar: ' + esc(f.titulo) + '"><img decoding="async" alt="' + esc(f.titulo) + '"><span class="ph">Foto de ejemplo</span></button><figcaption><strong>' + esc(f.titulo) + '</strong></figcaption>';
   const img = fig.querySelector('img');
   img.onload = () => fig.classList.remove('empty');
   img.onerror = () => fig.classList.add('empty');
