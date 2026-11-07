@@ -69,7 +69,7 @@
           <img class="about-photo" alt="Retrato de Brahian Camilo Muñoz López" width="480" height="600" loading="lazy" decoding="async" src="assets/portrait.jpg">
         </picture>
         <div class="about-body">
-          <p><strong>Soy Brahian Camilo Muñoz López</strong>: estudiante de Ingeniería Ambiental, tecnólogo en Sistemas de Gestión Ambiental y técnico en sistemas, con alta experiencia en gestión ambiental y coordinación de proyectos.</p>
+          <p><strong>Ingeniero Ambiental en formación</strong>, tecnólogo en Sistemas de Gestión Ambiental y técnico en sistemas, con alta experiencia en gestión ambiental y coordinación de proyectos.</p>
           <p>Mi enfoque está en el análisis de datos, la sostenibilidad, la meteorología y las ciencias de la atmósfera, con interés en desarrollar soluciones innovadoras que integren la tecnología y los recursos naturales.</p>
           <p>Diseño capacitaciones ambientales a la medida de cada empresa, para personal administrativo, ejecutivo y operativo, en agua, suelos, aire, energía, residuos sólidos, fauna, flora, sostenibilidad y educación social.</p>
         </div>
@@ -226,10 +226,10 @@ document.documentElement.classList.add('js');
 
 /* ===== GALERIA ===== */
 const FOTOS = [
-  { src: 'assets/galeria-compensacion-copacabana.jpg', titulo: 'Compensación forestal en Copacabana · 2021', descripcion: 'Sembrando un árbol en una jornada de compensación forestal.', pos: 'center 55%' },
-  { src: 'assets/galeria-herbivoria-los-monos.jpg', titulo: 'Segundo muestreo de herbivoría en la Reserva Agroecológica Los Monos, San Francisco · 2026', descripcion: 'Trabajo de campo en el bosque: con una garrocha se alcanzan las hojas de la copa de los árboles para el muestreo.', pos: 'center 90%' },
-  { src: 'assets/galeria-sensibilizacion-tumaco.jpg', titulo: 'Sensibilización con la comunidad de Tumaco · 2021', descripcion: 'Charla de sensibilización ambiental con la comunidad de Tumaco.', pos: 'center 50%' },
-  { src: 'assets/galeria-paramo-santurban.jpg', titulo: 'Visita al páramo de Santurbán, Vetas, Santander · 2022', descripcion: 'En la entrada del sendero Lagunas Negras, durante la visita al páramo de Santurbán.', pos: 'center 40%' }
+  { src: 'assets/galeria-compensacion-copacabana.jpg', titulo: 'Compensación forestal en Copacabana · 2021', pos: 'center 55%' },
+  { src: 'assets/galeria-herbivoria-los-monos.jpg', titulo: 'Muestreo de Herbivoría en la Reserva Agroecológica Los Monos San Francisco 2026', pos: 'center 90%' },
+  { src: 'assets/galeria-sensibilizacion-tumaco.jpg', titulo: 'Sensibilización con la comunidad de Tumaco · 2021', pos: 'center 50%' },
+  { src: 'assets/galeria-paramo-santurban.jpg', titulo: 'Visita al páramo de Santurbán, Vetas, Santander · 2022', pos: 'center 40%' }
 ];
 if (FOTOS.length) document.getElementById('galeria').hidden = false;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -237,7 +237,7 @@ const gal = document.getElementById('gallery');
 FOTOS.forEach((f, i) => {
   const fig = document.createElement('figure');
   fig.className = 'shot empty';
-  fig.innerHTML = '<button type="button" class="shot-btn" aria-label="Ampliar: ' + esc(f.titulo) + '"><img loading="lazy" decoding="async" alt="' + esc(f.titulo) + '"><span class="ph">Foto de ejemplo</span></button><figcaption><strong>' + esc(f.titulo) + '</strong><span>' + esc(f.descripcion) + '</span></figcaption>';
+  fig.innerHTML = '<button type="button" class="shot-btn" aria-label="Ampliar: ' + esc(f.titulo) + '"><img loading="lazy" decoding="async" alt="' + esc(f.titulo) + '"><span class="ph">Foto de ejemplo</span></button><figcaption><strong>' + esc(f.titulo) + '</strong></figcaption>';
   const img = fig.querySelector('img');
   img.onload = () => fig.classList.remove('empty');
   img.onerror = () => fig.classList.add('empty');
@@ -265,7 +265,7 @@ function show(i, trigger) {
   image.src = f.src;
   image.alt = f.titulo;
   document.getElementById('lb-t').textContent = f.titulo;
-  document.getElementById('lb-d').textContent = f.descripcion;
+  document.getElementById('lb-d').textContent = f.descripcion || '';
   lb.hidden = false;
   document.body.style.overflow = 'hidden';
   document.getElementById('lb-x').focus();
