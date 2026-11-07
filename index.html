@@ -111,6 +111,8 @@
     .theme-toggle { order: 2; font: inherit; font-size: .85rem; font-weight: 700; padding: .45rem .95rem; border-radius: 9999px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); cursor: pointer; white-space: nowrap; }
     .theme-toggle:hover { border-color: var(--accent-green); }
     @media (max-width: 720px) { .theme-toggle { order: 1; margin-left: auto; padding: .35rem .75rem; } header nav { order: 2; } }
+    .plat-ic { width: 2.6rem; height: 2.6rem; border-radius: 10px; border: 1px solid var(--border-color); display: grid; place-items: center; color: var(--accent-green); }
+    a.plat:hover .plat-ic { border-color: var(--accent-green); }
   </style>
 </head>
 <body>
@@ -255,6 +257,41 @@
         <p class="card-desc">Estimaciones rápidas para tomar conciencia. Cambia los valores y el resultado se actualiza al instante.</p>
         <div class="tabs" role="tablist" aria-label="Calculadoras"></div>
         <div id="calc-panels"></div>
+      </div>
+      <h3 class="sub-h">Algunas plataformas que uso para mis trabajos</h3>
+      <div class="grid-3">
+        <a class="card dl plat" href="https://biodiversidad.co/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z"/><path d="M5 19l8-8"/></svg></span>
+          <h3 class="card-title">SiB Colombia</h3>
+          <p class="card-desc">Sistema de Información sobre Biodiversidad de Colombia.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://conservation.maps.arcgis.com/home/index.html" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3.5 3.5 14.5 0 18M12 3c-3.5 3.5-3.5 14.5 0 18"/></svg></span>
+          <h3 class="card-title">Conservation International</h3>
+          <p class="card-desc">Portal de mapas y datos de conservación en ArcGIS.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://www.sgc.gov.co/?lang=es-CO" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2-6 4 12 3-9 2 3h5"/></svg></span>
+          <h3 class="card-title">SGC · Servicio Geológico Colombiano</h3>
+          <p class="card-desc">Información geocientífica de Colombia: geología, sismos y amenazas.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://qgis.org/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg></span>
+          <h3 class="card-title">QGIS</h3>
+          <p class="card-desc">Sistema de información geográfica de código abierto.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://www.minambiente.gov.co/normativa/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
+          <h3 class="card-title">Normativa · MinAmbiente</h3>
+          <p class="card-desc">Normativa del Ministerio de Ambiente y Desarrollo Sostenible.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://worldview.earthdata.nasa.gov/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="3.6" transform="rotate(-25 12 12)"/></svg></span>
+          <h3 class="card-title">NASA Worldview</h3>
+          <p class="card-desc">Imágenes satelitales de la Tierra casi en tiempo real.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://datacalculus.com/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span>
+          <h3 class="card-title">DataCalculus</h3>
+          <p class="card-desc">Plataforma para crear sitios y aplicaciones conversando con IA.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://siata.gov.co/siata_nuevo/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16" y1="13" x2="16" y2="21"/><line x1="8" y1="13" x2="8" y2="21"/><line x1="12" y1="15" x2="12" y2="23"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg></span>
+          <h3 class="card-title">SIATA</h3>
+          <p class="card-desc">Sistema de Alerta Temprana del valle de Aburrá.</p><span class="card-link">Visitar la plataforma ↗</span></a>
       </div>
     </section>
 
