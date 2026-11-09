@@ -178,6 +178,32 @@
     .map-list { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; }
     .map-list button { font: inherit; font-size: .82rem; padding: .35rem .8rem; border-radius: 9999px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); cursor: pointer; }
     .map-list button:hover { border-color: var(--accent-green); }
+
+    /* ===== Proyecto de datos ===== */
+    #datos { background: linear-gradient(180deg, #0f1110, #121815 60%, #0f1110); border-top: 1px solid var(--border-color); }
+    html[data-theme="light"] #datos { background: #eef2ee; }
+    #dp h4 { font-size: 1rem; margin: 1.5rem 0 .5rem; color: var(--accent-green); }
+    #dp .dp-grid h4 { margin-top: 1rem; }
+    #dp h5 { font-size: .85rem; color: var(--text-muted); font-weight: 600; margin-bottom: .4rem; }
+    .dp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0 2rem; }
+    .dp-det { margin-top: .75rem; border-top: 1px solid var(--border-color); padding-top: .75rem; }
+    .dp-det summary { cursor: pointer; font-weight: 700; }
+    .dp-det ol, .dp-det ul { margin: .6rem 0 0 1.2rem; display: flex; flex-direction: column; gap: .3rem; }
+    .dp-ctrl { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: end; }
+    .dp-ctrl fieldset { border: 0; padding: 0; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .dp-ctrl legend { font-size: .85rem; color: var(--text-muted); margin-bottom: .3rem; }
+    .dp-ctrl label { display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; color: var(--text-muted); }
+    .dp-ctrl fieldset label { flex-direction: row; align-items: center; gap: .4rem; color: var(--text-main); }
+    .dp-ctrl input[type=number] { width: 7rem; }
+    .dp-sum { margin: 1rem 0; max-width: 52rem; }
+    .dp-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin-top: 1rem; }
+    #dp .cv { height: 220px; }
+    .dp-tablewrap { max-height: 280px; overflow: auto; margin-top: .6rem; }
+    .dp-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    .dp-table th, .dp-table td { padding: .3rem .6rem; border-bottom: 1px solid var(--border-color); text-align: right; }
+    .dp-table th:first-child, .dp-table td:first-child { text-align: left; }
+    .dp-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin: .6rem 0; }
+    .dp-actions .btn-secondary { font: inherit; cursor: pointer; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -197,6 +223,7 @@
           <li><a href="#sobre-mi">Sobre mí</a></li>
           <li><a href="#proyectos">Experiencias</a></li>
           <li><a href="#herramientas">Herramientas</a></li>
+          <li><a href="#datos">Análisis de datos</a></li>
           <li><a href="#material">Material ilustrativo</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -371,6 +398,49 @@
           <p class="card-desc">Sistema de Alerta Temprana del valle de Aburrá.</p><span class="card-link">Visitar la plataforma ↗</span></a>
       </div>
     </section>
+
+    <section id="datos">
+      <h2 class="section-title">Análisis de datos</h2>
+      <p class="sub">Un proyecto reproducible: la pregunta, los datos, el método, los resultados y el código para repetirlo. Los resultados se calculan en tu navegador, con datos reales, cada vez que abres esta página.</p>
+      <article class="card" id="dp">
+        <h3 class="card-title">Lluvia y temperatura en Medellín, <span id="dp-range">1991–2025</span></h3>
+        <div class="dp-grid">
+          <div><h4>La pregunta</h4><p class="card-desc">¿Cómo se reparte la lluvia a lo largo del año en Medellín y ha cambiado en las últimas décadas?</p></div>
+          <div><h4>Los datos</h4><p class="card-desc">Reanálisis ERA5 servido por Open-Meteo: un punto en Medellín, con precipitación total y temperatura media diarias. Un reanálisis es un modelo que asimila observaciones, así que sirve para ver patrones pero no reemplaza las mediciones de estaciones. <a id="dp-url" href="#" target="_blank" rel="noopener">Ver la consulta exacta ↗</a></p></div>
+        </div>
+        <details class="dp-det"><summary>El método, paso a paso</summary>
+          <ol class="card-desc"><li>Se descargan los datos diarios del periodo.</li><li>Se agregan por mes; un mes es válido si tiene al menos el 90 % de sus días con dato.</li><li>Se agregan por año; un año es válido si sus 12 meses lo son (la lluvia se suma y la temperatura se promedia).</li><li>La climatología es el promedio de cada mes sobre todos los años del rango.</li><li>La tendencia es una regresión lineal por mínimos cuadrados, con intervalo de confianza del 95 %.</li><li>Las anomalías son la diferencia de cada año respecto al promedio del rango.</li></ol></details>
+        <details class="dp-det"><summary>Limitaciones</summary>
+          <ul class="card-desc"><li>Es un reanálisis, no mediciones de estaciones. En un valle de montaña, una celda del modelo no captura las diferencias locales.</li><li>Un solo punto y unas pocas décadas no bastan para atribuir causas: la tendencia describe lo que muestran estos datos, no explica por qué.</li><li>Con tan pocos años, el intervalo de confianza de la tendencia suele ser amplio.</li></ul></details>
+
+        <h4>Resultados</h4>
+        <div class="dp-ctrl">
+          <fieldset><legend>Variable</legend><label><input type="radio" name="dpv" value="p" checked> Precipitación</label> <label><input type="radio" name="dpv" value="t"> Temperatura</label></fieldset>
+          <label>Desde <input type="number" id="dp-a" step="1"></label>
+          <label>Hasta <input type="number" id="dp-b" step="1"></label>
+        </div>
+        <p class="cap" id="dp-status" aria-live="polite">Esperando para cargar los datos…</p>
+        <div class="wx-grid" id="dp-tiles"></div>
+        <p class="dp-sum" id="dp-sum" aria-live="polite"></p>
+        <div class="dp-charts">
+          <div><h5>Climatología mensual (barras: lluvia · línea: temperatura)</h5><canvas class="cv" id="dp-c1" role="img" aria-label="Precipitación y temperatura medias de cada mes"></canvas></div>
+          <div><h5>Serie anual y tendencia (línea punteada)</h5><canvas class="cv" id="dp-c2" role="img" aria-label="Serie anual con línea de tendencia"></canvas></div>
+          <div><h5>Anomalías anuales respecto al promedio</h5><canvas class="cv" id="dp-c3" role="img" aria-label="Anomalías anuales respecto al promedio"></canvas></div>
+        </div>
+        <details class="dp-det"><summary>Ver los datos anuales en tabla</summary><div class="dp-tablewrap"><table class="dp-table" id="dp-table"></table></div></details>
+
+        <h4>Reprodúcelo</h4>
+        <p class="card-desc">El mismo análisis está escrito en Python, con los mismos criterios, para que obtengas los mismos números en tu computador.</p>
+        <div class="dp-actions">
+          <a class="btn-secondary" href="https://github.com/Mytux/mytux.github.io/blob/main/analisis/lluvia_medellin.py" target="_blank" rel="noopener">Ver el código en GitHub ↗</a>
+          <a class="btn-secondary" href="analisis/lluvia_medellin.py" download>Descargar el script (.py)</a>
+          <a class="btn-secondary" href="https://github.com/Mytux/mytux.github.io/blob/main/analisis/README.md" target="_blank" rel="noopener">Leer el README ↗</a>
+          <button type="button" class="btn-secondary" id="dp-csv">Descargar datos mensuales (CSV)</button>
+        </div>
+        <p class="cap">Datos: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (licencia CC BY 4.0), a partir del reanálisis ERA5.</p>
+      </article>
+    </section>
+
 
     <section id="material">
       <h2 class="section-title">Material ilustrativo</h2>
@@ -746,7 +816,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
 
 /* ===== BARRA DE EXPLORACION ===== */
 (function () {
-  const SECS = [['inicio', 'Inicio'], ['sobre-mi', 'Sobre mí'], ['proyectos', 'Experiencias'], ['herramientas', 'Herramientas'], ['material', 'Material ilustrativo'], ['contacto', 'Contacto']];
+  const SECS = [['inicio', 'Inicio'], ['sobre-mi', 'Sobre mí'], ['proyectos', 'Experiencias'], ['herramientas', 'Herramientas'], ['datos', 'Análisis de datos'], ['material', 'Material ilustrativo'], ['contacto', 'Contacto']];
   const xp = document.createElement('div');
   xp.className = 'xp'; xp.setAttribute('aria-hidden', 'true');
   xp.innerHTML = '<span class="xp-lab xp-t">EXP</span><div class="xp-track"><div class="xp-fill"></div></div><span class="xp-lab xp-b">0%</span>';
@@ -801,6 +871,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     { k: ['inteligencia artificial', 'ia', 'bot', 'robot', 'chatgpt', 'eres real', 'eres un', 'quien eres', 'que eres'], a: 'Soy un asistente automático con respuestas preparadas sobre esta página; no soy una inteligencia artificial conectada a internet. Si tu pregunta es más específica, lo mejor es escribirle a Brahian desde <a href="#contacto">Contacto</a>.' },
     { k: ['clima', 'aire', 'calidad del aire', 'temperatura', 'lluvia', 'pm2 5', 'contaminacion', 'atmosfera', 'tiempo'], a: 'En <a href="#wx">Herramientas</a> hay un panel en vivo del clima y la calidad del aire de Medellín, con datos de Open-Meteo. Para mediciones de estaciones locales, la fuente es SIATA.' },
     { k: ['mapa', 'mapas', 'lugares', 'sitios', 'ubicacion', 'ubicaciones', 'donde'], a: 'En <a href="#fieldmap">Material ilustrativo</a> hay un mapa con los sitios de trabajo de campo: Copacabana, San Francisco, Tumaco, Santurbán, Belmira y Bello. Cada punto muestra su foto y su año.' },
+    { k: ['analisis', 'datos', 'proyecto de datos', 'precipitacion', 'tendencia', 'reproducible', 'python', 'era5', 'codigo', 'script'], a: 'En <a href="#datos">Análisis de datos</a> hay un proyecto reproducible: lluvia y temperatura en Medellín desde 1991, con datos de reanálisis ERA5. Calcula la climatología, la tendencia y las anomalías en tu navegador, y trae el script de Python para repetirlo.' },
     { k: ['gracias', 'genial', 'perfecto', 'excelente', 'chao', 'adios', 'hasta luego'], a: '¡Con gusto! Si te surge otra duda, aquí estaré.' }
   ];
   const FALLBACK = 'No tengo una respuesta preparada para eso. Prueba preguntando por Brahian, sus experiencias, habilidades, herramientas, descargas o contacto, o escríbele directamente desde <a href="#contacto">Contacto</a>.';
@@ -973,6 +1044,148 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     document.head.appendChild(s);
   }
   new IntersectionObserver((es, ob) => { if (es.some(e => e.isIntersecting) && !started) { started = true; ob.disconnect(); loadLeaflet(); } }, { rootMargin: '300px' }).observe(wrap);
+})();
+
+/* ===== PROYECTO DE DATOS: LLUVIA Y TEMPERATURA EN MEDELLIN (reanalisis ERA5 via Open-Meteo) ===== */
+(function () {
+  const box = document.getElementById('dp'); if (!box) return;
+  const LAT = 6.2442, LON = -75.5812, START = 1991, END = new Date().getFullYear() - 1;
+  const SRC = 'https://archive-api.open-meteo.com/v1/archive?latitude=' + LAT + '&longitude=' + LON + '&start_date=' + START + '-01-01&end_date=' + END + '-12-31&daily=precipitation_sum,temperature_2m_mean&timezone=America%2FBogota';
+  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const $ = id => document.getElementById(id);
+  const col = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const nf = (v, d) => Number(v).toLocaleString('es-CO', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const sg = (v, d) => (v >= 0 ? '+' : '−') + nf(Math.abs(v), d);
+  let ROWS = null;
+  $('dp-url').href = SRC; $('dp-range').textContent = START + '–' + END;
+  $('dp-a').min = $('dp-b').min = START; $('dp-a').max = $('dp-b').max = END; $('dp-a').value = START; $('dp-b').value = END;
+
+  /* --- agregación (mismos criterios que el script de Python) --- */
+  function monthly(daily) {
+    const acc = {};
+    daily.time.forEach((day, i) => {
+      const y = +day.slice(0, 4), m = +day.slice(5, 7), k = y * 100 + m, a = acc[k] || (acc[k] = { y, m, sp: 0, np: 0, st: 0, nt: 0 });
+      const p = daily.precipitation_sum[i], t = daily.temperature_2m_mean[i];
+      if (p != null) { a.sp += p; a.np++; } if (t != null) { a.st += t; a.nt++; }
+    });
+    return Object.keys(acc).sort().map(k => { const a = acc[k], dim = new Date(a.y, a.m, 0).getDate(); return [a.y, a.m, a.np >= .9 * dim ? a.sp : null, a.nt >= .9 * dim ? a.st / a.nt : null, dim]; });
+  }
+  function annual(rows, a0, b0) {
+    const by = {}; rows.forEach(r => { (by[r[0]] || (by[r[0]] = [])).push(r); });
+    return Object.keys(by).map(Number).filter(y => y >= a0 && y <= b0).sort((x, y) => x - y).map(y => {
+      const p = by[y].filter(r => r[2] != null), t = by[y].filter(r => r[3] != null);
+      return { y, p: p.length === 12 ? p.reduce((s, r) => s + r[2], 0) : null, t: t.length === 12 ? t.reduce((s, r) => s + r[3], 0) / 12 : null };
+    });
+  }
+  function clim(rows, a0, b0) {
+    const P = [], T = [];
+    for (let m = 1; m <= 12; m++) {
+      const rs = rows.filter(r => r[1] === m && r[0] >= a0 && r[0] <= b0), p = rs.filter(r => r[2] != null), t = rs.filter(r => r[3] != null);
+      P.push(p.length ? p.reduce((s, r) => s + r[2], 0) / p.length : null); T.push(t.length ? t.reduce((s, r) => s + r[3], 0) / t.length : null);
+    }
+    return { p: P, t: T };
+  }
+  const tcrit = gl => { const z = 1.96; return z + (Math.pow(z, 3) + z) / (4 * gl) + (5 * Math.pow(z, 5) + 16 * Math.pow(z, 3) + 3 * z) / (96 * gl * gl); };
+  function reg(x, y) {
+    const n = x.length, mx = x.reduce((s, v) => s + v, 0) / n, my = y.reduce((s, v) => s + v, 0) / n;
+    let sxx = 0, sxy = 0, syy = 0; for (let i = 0; i < n; i++) { sxx += (x[i] - mx) * (x[i] - mx); sxy += (x[i] - mx) * (y[i] - my); syy += (y[i] - my) * (y[i] - my); }
+    const b = sxy / sxx, a = my - b * mx; let sse = 0; for (let i = 0; i < n; i++) { const e = y[i] - (a + b * x[i]); sse += e * e; }
+    const gl = n - 2, se = Math.sqrt(sse / gl / sxx), t = tcrit(gl);
+    return { n, mean: my, a, b, r2: syy ? 1 - sse / syy : 0, lo: b - t * se, hi: b + t * se };
+  }
+
+  /* --- gráficas --- */
+  function setup(cv) {
+    const W = cv.clientWidth, H = cv.clientHeight || 220, d = Math.min(2, window.devicePixelRatio || 1); if (!W) return null;
+    cv.width = W * d; cv.height = H * d; const c = cv.getContext('2d'); c.setTransform(d, 0, 0, d, 0, 0); c.font = '11px system-ui, sans-serif'; return { c, W, H };
+  }
+  function grid(c, W, H, m, lo, hi, fmt) {
+    c.lineWidth = 1; c.strokeStyle = col('--c-line') || '#2e3430'; c.fillStyle = col('--c-mut') || '#9aa49d';
+    for (let i = 0; i <= 4; i++) { const v = lo + (hi - lo) * i / 4, y = H - m.b - (H - m.t - m.b) * i / 4; c.beginPath(); c.moveTo(m.l, y); c.lineTo(W - m.r, y); c.stroke(); c.fillText(fmt(v), 4, y + 4); }
+  }
+  function chart1(cl) {
+    const s = setup($('dp-c1')); if (!s) return; const { c, W, H } = s, m = { l: 46, r: 38, t: 14, b: 22 };
+    const pv = cl.p.filter(v => v != null), tv = cl.t.filter(v => v != null); if (!pv.length) return;
+    const pmax = Math.max.apply(null, pv) * 1.12; grid(c, W, H, m, 0, pmax, v => Math.round(v));
+    const bw = (W - m.l - m.r) / 12; c.fillStyle = col('--c-g') || '#8fcfa3';
+    cl.p.forEach((v, i) => { if (v == null) return; const h = (H - m.t - m.b) * v / pmax; c.fillRect(m.l + bw * i + bw * .18, H - m.b - h, bw * .64, h); });
+    c.fillStyle = col('--c-mut') || '#9aa49d'; MESES.forEach((n, i) => c.fillText(n[0].toUpperCase(), m.l + bw * (i + .5) - 3, H - 6));
+    if (tv.length) {
+      const lo = Math.min.apply(null, tv) - .5, hi = Math.max.apply(null, tv) + .5, Y = v => H - m.b - (H - m.t - m.b) * (v - lo) / (hi - lo);
+      c.strokeStyle = col('--c-b') || '#86bcd9'; c.lineWidth = 2.4; c.beginPath(); let pen = false;
+      cl.t.forEach((v, i) => { if (v == null) { pen = false; return; } const x = m.l + bw * (i + .5); pen ? c.lineTo(x, Y(v)) : c.moveTo(x, Y(v)); pen = true; }); c.stroke();
+      c.fillStyle = col('--c-b') || '#86bcd9'; c.fillText(hi.toFixed(1) + '°', W - m.r + 4, m.t + 4); c.fillText(lo.toFixed(1) + '°', W - m.r + 4, H - m.b);
+    }
+  }
+  function chart2(an, key, st, color, unit) {
+    const s = setup($('dp-c2')); if (!s) return; const { c, W, H } = s, m = { l: 50, r: 12, t: 14, b: 22 };
+    const pts = an.filter(r => r[key] != null); if (pts.length < 2) return;
+    const vs = pts.map(r => r[key]), pad = (Math.max.apply(null, vs) - Math.min.apply(null, vs)) * .12 || 1, lo = Math.min.apply(null, vs) - pad, hi = Math.max.apply(null, vs) + pad;
+    const x0 = pts[0].y, x1 = pts[pts.length - 1].y, X = y => m.l + (W - m.l - m.r) * (y - x0) / (x1 - x0 || 1), Y = v => H - m.b - (H - m.t - m.b) * (v - lo) / (hi - lo);
+    grid(c, W, H, m, lo, hi, v => key === 'p' ? Math.round(v) : v.toFixed(1));
+    c.fillStyle = col('--c-mut') || '#9aa49d'; const step = Math.max(1, Math.round((x1 - x0) / 6)); for (let y = x0; y <= x1; y += step) c.fillText(y, X(y) - 12, H - 6);
+    c.strokeStyle = color; c.lineWidth = 2.2; c.beginPath(); pts.forEach((r, i) => i ? c.lineTo(X(r.y), Y(r[key])) : c.moveTo(X(r.y), Y(r[key]))); c.stroke();
+    c.fillStyle = color; pts.forEach(r => { c.beginPath(); c.arc(X(r.y), Y(r[key]), 2.6, 0, 7); c.fill(); });
+    c.setLineDash([6, 5]); c.strokeStyle = col('--c-mut') || '#9aa49d'; c.lineWidth = 1.6; c.beginPath(); c.moveTo(X(x0), Y(st.a + st.b * x0)); c.lineTo(X(x1), Y(st.a + st.b * x1)); c.stroke(); c.setLineDash([]);
+  }
+  function chart3(an, key, st, color) {
+    const s = setup($('dp-c3')); if (!s) return; const { c, W, H } = s, m = { l: 50, r: 12, t: 14, b: 22 };
+    const pts = an.filter(r => r[key] != null); if (pts.length < 2) return;
+    const an2 = pts.map(r => r[key] - st.mean), mx = Math.max.apply(null, an2.map(Math.abs)) * 1.15 || 1;
+    grid(c, W, H, m, -mx, mx, v => (key === 'p' ? Math.round(v) : v.toFixed(1)));
+    const bw = (W - m.l - m.r) / pts.length, zero = H - m.b - (H - m.t - m.b) / 2;
+    pts.forEach((r, i) => { const v = an2[i], h = (H - m.t - m.b) / 2 * Math.abs(v) / mx; c.fillStyle = v >= 0 ? color : '#d9b27c'; c.fillRect(m.l + bw * i + bw * .12, v >= 0 ? zero - h : zero, bw * .76, h); });
+    c.fillStyle = col('--c-mut') || '#9aa49d'; const step = Math.max(1, Math.round(pts.length / 6)); pts.forEach((r, i) => { if (i % step === 0) c.fillText(r.y, m.l + bw * (i + .5) - 12, H - 6); });
+  }
+
+  /* --- actualización --- */
+  const getVar = () => { const r = document.querySelector('input[name="dpv"]:checked'); return r ? r.value : 'p'; };
+  let cur = null;
+  function update() {
+    if (!ROWS) return;
+    let a0 = Math.max(START, Math.min(END, +$('dp-a').value || START)), b0 = Math.max(START, Math.min(END, +$('dp-b').value || END));
+    if (b0 - a0 < 5) { if (a0 + 5 <= END) b0 = a0 + 5; else a0 = b0 - 5; }
+    $('dp-a').value = a0; $('dp-b').value = b0;
+    const key = getVar(), isP = key === 'p', an = annual(ROWS, a0, b0), cl = clim(ROWS, a0, b0);
+    const vals = an.filter(r => r[key] != null), unit = isP ? 'mm' : '°C', d = isP ? 1 : 2, color = isP ? (col('--c-g') || '#8fcfa3') : (col('--c-b') || '#86bcd9');
+    const lines = [];
+    const top = cl.p.map((v, i) => [v, i]).filter(x => x[0] != null).sort((x, y) => y[0] - x[0]);
+    if (top.length >= 2) lines.push('Los dos meses más lluviosos son ' + MESES[top[0][1]] + ' y ' + MESES[top[1][1]] + '.');
+    if (vals.length < 6) { $('dp-tiles').innerHTML = ''; $('dp-sum').textContent = 'Hay muy pocos años válidos en este rango para calcular una tendencia. Amplía el rango.'; chart1(cl); return; }
+    const st = reg(vals.map(r => r.y), vals.map(r => r[key]));
+    cur = { an, key, st };
+    const b10 = st.b * 10, lo10 = st.lo * 10, hi10 = st.hi * 10, incl0 = lo10 <= 0 && 0 <= hi10;
+    lines.push(a0 + '–' + b0 + ' (' + st.n + ' años): ' + (isP ? 'la precipitación anual media fue ' : 'la temperatura media anual fue ') + nf(st.mean, d) + ' ' + unit + '. La tendencia lineal es de ' + sg(b10, d) + ' ' + unit + ' por década (intervalo de confianza del 95 %: ' + sg(lo10, d) + ' a ' + sg(hi10, d) + '; R² = ' + nf(st.r2, 2) + '). ' + (incl0 ? 'El intervalo incluye el cero: con estos datos no se puede afirmar que haya una tendencia.' : 'El intervalo no incluye el cero, pero recuerda que es un reanálisis y no reemplaza datos de estaciones.'));
+    $('dp-sum').textContent = lines.join(' ');
+    const ext = vals.slice().sort((x, y) => y[key] - x[key]), hi1 = ext[0], lo1 = ext[ext.length - 1];
+    const tile = (l, v, s2) => '<div class="wx-tile"><small>' + l + '</small><strong>' + v + '</strong>' + (s2 ? '<small>' + s2 + '</small>' : '') + '</div>';
+    $('dp-tiles').innerHTML = tile('Promedio anual', nf(st.mean, d) + ' ' + unit) + tile('Tendencia por década', sg(b10, d) + ' ' + unit, 'IC 95 %: ' + sg(lo10, d) + ' a ' + sg(hi10, d)) + tile('R²', nf(st.r2, 2), st.n + ' años analizados') +
+      tile(isP ? 'Año más lluvioso' : 'Año más cálido', String(hi1.y), nf(hi1[key], d) + ' ' + unit) + tile(isP ? 'Año más seco' : 'Año más frío', String(lo1.y), nf(lo1[key], d) + ' ' + unit);
+    chart1(cl); chart2(an, key, st, color, unit); chart3(an, key, st, color);
+    $('dp-c2').setAttribute('aria-label', 'Serie anual de ' + (isP ? 'precipitación' : 'temperatura') + ' con línea de tendencia'); 
+    $('dp-table').innerHTML = '<thead><tr><th>Año</th><th>Precipitación (mm)</th><th>Temperatura (°C)</th></tr></thead><tbody>' + an.map(r => '<tr><td>' + r.y + '</td><td>' + (r.p == null ? '–' : nf(r.p, 1)) + '</td><td>' + (r.t == null ? '–' : nf(r.t, 2)) + '</td></tr>').join('') + '</tbody>';
+  }
+  async function load() {
+    const status = $('dp-status');
+    try {
+      const key = 'mytux-era5-' + START + '-' + END; let rows = null;
+      try { const s = JSON.parse(localStorage.getItem(key)); if (s && Date.now() - s.t < 30 * 864e5) rows = s.r; } catch (e) {}
+      if (!rows) { status.textContent = 'Descargando más de 30 años de datos diarios…'; const r = await fetch(SRC); if (!r.ok) throw new Error('HTTP ' + r.status); const j = await r.json(); rows = monthly(j.daily); try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), r: rows })); } catch (e) {} }
+      ROWS = rows; status.textContent = ''; update();
+    } catch (e) {
+      status.innerHTML = 'No se pudieron descargar los datos en este momento. Puedes reproducir el análisis con el <a href="analisis/lluvia_medellin.py" download>script de Python</a>.';
+    }
+  }
+  $('dp-a').addEventListener('change', update); $('dp-b').addEventListener('change', update);
+  document.querySelectorAll('input[name="dpv"]').forEach(r => r.addEventListener('change', update));
+  $('dp-csv').onclick = () => {
+    if (!ROWS) return;
+    const csv = 'anio,mes,precipitacion_mm,temperatura_media_c,dias\n' + ROWS.map(r => [r[0], r[1], r[2] == null ? '' : r[2].toFixed(2), r[3] == null ? '' : r[3].toFixed(2), r[4]].join(',')).join('\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); a.download = 'datos_mensuales_medellin.csv'; document.body.appendChild(a); a.click(); a.remove();
+  };
+  window.addEventListener('resize', () => { if (cur) update(); });
+  let started = false;
+  new IntersectionObserver((es, ob) => { if (es.some(e => e.isIntersecting) && !started) { started = true; ob.disconnect(); load(); } }, { rootMargin: '200px' }).observe(box);
 })();
 
 /* ===== INTRODUCCION ANIMADA: Mytux al centro -> holograma femenino -> se convierte en energia -> barra de exploracion ===== */
