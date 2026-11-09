@@ -180,8 +180,6 @@
     .map-list button:hover { border-color: var(--accent-green); }
 
     /* ===== Proyecto de datos ===== */
-    #datos { background: linear-gradient(180deg, #0f1110, #121815 60%, #0f1110); border-top: 1px solid var(--border-color); }
-    html[data-theme="light"] #datos { background: #eef2ee; }
     #dp h4 { font-size: 1rem; margin: 1.5rem 0 .5rem; color: var(--accent-green); }
     #dp .dp-grid h4 { margin-top: 1rem; }
     #dp h5 { font-size: .85rem; color: var(--text-muted); font-weight: 600; margin-bottom: .4rem; }
@@ -204,6 +202,26 @@
     .dp-table th:first-child, .dp-table td:first-child { text-align: left; }
     .dp-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin: .6rem 0; }
     .dp-actions .btn-secondary { font: inherit; cursor: pointer; text-decoration: none; }
+
+    /* ===== Herramientas desplegables ===== */
+    .tools { display: flex; flex-direction: column; gap: .75rem; }
+    details.tool { border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-card); overflow: hidden; transition: border-color .2s; }
+    details.tool[open] { border-color: rgba(143,207,163,.5); }
+    details.tool > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; }
+    details.tool > summary::-webkit-details-marker { display: none; }
+    details.tool > summary::after { content: ""; flex: none; width: .6rem; height: .6rem; margin-left: auto; border-right: 2px solid var(--accent-green); border-bottom: 2px solid var(--accent-green); transform: rotate(45deg); transition: transform .2s; }
+    details.tool[open] > summary::after { transform: rotate(-135deg); }
+    details.tool > summary:hover { background: rgba(143,207,163,.07); }
+    details.tool > summary:focus-visible { outline: 3px solid var(--accent-green); outline-offset: -3px; }
+    .tool-head { display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
+    .tool-t { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700; font-size: 1.15rem; line-height: 1.25; }
+    .tool-s { color: var(--text-muted); font-size: .88rem; }
+    .tool-body { padding: 1.25rem 1.25rem 1.5rem; border-top: 1px solid var(--border-color); }
+    .tool-body .sim { padding: 0; margin: 0; }
+    .tool-body #dp > h3 { margin-top: 0; }
+    @media (max-width: 560px) { details.tool > summary { padding: .85rem 1rem; gap: .75rem; } .tool-body { padding: 1rem; } }
+    .intro-hud { font: 600 .75rem monospace; letter-spacing: .22em; line-height: 1.7; color: #a9bcff; text-align: center; opacity: 0; transition: opacity .8s ease 1s; }
+    .intro[data-stage="b"] .intro-hud { opacity: 1; }
   </style>
 </head>
 <body>
@@ -223,7 +241,6 @@
           <li><a href="#sobre-mi">Sobre mí</a></li>
           <li><a href="#proyectos">Experiencias</a></li>
           <li><a href="#herramientas">Herramientas</a></li>
-          <li><a href="#datos">Análisis de datos</a></li>
           <li><a href="#material">Material ilustrativo</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -243,7 +260,7 @@
         <h1 class="brand-title">Mytux</h1>
         <p class="hero-text">Soy Brahian, estudiante de Ingeniería Ambiental en Medellín. Me interesan los datos, la meteorología y la atmósfera, y aquí dejo lo que voy aprendiendo: proyectos, simuladores, plantillas y notas para entenderlo todo un poco mejor.</p>
         <div class="cta-group">
-          <a href="#herramientas" class="btn-primary">Probar el simulador</a>
+          <a href="#t-sim" class="btn-primary">Probar el simulador</a>
           <a href="#proyectos" class="btn-secondary">Ver experiencias</a>
           <a href="#material" class="btn-secondary">Leer Nota Verde</a>
         </div>
@@ -291,12 +308,12 @@
 
     <section id="herramientas">
       <h2 class="section-title">Herramientas</h2>
-      <p class="sub">Un simulador de ecología de poblaciones y calculadoras ambientales para probar con tus propios datos.</p>
-      <div class="card sim" id="sim">
-        <div class="sim-head">
-          <h3 class="card-title">Simulador de ecología de poblaciones</h3>
-          <span class="tag tag-green">Interactivo</span>
-        </div>
+      <p class="sub">Toca el nombre de una herramienta para abrirla y vuelve a tocarlo para cerrarla.</p>
+      <div class="tools">
+      <details class="tool" id="t-sim">
+        <summary><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><path d="M7 16c3 0 4-9 10-9"/></svg></span><span class="tool-head"><span class="tool-t">Simulador de ecología de poblaciones</span><span class="tool-s">Trabajo universitario · estrategas r frente a estrategas K</span></span></summary>
+        <div class="tool-body">
+<div class="sim" id="sim">
         <p class="sim-sub">Trabajo universitario · Evaluación de Ecología · Estrategas r frente a estrategas K</p>
         <p class="card-desc">Modelado de la tasa intrínseca de crecimiento y su sensibilidad demográfica (Cole, 1954). Ajusta R₀ (tasa neta reproductiva) y T (tiempo generacional) para ver cómo cambia r = ln(R₀) / T.</p>
         <div class="tabs" role="tablist" aria-label="Secciones del simulador">
@@ -346,14 +363,22 @@
           <p class="cap" id="c4-caption">Eje X: R₀ (escala logarítmica) · Eje Y: reducción porcentual en r.</p>
         </div>
       </div>
-      <h3 class="sub-h">Calculadoras ambientales</h3>
-      <div class="card" id="calc">
+        </div>
+      </details>
+      <details class="tool" id="t-calc">
+        <summary><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg></span><span class="tool-head"><span class="tool-t">Calculadoras ambientales</span><span class="tool-s">Huella de carbono, residuos y agua</span></span></summary>
+        <div class="tool-body">
+<div id="calc">
         <p class="card-desc">Estimaciones rápidas para tomar conciencia. Cambia los valores y el resultado se actualiza al instante.</p>
         <div class="tabs" role="tablist" aria-label="Calculadoras"></div>
         <div id="calc-panels"></div>
       </div>
-      <h3 class="sub-h">Clima y calidad del aire en Medellín, en vivo</h3>
-      <div class="card" id="wx">
+        </div>
+      </details>
+      <details class="tool" id="t-wx">
+        <summary><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16" y1="13" x2="16" y2="21"/><line x1="8" y1="13" x2="8" y2="21"/><line x1="12" y1="15" x2="12" y2="23"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg></span><span class="tool-head"><span class="tool-t">Clima y calidad del aire en Medellín</span><span class="tool-s">Datos en vivo de Open-Meteo</span></span></summary>
+        <div class="tool-body">
+<div id="wx">
         <div class="wx-top"><p class="card-desc">Datos que se actualizan solos. Sirven para ver cómo cambian la temperatura y las partículas finas (PM2.5) durante el día.</p><button type="button" class="btn-secondary" id="wx-refresh">Actualizar</button></div>
         <div class="wx-grid" id="wx-now" aria-live="polite"><p class="cap">Cargando datos…</p></div>
         <div class="wx-charts">
@@ -362,47 +387,12 @@
         </div>
         <p class="cap" id="wx-meta"></p>
       </div>
-      <h3 class="sub-h">Algunas plataformas que uso para mis trabajos</h3>
-      <div class="grid-3">
-        <a class="card dl plat" href="https://biodiversidad.co/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z"/><path d="M5 19l8-8"/></svg></span>
-          <h3 class="card-title">SiB Colombia</h3>
-          <p class="card-desc">Sistema de Información sobre Biodiversidad de Colombia.</p><span class="card-link">Visitar la plataforma ↗</span></a>
-        <a class="card dl plat" href="https://conservation.maps.arcgis.com/home/index.html" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3.5 3.5 14.5 0 18M12 3c-3.5 3.5-3.5 14.5 0 18"/></svg></span>
-          <h3 class="card-title">Conservation International</h3>
-          <p class="card-desc">Portal de mapas y datos de conservación en ArcGIS.</p><span class="card-link">Visitar la plataforma ↗</span></a>
-        <a class="card dl plat" href="https://www.sgc.gov.co/?lang=es-CO" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2-6 4 12 3-9 2 3h5"/></svg></span>
-          <h3 class="card-title">SGC · Servicio Geológico Colombiano</h3>
-          <p class="card-desc">Información geocientífica de Colombia: geología, sismos y amenazas.</p><span class="card-link">Visitar la plataforma ↗</span></a>
-        <a class="card dl plat" href="https://qgis.org/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg></span>
-          <h3 class="card-title">QGIS</h3>
-          <p class="card-desc">Sistema de información geográfica de código abierto.</p><span class="card-link">Visitar la plataforma ↗</span></a>
-        <a class="card dl plat" href="https://www.minambiente.gov.co/normativa/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
-          <h3 class="card-title">Normativa · MinAmbiente</h3>
-          <p class="card-desc">Normativa del Ministerio de Ambiente y Desarrollo Sostenible.</p><span class="card-link">Visitar la plataforma ↗</span></a>
-        <a class="card dl plat" href="https://worldview.earthdata.nasa.gov/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="3.6" transform="rotate(-25 12 12)"/></svg></span>
-          <h3 class="card-title">NASA Worldview</h3>
-          <p class="card-desc">Imágenes satelitales de la Tierra casi en tiempo real.</p><span class="card-link">Visitar la plataforma ↗</span></a>
-        <a class="card dl plat" href="https://datacalculus.com/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span>
-          <h3 class="card-title">DataCalculus</h3>
-          <p class="card-desc">Plataforma para crear sitios y aplicaciones conversando con IA.</p><span class="card-link">Visitar la plataforma ↗</span></a>
-        <a class="card dl plat" href="https://siata.gov.co/siata_nuevo/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16" y1="13" x2="16" y2="21"/><line x1="8" y1="13" x2="8" y2="21"/><line x1="12" y1="15" x2="12" y2="23"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg></span>
-          <h3 class="card-title">SIATA</h3>
-          <p class="card-desc">Sistema de Alerta Temprana del valle de Aburrá.</p><span class="card-link">Visitar la plataforma ↗</span></a>
-      </div>
-    </section>
-
-    <section id="datos">
-      <h2 class="section-title">Análisis de datos</h2>
-      <p class="sub">Un proyecto reproducible: la pregunta, los datos, el método, los resultados y el código para repetirlo. Los resultados se calculan en tu navegador, con datos reales, cada vez que abres esta página.</p>
-      <article class="card" id="dp">
+        </div>
+      </details>
+      <details class="tool" id="t-dp">
+        <summary><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span><span class="tool-head"><span class="tool-t">Análisis de datos: lluvia y temperatura en Medellín</span><span class="tool-s">Proyecto reproducible con datos ERA5 y código en Python</span></span></summary>
+        <div class="tool-body">
+<article id="dp">
         <h3 class="card-title">Lluvia y temperatura en Medellín, <span id="dp-range">1991–2025</span></h3>
         <div class="dp-grid">
           <div><h4>La pregunta</h4><p class="card-desc">¿Cómo se reparte la lluvia a lo largo del año en Medellín y ha cambiado en las últimas décadas?</p></div>
@@ -439,6 +429,48 @@
         </div>
         <p class="cap">Datos: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (licencia CC BY 4.0), a partir del reanálisis ERA5.</p>
       </article>
+        </div>
+      </details>
+      <details class="tool" id="t-plat">
+        <summary><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></span><span class="tool-head"><span class="tool-t">Plataformas que uso para mis trabajos</span><span class="tool-s">Enlaces a herramientas externas</span></span></summary>
+        <div class="tool-body">
+<div class="grid-3">
+        <a class="card dl plat" href="https://biodiversidad.co/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z"/><path d="M5 19l8-8"/></svg></span>
+          <h3 class="card-title">SiB Colombia</h3>
+          <p class="card-desc">Sistema de Información sobre Biodiversidad de Colombia.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://conservation.maps.arcgis.com/home/index.html" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3.5 3.5 14.5 0 18M12 3c-3.5 3.5-3.5 14.5 0 18"/></svg></span>
+          <h3 class="card-title">Conservation International</h3>
+          <p class="card-desc">Portal de mapas y datos de conservación en ArcGIS.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://www.sgc.gov.co/?lang=es-CO" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2-6 4 12 3-9 2 3h5"/></svg></span>
+          <h3 class="card-title">SGC · Servicio Geológico Colombiano</h3>
+          <p class="card-desc">Información geocientífica de Colombia: geología, sismos y amenazas.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://qgis.org/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg></span>
+          <h3 class="card-title">QGIS</h3>
+          <p class="card-desc">Sistema de información geográfica de código abierto.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://www.minambiente.gov.co/normativa/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
+          <h3 class="card-title">Normativa · MinAmbiente</h3>
+          <p class="card-desc">Normativa del Ministerio de Ambiente y Desarrollo Sostenible.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://worldview.earthdata.nasa.gov/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="3.6" transform="rotate(-25 12 12)"/></svg></span>
+          <h3 class="card-title">NASA Worldview</h3>
+          <p class="card-desc">Imágenes satelitales de la Tierra casi en tiempo real.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://datacalculus.com/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span>
+          <h3 class="card-title">DataCalculus</h3>
+          <p class="card-desc">Plataforma para crear sitios y aplicaciones conversando con IA.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+        <a class="card dl plat" href="https://siata.gov.co/siata_nuevo/" target="_blank" rel="noopener">
+          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16" y1="13" x2="16" y2="21"/><line x1="8" y1="13" x2="8" y2="21"/><line x1="12" y1="15" x2="12" y2="23"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg></span>
+          <h3 class="card-title">SIATA</h3>
+          <p class="card-desc">Sistema de Alerta Temprana del valle de Aburrá.</p><span class="card-link">Visitar la plataforma ↗</span></a>
+      </div>
+        </div>
+      </details>
+      </div>
     </section>
 
 
@@ -816,7 +848,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
 
 /* ===== BARRA DE EXPLORACION ===== */
 (function () {
-  const SECS = [['inicio', 'Inicio'], ['sobre-mi', 'Sobre mí'], ['proyectos', 'Experiencias'], ['herramientas', 'Herramientas'], ['datos', 'Análisis de datos'], ['material', 'Material ilustrativo'], ['contacto', 'Contacto']];
+  const SECS = [['inicio', 'Inicio'], ['sobre-mi', 'Sobre mí'], ['proyectos', 'Experiencias'], ['herramientas', 'Herramientas'], ['material', 'Material ilustrativo'], ['contacto', 'Contacto']];
   const xp = document.createElement('div');
   xp.className = 'xp'; xp.setAttribute('aria-hidden', 'true');
   xp.innerHTML = '<span class="xp-lab xp-t">EXP</span><div class="xp-track"><div class="xp-fill"></div></div><span class="xp-lab xp-b">0%</span>';
@@ -863,15 +895,15 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     { k: ['quien', 'brahian', 'camilo', 'perfil', 'presentate', 'mytux', 'sobre mi', 'estudia', 'estudio', 'carrera', 'universidad'], a: 'Brahian Camilo Muñoz López es ingeniero ambiental en formación (Universidad Nacional de Colombia, sede Medellín), tecnólogo en Sistemas de Gestión Ambiental y técnico en sistemas. Su enfoque está en el análisis de datos, la sostenibilidad, la meteorología y las ciencias de la atmósfera. Lo cuenta todo en <a href="#sobre-mi">Sobre mí</a>.' },
     { k: ['experiencia', 'experiencias', 'trabajo', 'trabajos', 'trabajado', 'empleo', 'cargo', 'amet', 'realidad virtual', 'deli', 'anne rose', 'soluciones integrales', 'aeronautica', 'trayectoria'], a: 'Entre 2025 y 2026 fue gestor ambiental en Deli - Anne Rose, operando la planta de tratamiento de aguas residuales industriales. Durante 2025 trabajó en control, rescate y ahuyentamiento de fauna silvestre en el relleno sanitario La Pradera, con Soluciones Integrales TM SAS. Desde 2024 lidera el comité de planeación de AMET (capítulo estudiantil de Ingeniería Ambiental, UNAL Medellín), desde 2023 coordina la fundación Colombian Virtual Reality, y entre 2022 y 2023 coordinó proyectos socioambientales a nivel nacional en Soluciones Integrales TM SAS. Más detalles en <a href="#proyectos">Experiencias</a>.' },
     { k: ['habilidad', 'habilidades', 'sabe', 'sabes', 'skills', 'capacidades', 'especialidad', 'servicios', 'pma', 'sga', 'rua', 'ptar', 'capacitaciones', 'capacitacion'], a: 'Maneja PMA y SGA, matrices legales y ASPI, informes de caracterización, digitalización del RUA, operación de plantas de tratamiento de aguas residuales industriales, coordinación de proyectos, capacitaciones ambientales empresariales y analítica de datos &amp; Business Intelligence. Míralas en <a href="#sobre-mi">Sobre mí</a>.' },
-    { k: ['herramienta', 'herramientas', 'simulador', 'simulacion', 'calculadora', 'calculadoras', 'huella', 'carbono', 'residuos', 'agua', 'poblacion', 'poblacional', 'ecologia'], a: 'En <a href="#herramientas">Herramientas</a> hay un simulador de ecología de poblaciones (trabajo universitario) y calculadoras de huella de carbono, residuos y agua. Las calculadoras dan estimaciones aproximadas, con valores que puedes cambiar.' },
+    { k: ['herramienta', 'herramientas', 'simulador', 'simulacion', 'calculadora', 'calculadoras', 'huella', 'carbono', 'residuos', 'agua', 'poblacion', 'poblacional', 'ecologia'], a: 'En <a href="#t-sim">Herramientas</a> hay un simulador de ecología de poblaciones (trabajo universitario) y <a href="#t-calc">calculadoras</a> de huella de carbono, residuos y agua. Las calculadoras dan estimaciones aproximadas, con valores que puedes cambiar.' },
     { k: ['descarga', 'descargas', 'descargar', 'plantilla', 'plantillas', 'excel', 'matriz', 'chequeo', 'lista', 'cv', 'hoja de vida', 'curriculum', 'pdf'], a: 'Puedes descargar la <a href="assets/matriz-legal-ambiental.xlsx" download>plantilla de matriz legal ambiental</a>, la <a href="assets/lista-chequeo-rua.xlsx" download>lista de chequeo del RUA</a> y la <a href="assets/CV-Brahian-Munoz.pdf" download>hoja de vida</a>.' },
     { k: ['contacto', 'contactar', 'escribir', 'escribirle', 'correo', 'email', 'whatsapp', 'telefono', 'celular', 'linkedin', 'instagram', 'github', 'redes', 'hablar'], a: 'Puedes escribirle a bmunozl@unal.edu.co, por <a href="https://wa.me/573164197518" target="_blank" rel="noopener">WhatsApp</a>, por LinkedIn o Instagram (@xmytux). También hay un formulario en <a href="#contacto">Contacto</a>.' },
     { k: ['foto', 'fotos', 'galeria', 'imagenes', 'campo', 'salida', 'santurban', 'tumaco', 'copacabana', 'herbivoria', 'paramo'], a: 'En <a href="#material">Material ilustrativo</a> hay fotos de trabajo de campo: la compensación forestal en Copacabana, el muestreo de herbivoría en la Reserva Agroecológica Los Monos, la sensibilización en Tumaco y la visita al páramo de Santurbán.' },
     { k: ['blog', 'nota verde', 'articulo', 'articulos', 'leer', 'noticias'], a: 'Nota Verde es el blog de la página, con artículos cortos como qué es una matriz legal ambiental o por qué capacitar al personal operativo. Está en <a href="#material">Material ilustrativo</a>.' },
     { k: ['inteligencia artificial', 'ia', 'bot', 'robot', 'chatgpt', 'eres real', 'eres un', 'quien eres', 'que eres'], a: 'Soy un asistente automático con respuestas preparadas sobre esta página; no soy una inteligencia artificial conectada a internet. Si tu pregunta es más específica, lo mejor es escribirle a Brahian desde <a href="#contacto">Contacto</a>.' },
-    { k: ['clima', 'aire', 'calidad del aire', 'temperatura', 'lluvia', 'pm2 5', 'contaminacion', 'atmosfera', 'tiempo'], a: 'En <a href="#wx">Herramientas</a> hay un panel en vivo del clima y la calidad del aire de Medellín, con datos de Open-Meteo. Para mediciones de estaciones locales, la fuente es SIATA.' },
+    { k: ['clima', 'aire', 'calidad del aire', 'temperatura', 'lluvia', 'pm2 5', 'contaminacion', 'atmosfera', 'tiempo'], a: 'En <a href="#t-wx">Herramientas</a> hay un panel en vivo del clima y la calidad del aire de Medellín, con datos de Open-Meteo. Para mediciones de estaciones locales, la fuente es SIATA.' },
     { k: ['mapa', 'mapas', 'lugares', 'sitios', 'ubicacion', 'ubicaciones', 'donde'], a: 'En <a href="#fieldmap">Material ilustrativo</a> hay un mapa con los sitios de trabajo de campo: Copacabana, San Francisco, Tumaco, Santurbán, Belmira y Bello. Cada punto muestra su foto y su año.' },
-    { k: ['analisis', 'datos', 'proyecto de datos', 'precipitacion', 'tendencia', 'reproducible', 'python', 'era5', 'codigo', 'script'], a: 'En <a href="#datos">Análisis de datos</a> hay un proyecto reproducible: lluvia y temperatura en Medellín desde 1991, con datos de reanálisis ERA5. Calcula la climatología, la tendencia y las anomalías en tu navegador, y trae el script de Python para repetirlo.' },
+    { k: ['analisis', 'datos', 'proyecto de datos', 'precipitacion', 'tendencia', 'reproducible', 'python', 'era5', 'codigo', 'script'], a: 'En <a href="#t-dp">Análisis de datos</a> hay un proyecto reproducible: lluvia y temperatura en Medellín desde 1991, con datos de reanálisis ERA5. Calcula la climatología, la tendencia y las anomalías en tu navegador, y trae el script de Python para repetirlo.' },
     { k: ['gracias', 'genial', 'perfecto', 'excelente', 'chao', 'adios', 'hasta luego'], a: '¡Con gusto! Si te surge otra duda, aquí estaré.' }
   ];
   const FALLBACK = 'No tengo una respuesta preparada para eso. Prueba preguntando por Brahian, sus experiencias, habilidades, herramientas, descargas o contacto, o escríbele directamente desde <a href="#contacto">Contacto</a>.';
@@ -1188,6 +1220,15 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   new IntersectionObserver((es, ob) => { if (es.some(e => e.isIntersecting) && !started) { started = true; ob.disconnect(); load(); } }, { rootMargin: '200px' }).observe(box);
 })();
 
+/* ===== HERRAMIENTAS DESPLEGABLES: abrir por enlace y redibujar las gráficas al abrir/cerrar ===== */
+(function () {
+  const abrir = h => { try { const d = h && document.querySelector(h); if (d && d.matches && d.matches('details.tool')) d.open = true; } catch (e) {} };
+  document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('a[href^="#t-"]'); if (a) abrir(a.getAttribute('href')); });
+  window.addEventListener('hashchange', () => abrir(location.hash));
+  abrir(location.hash);
+  document.addEventListener('toggle', () => { setTimeout(() => window.dispatchEvent(new Event('resize')), 40); }, true);
+})();
+
 /* ===== INTRODUCCION ANIMADA: Mytux al centro -> holograma femenino -> se convierte en energia -> barra de exploracion ===== */
 (function () {
   try {
@@ -1196,10 +1237,10 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   const root = document.documentElement; root.style.overflow = 'hidden';
   const ov = document.createElement('div');
   ov.className = 'intro'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-label', 'Introducción animada');
-  ov.innerHTML = '<div class="intro-bg"></div><video class="intro-video" muted playsinline preload="auto" hidden></video><div class="intro-stage intro-a"><div class="intro-title">Mytux</div><div class="intro-sub">SITIO DE EXPLORACIÓN =)</div></div><div class="intro-stage intro-b"><canvas class="intro-holo"></canvas></div><button type="button" class="intro-snd" hidden>🔊 Activar sonido</button><button type="button" class="intro-skip">Saltar intro ›</button>';
+  ov.innerHTML = '<div class="intro-bg"></div><video class="intro-video" muted playsinline preload="auto" hidden></video><div class="intro-stage intro-a"><div class="intro-title">Mytux</div><div class="intro-sub">SITIO DE EXPLORACIÓN =)</div></div><div class="intro-stage intro-b"><canvas class="intro-holo"></canvas><div class="intro-hud">ASISTENTE MYTUX<br>ESTADO: EN LÍNEA</div></div><button type="button" class="intro-snd" hidden>🔊 Activar sonido</button><button type="button" class="intro-skip">Saltar intro ›</button>';
   document.body.appendChild(ov);
   const v = ov.querySelector('video'), cv = ov.querySelector('.intro-holo'), skip = ov.querySelector('.intro-skip'), snd = ov.querySelector('.intro-snd');
-  let done = false, started = false, raf = 0, tHolo = 0, tCharge = 0; const timers = [];
+  let done = false, started = false, raf = 0, tHolo = 0, tCharge = 0, mode = 'proc', S = null; const timers = [];
   const later = (f, ms) => timers.push(setTimeout(f, ms));
 
   /* ---------- holograma: silueta femenina limpia, hecha de luz ---------- */
@@ -1271,6 +1312,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   const tmp = mk(), tc = tmp.getContext('2d');
 
   function frame(ts) {
+    if (mode === 'img') { frameImg(ts); return; }
     const t = ts / 1000, rev = tHolo ? Math.min(1, (ts - tHolo) / 1200) : 0, ch = tCharge ? Math.min(1, (ts - tCharge) / CFG.chargeMs) : 0;
     tc.globalCompositeOperation = 'source-over'; tc.clearRect(0, 0, W, H);
     const o1 = (t * 70) % (H * 2); tc.drawImage(code, 0, -o1); tc.drawImage(code, 0, H * 2 - o1);
@@ -1295,15 +1337,56 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   }
   raf = requestAnimationFrame(frame);
 
+  /* ---------- modelo en imagen (assets/cortana-holograma.webp): si no existe, se usa la silueta de arriba ---------- */
+  function frameImg(ts) {
+    const IW = S.W, IH = S.H, t = ts / 1000, rev = tHolo ? Math.min(1, (ts - tHolo) / 1400) : 0, ch = tCharge ? Math.min(1, (ts - tCharge) / CFG.chargeMs) : 0;
+    ctx.setTransform(d, 0, 0, d, 0, 0); ctx.clearRect(0, 0, IW, IH);
+    const ry = IH * (1 - rev);
+    ctx.save(); ctx.beginPath(); ctx.rect(0, ry, IW, IH - ry); ctx.clip();
+    ctx.globalAlpha = .45 + .1 * Math.sin(t * 3); ctx.drawImage(S.glow, 0, 0);
+    ctx.globalAlpha = .9 + .1 * Math.sin(t * 17) * Math.sin(t * 3.1); ctx.drawImage(S.img, 0, 0);
+    ctx.globalAlpha = 1;
+    const tc2 = S.tmp.getContext('2d'); tc2.globalCompositeOperation = 'source-over'; tc2.clearRect(0, 0, IW, IH);
+    tc2.drawImage(S.band, 0, ((t * 140) % (IH + 160)) - 110); tc2.globalCompositeOperation = 'destination-in'; tc2.drawImage(S.mask, 0, 0);
+    ctx.globalCompositeOperation = 'lighter'; ctx.drawImage(S.tmp, 0, 0);
+    if (ch > 0) { ctx.globalAlpha = ch * .85; ctx.drawImage(S.white, 0, 0); ctx.globalAlpha = 1; }
+    ctx.globalCompositeOperation = 'destination-out'; ctx.drawImage(S.cut, 0, 0); ctx.globalCompositeOperation = 'source-over';
+    ctx.restore();
+    ctx.strokeStyle = 'rgba(120,170,255,' + (.45 + .3 * Math.sin(t * 2.5)) + ')'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.ellipse(IW / 2, IH - 14, IW * .34 + 4 * Math.sin(t * 2.5), 12, 0, 0, 7); ctx.stroke();
+    if (rev > 0 && rev < 1) { ctx.fillStyle = 'rgba(215,228,255,.95)'; ctx.fillRect(IW * .12, ry, IW * .76, 2); }
+    raf = requestAnimationFrame(frame);
+  }
+  const himg = new Image();
+  himg.onload = () => {
+    try {
+      const IW = himg.naturalWidth, IH = himg.naturalHeight, mk2 = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+      const mask2 = mk2(IW, IH); mask2.getContext('2d').drawImage(himg, 0, 0);
+      const white = mk2(IW, IH), gw = white.getContext('2d'); gw.drawImage(himg, 0, 0); gw.globalCompositeOperation = 'source-in'; gw.fillStyle = '#fff'; gw.fillRect(0, 0, IW, IH);
+      const glow = mk2(IW, IH), gg = glow.getContext('2d'); gg.shadowColor = 'rgba(90,150,255,1)'; gg.shadowBlur = 26; gg.drawImage(himg, 0, 0);
+      const cut = mk2(IW, IH), gc = cut.getContext('2d'); gc.fillStyle = 'rgba(0,0,0,.3)'; for (let y = 0; y < IH; y += 3) gc.fillRect(0, y, IW, 1);
+      const band = mk2(IW, 64), gb = band.getContext('2d'), gr = gb.createLinearGradient(0, 0, 0, 64); gr.addColorStop(0, 'rgba(140,190,255,0)'); gr.addColorStop(.5, 'rgba(170,210,255,.75)'); gr.addColorStop(1, 'rgba(140,190,255,0)'); gb.fillStyle = gr; gb.fillRect(0, 0, IW, 64);
+      S = { W: IW, H: IH, img: himg, mask: mask2, white, glow, cut, band, tmp: mk2(IW, IH) };
+      if (done) return;
+      cv.width = IW * d; cv.height = IH * d; cv.style.aspectRatio = IW + ' / ' + IH; cv.style.height = 'min(560px, 70vh)'; cv.style.width = 'auto';
+      mode = 'img';
+    } catch (err) { mode = 'proc'; S = null; }
+  };
+  himg.src = 'assets/cortana-holograma.webp';
+
   /* ---------- al terminar: la silueta se convierte en energía y viaja a la barra ---------- */
   function origins() {
-    const out = [];
+    const out = [], r = cv.getBoundingClientRect();
     if (!started) {
-      const r = cv.getBoundingClientRect(), sx = r.width / W, sy = r.height / H, data = mask.getContext('2d').getImageData(0, 0, W, H).data;
-      for (let n = 0; n < 9000 && out.length < 240; n++) {
-        const x = (Math.random() * W) | 0, y = (Math.random() * H * .9) | 0;
-        if (data[(y * W + x) * 4 + 3] > 128) out.push([r.left + x * sx, r.top + y * sy]);
-      }
+      const MW = mode === 'img' ? S.W : W, MH = mode === 'img' ? S.H : H, MM = mode === 'img' ? S.mask : mask, sx = r.width / MW, sy = r.height / MH;
+      try {
+        const data = MM.getContext('2d').getImageData(0, 0, MW, MH).data;
+        for (let n = 0; n < 9000 && out.length < 240; n++) {
+          const x = (Math.random() * MW) | 0, y = (Math.random() * MH * .9) | 0;
+          if (data[(y * MW + x) * 4 + 3] > 128) out.push([r.left + x * sx, r.top + y * sy]);
+        }
+      } catch (e) { /* lectura de píxeles bloqueada: se usan puntos dentro del recuadro de la figura */ }
+      for (let n = out.length; n < 200; n++) out.push([r.left + r.width * (.2 + Math.random() * .6), r.top + r.height * (.05 + Math.random() * .8)]);
     } else {
       const R = Math.min(window.innerWidth, window.innerHeight) * .12;
       for (let n = 0; n < 200; n++) { const a = Math.random() * 6.283, q = Math.sqrt(Math.random()) * R; out.push([window.innerWidth / 2 + Math.cos(a) * q, window.innerHeight / 2 + Math.sin(a) * q]); }
@@ -1347,7 +1430,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   function finish() {
     if (done) return; done = true; timers.forEach(clearTimeout); cancelAnimationFrame(raf);
     try { v.pause(); } catch (e) {}
-    const pts = origins();
+    let pts = []; try { pts = origins(); } catch (err) {}
     ov.classList.add('out'); root.style.overflow = '';
     setTimeout(() => ov.remove(), 1100);
     try { launch(pts); } catch (err) {}
