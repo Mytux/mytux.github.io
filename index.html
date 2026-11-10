@@ -220,6 +220,7 @@
     .tool-body .sim { padding: 0; margin: 0; }
     .tool-body #dp > h3 { margin-top: 0; }
     @media (max-width: 560px) { details.tool > summary { padding: .85rem 1rem; gap: .75rem; } .tool-body { padding: 1rem; } }
+    .intro-hud b { display: block; font-size: 1.05rem; letter-spacing: .34em; color: #e6efff; margin-bottom: .1rem; }
     .intro-hud { font: 600 .75rem monospace; letter-spacing: .22em; line-height: 1.7; color: #a9bcff; text-align: center; opacity: 0; transition: opacity .8s ease 1s; }
     .intro[data-stage="b"] .intro-hud { opacity: 1; }
   </style>
@@ -891,7 +892,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
 (function () {
   const norm = t => ' ' + t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9ñ ]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
   const KB = [
-    { k: ['hola', 'buenas', 'hey', 'saludos', 'buenos dias', 'buenas tardes', 'buenas noches'], a: '¡Hola! Soy el asistente de esta página. Puedo contarte sobre Brahian, sus experiencias, habilidades, herramientas, descargas o cómo contactarlo. ¿Qué te gustaría saber?' },
+    { k: ['hola', 'buenas', 'hey', 'saludos', 'buenos dias', 'buenas tardes', 'buenas noches'], a: '¡Hola! Soy Somada, la asistente artificial de Mytux. Puedo contarte sobre Brahian, sus experiencias, habilidades, herramientas, descargas o cómo contactarlo. ¿Qué te gustaría saber?' },
     { k: ['quien', 'brahian', 'camilo', 'perfil', 'presentate', 'mytux', 'sobre mi', 'estudia', 'estudio', 'carrera', 'universidad'], a: 'Brahian Camilo Muñoz López es ingeniero ambiental en formación (Universidad Nacional de Colombia, sede Medellín), tecnólogo en Sistemas de Gestión Ambiental y técnico en sistemas. Su enfoque está en el análisis de datos, la sostenibilidad, la meteorología y las ciencias de la atmósfera. Lo cuenta todo en <a href="#sobre-mi">Sobre mí</a>.' },
     { k: ['experiencia', 'experiencias', 'trabajo', 'trabajos', 'trabajado', 'empleo', 'cargo', 'amet', 'realidad virtual', 'deli', 'anne rose', 'soluciones integrales', 'aeronautica', 'trayectoria'], a: 'Entre 2025 y 2026 fue gestor ambiental en Deli - Anne Rose, operando la planta de tratamiento de aguas residuales industriales. Durante 2025 trabajó en control, rescate y ahuyentamiento de fauna silvestre en el relleno sanitario La Pradera, con Soluciones Integrales TM SAS. Desde 2024 lidera el comité de planeación de AMET (capítulo estudiantil de Ingeniería Ambiental, UNAL Medellín), desde 2023 coordina la fundación Colombian Virtual Reality, y entre 2022 y 2023 coordinó proyectos socioambientales a nivel nacional en Soluciones Integrales TM SAS. Más detalles en <a href="#proyectos">Experiencias</a>.' },
     { k: ['habilidad', 'habilidades', 'sabe', 'sabes', 'skills', 'capacidades', 'especialidad', 'servicios', 'pma', 'sga', 'rua', 'ptar', 'capacitaciones', 'capacitacion'], a: 'Maneja PMA y SGA, matrices legales y ASPI, informes de caracterización, digitalización del RUA, operación de plantas de tratamiento de aguas residuales industriales, coordinación de proyectos, capacitaciones ambientales empresariales y analítica de datos &amp; Business Intelligence. Míralas en <a href="#sobre-mi">Sobre mí</a>.' },
@@ -900,7 +901,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     { k: ['contacto', 'contactar', 'escribir', 'escribirle', 'correo', 'email', 'whatsapp', 'telefono', 'celular', 'linkedin', 'instagram', 'github', 'redes', 'hablar'], a: 'Puedes escribirle a bmunozl@unal.edu.co, por <a href="https://wa.me/573164197518" target="_blank" rel="noopener">WhatsApp</a>, por LinkedIn o Instagram (@xmytux). También hay un formulario en <a href="#contacto">Contacto</a>.' },
     { k: ['foto', 'fotos', 'galeria', 'imagenes', 'campo', 'salida', 'santurban', 'tumaco', 'copacabana', 'herbivoria', 'paramo'], a: 'En <a href="#material">Material ilustrativo</a> hay fotos de trabajo de campo: la compensación forestal en Copacabana, el muestreo de herbivoría en la Reserva Agroecológica Los Monos, la sensibilización en Tumaco y la visita al páramo de Santurbán.' },
     { k: ['blog', 'nota verde', 'articulo', 'articulos', 'leer', 'noticias'], a: 'Nota Verde es el blog de la página, con artículos cortos como qué es una matriz legal ambiental o por qué capacitar al personal operativo. Está en <a href="#material">Material ilustrativo</a>.' },
-    { k: ['inteligencia artificial', 'ia', 'bot', 'robot', 'chatgpt', 'eres real', 'eres un', 'quien eres', 'que eres'], a: 'Soy un asistente automático con respuestas preparadas sobre esta página; no soy una inteligencia artificial conectada a internet. Si tu pregunta es más específica, lo mejor es escribirle a Brahian desde <a href="#contacto">Contacto</a>.' },
+    { k: ['inteligencia artificial', 'ia', 'bot', 'robot', 'chatgpt', 'eres real', 'eres un', 'quien eres', 'que eres', 'somada', 'como te llamas', 'tu nombre'], a: 'Soy Somada, la asistente artificial de Mytux. Funciono con respuestas preparadas sobre esta página: no estoy conectada a internet ni a un modelo de IA. Si tu pregunta es más específica, lo mejor es escribirle a Brahian desde <a href="#contacto">Contacto</a>.' },
     { k: ['clima', 'aire', 'calidad del aire', 'temperatura', 'lluvia', 'pm2 5', 'contaminacion', 'atmosfera', 'tiempo'], a: 'En <a href="#t-wx">Herramientas</a> hay un panel en vivo del clima y la calidad del aire de Medellín, con datos de Open-Meteo. Para mediciones de estaciones locales, la fuente es SIATA.' },
     { k: ['mapa', 'mapas', 'lugares', 'sitios', 'ubicacion', 'ubicaciones', 'donde'], a: 'En <a href="#fieldmap">Material ilustrativo</a> hay un mapa con los sitios de trabajo de campo: Copacabana, San Francisco, Tumaco, Santurbán, Belmira y Bello. Cada punto muestra su foto y su año.' },
     { k: ['analisis', 'datos', 'proyecto de datos', 'precipitacion', 'tendencia', 'reproducible', 'python', 'era5', 'codigo', 'script'], a: 'En <a href="#t-dp">Análisis de datos</a> hay un proyecto reproducible: lluvia y temperatura en Medellín desde 1991, con datos de reanálisis ERA5. Calcula la climatología, la tendencia y las anomalías en tu navegador, y trae el script de Python para repetirlo.' },
@@ -914,10 +915,10 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     return best ? best.a : FALLBACK;
   }
   const fab = document.createElement('button');
-  fab.type = 'button'; fab.className = 'bot-fab'; fab.setAttribute('aria-label', 'Abrir el asistente de la página'); fab.setAttribute('aria-expanded', 'false'); fab.textContent = '💬';
+  fab.type = 'button'; fab.className = 'bot-fab'; fab.setAttribute('aria-label', 'Abrir a Somada, la asistente de la página'); fab.setAttribute('aria-expanded', 'false'); fab.textContent = '💬';
   const box = document.createElement('div');
-  box.className = 'bot'; box.hidden = true; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Asistente de Mytux');
-  box.innerHTML = '<div class="bot-head"><div><strong>Asistente de Mytux</strong><small>Asistente automático · respuestas preparadas</small></div><button type="button" class="bot-x" aria-label="Cerrar el asistente">✕</button></div><div class="bot-log" role="log" aria-live="polite"></div><div class="bot-chips"></div><form class="bot-form"><input type="text" placeholder="Escribe tu pregunta…" aria-label="Tu pregunta" autocomplete="off"><button type="submit">Enviar</button></form>';
+  box.className = 'bot'; box.hidden = true; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Somada, asistente artificial de Mytux');
+  box.innerHTML = '<div class="bot-head"><div><strong>Somada</strong><small>Asistente artificial de Mytux · respuestas preparadas</small></div><button type="button" class="bot-x" aria-label="Cerrar a Somada">✕</button></div><div class="bot-log" role="log" aria-live="polite"></div><div class="bot-chips"></div><form class="bot-form"><input type="text" placeholder="Escribe tu pregunta…" aria-label="Tu pregunta" autocomplete="off"><button type="submit">Enviar</button></form>';
   document.body.appendChild(box); document.body.appendChild(fab);
   const log = box.querySelector('.bot-log'), chips = box.querySelector('.bot-chips'), input = box.querySelector('input');
   function add(html, who) {
@@ -931,11 +932,11 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     setTimeout(() => add(answer(q), 'from-bot'), 350);
   }
   CHIPS.forEach(c => { const b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.onclick = () => ask(c); chips.appendChild(b); });
-  add('¡Hola! Soy el asistente de esta página. Elige un tema o escribe tu pregunta.', 'from-bot');
+  add('¡Hola! Soy Somada, la asistente artificial de Mytux. Elige un tema o escribe tu pregunta.', 'from-bot');
   function open(v) {
     box.hidden = !v; fab.setAttribute('aria-expanded', String(v));
     fab.textContent = v ? '✕' : '💬';
-    fab.setAttribute('aria-label', v ? 'Cerrar el asistente' : 'Abrir el asistente de la página');
+    fab.setAttribute('aria-label', v ? 'Cerrar a Somada' : 'Abrir a Somada, la asistente de la página');
     if (v) input.focus(); else fab.focus();
   }
   fab.onclick = () => open(box.hidden);
@@ -1232,12 +1233,12 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
 /* ===== INTRODUCCION ANIMADA: Mytux al centro -> holograma femenino -> se convierte en energia -> barra de exploracion ===== */
 (function () {
   try {
-  const CFG = { video: 'assets/intro.mp4', titleMs: 1700, holoEnd: 4700, chargeMs: 700, maxMs: 15000 };
+  const CFG = { video: 'assets/intro.mp4', titleMs: 1700, holoEnd: 5400, chargeMs: 700, maxMs: 15000 };
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const root = document.documentElement; root.style.overflow = 'hidden';
   const ov = document.createElement('div');
   ov.className = 'intro'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-label', 'Introducción animada');
-  ov.innerHTML = '<div class="intro-bg"></div><video class="intro-video" muted playsinline preload="auto" hidden></video><div class="intro-stage intro-a"><div class="intro-title">Mytux</div><div class="intro-sub">SITIO DE EXPLORACIÓN =)</div></div><div class="intro-stage intro-b"><canvas class="intro-holo"></canvas><div class="intro-hud">ASISTENTE MYTUX<br>ESTADO: EN LÍNEA</div></div><button type="button" class="intro-snd" hidden>🔊 Activar sonido</button><button type="button" class="intro-skip">Saltar intro ›</button>';
+  ov.innerHTML = '<div class="intro-bg"></div><video class="intro-video" muted playsinline preload="auto" hidden></video><div class="intro-stage intro-a"><div class="intro-title">Mytux</div><div class="intro-sub">SITIO DE EXPLORACIÓN =)</div></div><div class="intro-stage intro-b"><canvas class="intro-holo"></canvas><div class="intro-hud"><b>SOMADA</b>ASISTENTE ARTIFICIAL DE MYTUX<br>ESTADO: EN LÍNEA</div></div><button type="button" class="intro-snd" hidden>🔊 Activar sonido</button><button type="button" class="intro-skip">Saltar intro ›</button>';
   document.body.appendChild(ov);
   const v = ov.querySelector('video'), cv = ov.querySelector('.intro-holo'), skip = ov.querySelector('.intro-skip'), snd = ov.querySelector('.intro-snd');
   let done = false, started = false, raf = 0, tHolo = 0, tCharge = 0, mode = 'proc', S = null; const timers = [];
@@ -1337,42 +1338,48 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   }
   raf = requestAnimationFrame(frame);
 
-  /* ---------- modelo en imagen (assets/cortana-holograma.webp): si no existe, se usa la silueta de arriba ---------- */
+  /* ---------- Somada: GIF convertido en hoja de cuadros (assets/somada-holograma.webp), reproducido a cámara lenta ---------- */
+  const SHEET = { cols: 3, rows: 3, n: 9, fps: 5.6 * 0.4 };   // el GIF original corre a 5,6 cuadros/s; aquí va al 40 % de esa velocidad
   function frameImg(ts) {
     const IW = S.W, IH = S.H, t = ts / 1000, rev = tHolo ? Math.min(1, (ts - tHolo) / 1400) : 0, ch = tCharge ? Math.min(1, (ts - tCharge) / CFG.chargeMs) : 0;
+    const fp = (t * SHEET.fps) % SHEET.n, i0 = Math.floor(fp), i1 = (i0 + 1) % SHEET.n, fr = fp - i0;
+    const cell = (sh, i, a) => { ctx.globalAlpha = a; ctx.drawImage(sh, (i % SHEET.cols) * IW, Math.floor(i / SHEET.cols) * IH, IW, IH, 0, 0, IW, IH); };
+    const blend = (sh, a) => { cell(sh, i0, a); if (fr > .001) cell(sh, i1, a * fr); };     // fundido suave entre cuadros
     ctx.setTransform(d, 0, 0, d, 0, 0); ctx.clearRect(0, 0, IW, IH);
     const ry = IH * (1 - rev);
     ctx.save(); ctx.beginPath(); ctx.rect(0, ry, IW, IH - ry); ctx.clip();
-    ctx.globalAlpha = .45 + .1 * Math.sin(t * 3); ctx.drawImage(S.glow, 0, 0);
-    ctx.globalAlpha = .9 + .1 * Math.sin(t * 17) * Math.sin(t * 3.1); ctx.drawImage(S.img, 0, 0);
+    blend(S.glow, .45 + .1 * Math.sin(t * 3));
+    blend(S.sheet, .93 + .07 * Math.sin(t * 11));
     ctx.globalAlpha = 1;
     const tc2 = S.tmp.getContext('2d'); tc2.globalCompositeOperation = 'source-over'; tc2.clearRect(0, 0, IW, IH);
-    tc2.drawImage(S.band, 0, ((t * 140) % (IH + 160)) - 110); tc2.globalCompositeOperation = 'destination-in'; tc2.drawImage(S.mask, 0, 0);
+    tc2.drawImage(S.band, 0, ((t * 120) % (IH + 160)) - 110); tc2.globalCompositeOperation = 'destination-in'; tc2.drawImage(S.mask, 0, 0);
     ctx.globalCompositeOperation = 'lighter'; ctx.drawImage(S.tmp, 0, 0);
-    if (ch > 0) { ctx.globalAlpha = ch * .85; ctx.drawImage(S.white, 0, 0); ctx.globalAlpha = 1; }
-    ctx.globalCompositeOperation = 'destination-out'; ctx.drawImage(S.cut, 0, 0); ctx.globalCompositeOperation = 'source-over';
+    if (ch > 0) blend(S.white, ch * .85);
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'destination-out'; ctx.drawImage(S.cut, 0, 0); ctx.globalCompositeOperation = 'source-over';
     ctx.restore();
     ctx.strokeStyle = 'rgba(120,170,255,' + (.45 + .3 * Math.sin(t * 2.5)) + ')'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.ellipse(IW / 2, IH - 14, IW * .34 + 4 * Math.sin(t * 2.5), 12, 0, 0, 7); ctx.stroke();
-    if (rev > 0 && rev < 1) { ctx.fillStyle = 'rgba(215,228,255,.95)'; ctx.fillRect(IW * .12, ry, IW * .76, 2); }
+    ctx.beginPath(); ctx.ellipse(IW / 2, IH - 10, IW * .32 + 4 * Math.sin(t * 2.5), 10, 0, 0, 7); ctx.stroke();
+    if (rev > 0 && rev < 1) { ctx.fillStyle = 'rgba(215,228,255,.95)'; ctx.fillRect(IW * .1, ry, IW * .8, 2); }
     raf = requestAnimationFrame(frame);
   }
   const himg = new Image();
   himg.onload = () => {
     try {
-      const IW = himg.naturalWidth, IH = himg.naturalHeight, mk2 = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
-      const mask2 = mk2(IW, IH); mask2.getContext('2d').drawImage(himg, 0, 0);
-      const white = mk2(IW, IH), gw = white.getContext('2d'); gw.drawImage(himg, 0, 0); gw.globalCompositeOperation = 'source-in'; gw.fillStyle = '#fff'; gw.fillRect(0, 0, IW, IH);
-      const glow = mk2(IW, IH), gg = glow.getContext('2d'); gg.shadowColor = 'rgba(90,150,255,1)'; gg.shadowBlur = 26; gg.drawImage(himg, 0, 0);
+      const SW = himg.naturalWidth, SH = himg.naturalHeight, IW = Math.round(SW / SHEET.cols), IH = Math.round(SH / SHEET.rows);
+      const mk2 = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+      const mask = mk2(IW, IH), gm = mask.getContext('2d');                       // unión de todos los cuadros: recorta la franja de escaneo
+      for (let k = 0; k < SHEET.n; k++) gm.drawImage(himg, (k % SHEET.cols) * IW, Math.floor(k / SHEET.cols) * IH, IW, IH, 0, 0, IW, IH);
+      const white = mk2(SW, SH), gw = white.getContext('2d'); gw.drawImage(himg, 0, 0); gw.globalCompositeOperation = 'source-in'; gw.fillStyle = '#fff'; gw.fillRect(0, 0, SW, SH);
+      const glow = mk2(SW, SH), gg = glow.getContext('2d'); gg.shadowColor = 'rgba(90,150,255,1)'; gg.shadowBlur = 22; gg.drawImage(himg, 0, 0);
       const cut = mk2(IW, IH), gc = cut.getContext('2d'); gc.fillStyle = 'rgba(0,0,0,.3)'; for (let y = 0; y < IH; y += 3) gc.fillRect(0, y, IW, 1);
-      const band = mk2(IW, 64), gb = band.getContext('2d'), gr = gb.createLinearGradient(0, 0, 0, 64); gr.addColorStop(0, 'rgba(140,190,255,0)'); gr.addColorStop(.5, 'rgba(170,210,255,.75)'); gr.addColorStop(1, 'rgba(140,190,255,0)'); gb.fillStyle = gr; gb.fillRect(0, 0, IW, 64);
-      S = { W: IW, H: IH, img: himg, mask: mask2, white, glow, cut, band, tmp: mk2(IW, IH) };
+      const band = mk2(IW, 64), gb = band.getContext('2d'), gr = gb.createLinearGradient(0, 0, 0, 64); gr.addColorStop(0, 'rgba(140,190,255,0)'); gr.addColorStop(.5, 'rgba(170,210,255,.7)'); gr.addColorStop(1, 'rgba(140,190,255,0)'); gb.fillStyle = gr; gb.fillRect(0, 0, IW, 64);
+      S = { W: IW, H: IH, sheet: himg, mask, white, glow, cut, band, tmp: mk2(IW, IH) };
       if (done) return;
-      cv.width = IW * d; cv.height = IH * d; cv.style.aspectRatio = IW + ' / ' + IH; cv.style.height = 'min(560px, 70vh)'; cv.style.width = 'auto';
+      cv.width = IW * d; cv.height = IH * d; cv.style.aspectRatio = IW + ' / ' + IH; cv.style.height = 'min(340px, 46vh)'; cv.style.width = 'auto';
       mode = 'img';
     } catch (err) { mode = 'proc'; S = null; }
   };
-  himg.src = 'assets/cortana-holograma.webp';
+  himg.src = 'assets/somada-holograma.webp';
 
   /* ---------- al terminar: la silueta se convierte en energía y viaja a la barra ---------- */
   function origins() {
