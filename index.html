@@ -223,6 +223,65 @@
     .intro-hud b { display: block; font-size: 1.05rem; letter-spacing: .34em; color: #e6efff; margin-bottom: .1rem; }
     .intro-hud { font: 600 .75rem monospace; letter-spacing: .22em; line-height: 1.7; color: #a9bcff; text-align: center; opacity: 0; transition: opacity .8s ease 1s; }
     .intro[data-stage="b"] .intro-hud { opacity: 1; }
+
+    /* ===== Apartados como espacios separados ===== */
+    html.has-views main > section.view:not(.active) { display: none !important; }
+    html.has-views main > section.view.active { animation: viewIn .4s ease; }
+    @keyframes viewIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    main { min-height: 72vh; }
+    .section-title::before { counter-increment: none; content: attr(data-n); }
+    .xp-mark.now i { box-shadow: 0 0 0 3px rgba(143,207,163,.4); }
+    @media (prefers-reduced-motion: reduce) { html.has-views main > section.view.active { animation: none; } }
+
+    /* ===== Inicio: accesos ===== */
+    #inicio .home-more { grid-column: 1 / -1; grid-row: 2; margin-top: 2.5rem; }
+    .home-h { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+    .home-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
+    .home-card { display: flex; flex-direction: column; gap: .4rem; padding: 1.05rem 1.15rem; border: 1px solid rgba(255,255,255,.18); border-radius: 12px; background: rgba(12,16,14,.68); backdrop-filter: blur(6px); color: #f3f5f3; text-decoration: none; transition: border-color .2s, transform .2s; }
+    .home-card:hover { border-color: rgba(143,207,163,.7); transform: translateY(-3px); }
+    .home-card strong { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 1.05rem; }
+    .home-card span:last-child { color: #c9d6cd; font-size: .88rem; }
+    html[data-theme="light"] .home-card { background: rgba(255,255,255,.86); color: #17201a; border-color: rgba(0,0,0,.12); }
+    html[data-theme="light"] .home-card span:last-child { color: #53625a; }
+    html[data-theme="light"] .home-h { color: #17201a; text-shadow: none; }
+    @media (max-width: 640px) { #inicio .home-more { grid-row: auto; } }
+
+    /* ===== Contacto y preguntas frecuentes ===== */
+    .contact-cards .card { gap: .4rem; }
+    .faq { display: flex; flex-direction: column; max-width: 52rem; }
+
+    /* ===== Monitoreo ambiental ===== */
+    #monitoreo { background: linear-gradient(180deg, #0f1110, #101a16 50%, #0f1110); border-top: 1px solid var(--border-color); }
+    html[data-theme="light"] #monitoreo { background: #ecf1ed; }
+    .mon-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .mon-top button { font: inherit; cursor: pointer; padding: .45rem 1rem; }
+    .mon-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr); gap: 1.25rem; margin-top: 1.25rem; align-items: start; }
+    @media (max-width: 900px) { .mon-layout { grid-template-columns: 1fr; } }
+    .mon-layers { display: flex; flex-wrap: wrap; gap: .5rem 1.1rem; margin-bottom: .75rem; font-size: .88rem; align-items: center; }
+    .mon-layers label { display: flex; align-items: center; gap: .4rem; cursor: pointer; }
+    .mon-layers input[type=checkbox] { accent-color: var(--accent-green); }
+    .mon-layers input[type=date] { font: inherit; padding: .25rem .5rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); }
+    .monmap { height: min(540px, 72vh); }
+    html[data-theme="dark"] #monmap .leaflet-basePane-pane { filter: invert(1) hue-rotate(180deg) brightness(.9) contrast(.9) saturate(.7); }
+    .mon-panel { border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-card); padding: 1rem; display: flex; flex-direction: column; gap: .75rem; max-height: 640px; overflow: auto; }
+    .mon-tabs { display: flex; gap: .4rem; flex-wrap: wrap; margin: 0; }
+    .mon-pane { display: flex; flex-direction: column; gap: .6rem; }
+    .mon-pane[hidden] { display: none; }
+    .mon-panel h4 { font-size: .95rem; color: var(--accent-green); }
+    .mon-list { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .mon-list button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: .5rem; text-align: left; font: inherit; font-size: .92rem; padding: .5rem .7rem; border-radius: 8px; border: 1px solid var(--border-color); background: transparent; color: var(--text-main); cursor: pointer; }
+    .mon-list button:hover { border-color: var(--accent-green); }
+    .mon-list small { display: block; color: var(--text-muted); font-size: .78rem; }
+    .mon-badge { font-style: normal; font-size: .7rem; font-weight: 700; padding: .1rem .5rem; border-radius: 9999px; background: rgba(238,143,127,.2); color: #ee8f7f; border: 1px solid rgba(238,143,127,.4); white-space: nowrap; }
+    #mon-detail { border-top: 1px solid var(--border-color); padding-top: .75rem; }
+    #mon-detail:empty { display: none; }
+    .mk { display: block; margin: auto; }
+    .mk-volc { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 14px solid #ee8f7f; filter: drop-shadow(0 0 3px rgba(0,0,0,.6)); }
+    .mk-hot { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 18px solid #ff5a4a; filter: drop-shadow(0 0 6px rgba(255,90,74,.9)); }
+    .mk-fire { width: 10px; height: 10px; border-radius: 50%; background: #f0b36a; box-shadow: 0 0 6px #f0b36a; }
+    .mk-storm { width: 12px; height: 12px; border-radius: 50%; background: #c59ae0; box-shadow: 0 0 6px #c59ae0; }
+    .mk-zone { width: 14px; height: 14px; border-radius: 50%; background: #8fcfa3; border: 3px solid #fff; box-shadow: 0 0 0 2px #2f7d4f; }
+    .skillgrid + .skillgrid { margin-top: 2.5rem; }
   </style>
 </head>
 <body>
@@ -242,6 +301,7 @@
           <li><a href="#sobre-mi">Sobre mí</a></li>
           <li><a href="#proyectos">Experiencias</a></li>
           <li><a href="#herramientas">Herramientas</a></li>
+          <li><a href="#monitoreo">Monitoreo ambiental</a></li>
           <li><a href="#material">Material ilustrativo</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -267,6 +327,17 @@
         </div>
       </div>
       <div class="hero-globe"><img src="assets/mundo.gif" alt="Ilustración de una persona sosteniendo el planeta Tierra bajo un halo de llamas" width="439" height="370"></div>
+      <div class="home-more">
+        <h2 class="home-h">Explora la página</h2>
+        <div class="home-grid">
+          <a class="home-card" href="#sobre-mi"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><strong>Sobre mí</strong><span>Mi formación, mis habilidades y lo que me mueve.</span></a>
+          <a class="home-card" href="#proyectos"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><strong>Experiencias</strong><span>Mi trabajo y mis proyectos, en una línea de tiempo.</span></a>
+          <a class="home-card" href="#herramientas"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><path d="M7 16c3 0 4-9 10-9"/></svg></span><strong>Herramientas</strong><span>Simulador, calculadoras, clima y análisis de datos.</span></a>
+          <a class="home-card" href="#monitoreo"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3.5 3.5 14.5 0 18M12 3c-3.5 3.5-3.5 14.5 0 18"/></svg></span><strong>Monitoreo ambiental</strong><span>Ozono, volcanes y zonas clave, en tiempo casi real.</span></a>
+          <a class="home-card" href="#material"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span><strong>Material ilustrativo</strong><span>Guías, plantillas, mapa de campo, blog y fotos.</span></a>
+          <a class="home-card" href="#contacto"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span><strong>Contacto</strong><span>Escríbeme o sígueme en mis redes.</span></a>
+        </div>
+      </div>
     </section>
 
     <section id="sobre-mi">
@@ -288,18 +359,31 @@
         <div><h3>Capacitación y datos</h3><ul><li>Capacitaciones ambientales empresariales</li><li>Analítica de Datos &amp; Business Intelligence</li><li>Herramientas digitales</li></ul></div>
         <div><h3>Intereses</h3><ul><li>Análisis de datos</li><li>Meteorología</li><li>Ciencias de la atmósfera</li><li>Sostenibilidad y recursos naturales</li></ul></div>
       </div>
+    
+      <div class="skillgrid" aria-label="Formación y más">
+        <div><h4>Formación</h4><ul><li>Ingeniería Ambiental · Universidad Nacional de Colombia, sede Medellín (en curso)</li><li>Tecnólogo en Sistemas de Gestión Ambiental · SENA · 2022</li><li>Media técnica en sistemas · SENA · 2018</li></ul></div>
+        <div><h4>Cursos (SENA)</h4><ul><li>Emprendimiento innovador · 40 h</li><li>Derechos fundamentales en el trabajo · 48 h</li><li>Calidad de agua: potable y residual · 40 h</li><li>Primeros auxilios · 40 h</li><li>English Dot Works 1 a 6 · 360 h</li></ul></div>
+        <div><h4>Competencias</h4><ul><li>Liderazgo y trabajo en equipo</li><li>Comunicación asertiva</li><li>Resolución de conflictos</li><li>Creatividad y adaptabilidad</li><li>Gestión del tiempo y enfoque al logro</li></ul></div>
+        <div><h4>Idiomas y fuera del trabajo</h4><ul><li>Inglés (nivel 1 de 5)</li><li>Portugués (nivel 2 de 5)</li><li>Senderismo y videojuegos</li><li>Enseñar y compartir saberes</li></ul></div>
+      </div>
     </section>
 
     <section id="proyectos">
       <h2 class="section-title">Experiencias</h2>
       <ol class="tl">
-        <li><span class="yr">2025 a 2026</span><div><h3>Operación de la planta de tratamiento de aguas residuales industriales <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Deli - Anne Rose</p><p class="card-desc">Controles diarios de la calidad del agua, mantenimiento del sistema, indicadores del DGA, control de residuos y gestión de proveedores.</p></div></li>
-        <li><span class="yr">2025</span><div><h3>Control, rescate y ahuyentamiento de fauna silvestre <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Soluciones Integrales TM SAS · Relleno sanitario La Pradera · Corantioquia</p><p class="card-desc">Elaboración de actividades de muestreo, métodos de ahuyentamiento, acompañamiento en rescate y control de fauna silvestre, compilación de base de datos y elaboración de informes para Corantioquia en el relleno sanitario La Pradera.</p></div></li>
-        <li><span class="yr">2024 a hoy</span><div><h3>AMET · Capítulo estudiantil de Ingeniería Ambiental <span class="tag tag-blue">En curso</span></h3><p class="card-meta">Universidad Nacional, sede Medellín</p><p class="card-desc">Planeación de eventos académicos, ambientales y culturales, y proyectos de sostenibilidad del campus.</p></div></li>
-        <li><span class="yr">2023 a hoy</span><div><h3>Colombian Virtual Reality <span class="tag tag-blue">En curso</span></h3><p class="card-meta">Fundación</p><p class="card-desc">Coordinación de equipos, estrategia y recursos para generar un cambio positivo y sostenible en la comunidad.</p></div></li>
-        <li><span class="yr">2022 a 2023</span><div><h3>Proyectos socioambientales a nivel nacional <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Soluciones Integrales TM SAS</p><p class="card-desc">Planificación, implementación y seguimiento de iniciativas para entidades públicas, con informes, planes de trabajo y cronogramas.</p></div></li>
+        <li><span class="yr">2025 a 2026</span><div><h3>Operación de la planta de tratamiento de aguas residuales industriales <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Deli - Anne Rose</p><p class="card-desc">Controles diarios de la calidad del agua, mantenimiento del sistema, indicadores del DGA, control de residuos y gestión de proveedores.</p><details class="dp-det"><summary>Ver funciones</summary><ul class="card-desc"><li>Entrega de los indicadores del DGA y de los reportes de la PTARI.</li><li>Verificaciones semanales y mantenimientos de todo el sistema de tratamiento de aguas.</li><li>Preparación de los químicos para el funcionamiento de la planta.</li><li>Toma de muestras y controles diarios de la calidad del agua de salida.</li><li>Control y tabulación de los residuos generados; manejo de proveedores externos de material orgánico, reciclable e inorgánico.</li><li>Lavado y desinfección de las trampas de grasa, y control del orden en el área de basuras.</li><li>Acompañamiento de la fumigación y reporte de anomalías al área de calidad.</li><li>Cumplimiento de las exigencias del Área Metropolitana.</li></ul></details></div></li>
+        <li><span class="yr">2025</span><div><h3>Control, rescate y ahuyentamiento de fauna silvestre <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Soluciones Integrales TM SAS · Relleno sanitario La Pradera · Corantioquia</p><p class="card-desc">Elaboración de actividades de muestreo, métodos de ahuyentamiento, acompañamiento en rescate y control de fauna silvestre, compilación de base de datos y elaboración de informes para Corantioquia en el relleno sanitario La Pradera.</p><details class="dp-det"><summary>Ver funciones</summary><ul class="card-desc"><li>Actividades de muestreo y métodos de ahuyentamiento de fauna silvestre.</li><li>Acompañamiento en el rescate y el control de fauna.</li><li>Compilación de una base de datos y elaboración de informes para Corantioquia.</li></ul></details></div></li>
+        <li><span class="yr">2024 a hoy</span><div><h3>AMET · Capítulo estudiantil de Ingeniería Ambiental <span class="tag tag-blue">En curso</span></h3><p class="card-meta">Universidad Nacional, sede Medellín</p><p class="card-desc">Planeación de eventos académicos, ambientales y culturales, y proyectos de sostenibilidad del campus.</p><details class="dp-det"><summary>Ver funciones</summary><ul class="card-desc"><li>Planeación y coordinación de eventos académicos, ambientales, culturales y sociales.</li><li>Liderazgo de los servicios de consultoría a empresas externas.</li><li>Desarrollo de proyectos que promueven la conciencia ambiental y la sostenibilidad del campus.</li></ul></details></div></li>
+        <li><span class="yr">2023 a hoy</span><div><h3>Colombian Virtual Reality <span class="tag tag-blue">En curso</span></h3><p class="card-meta">Fundación</p><p class="card-desc">Coordinación de equipos, estrategia y recursos para generar un cambio positivo y sostenible en la comunidad.</p><details class="dp-det"><summary>Ver funciones</summary><ul class="card-desc"><li>Diseño de estrategias, coordinación de equipos y toma de decisiones para el crecimiento de la fundación.</li><li>Manejo de los recursos financieros y logísticos para que se asignen de manera óptima y transparente.</li><li>Supervisión de los aspectos operativos de los eventos y programas.</li></ul></details></div></li>
+        <li><span class="yr">2022 a 2023</span><div><h3>Proyectos socioambientales a nivel nacional <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Soluciones Integrales TM SAS</p><p class="card-desc">Planificación, implementación y seguimiento de iniciativas para entidades públicas, con informes, planes de trabajo y cronogramas.</p><details class="dp-det"><summary>Ver funciones</summary><ul class="card-desc"><li>Planificación, implementación y seguimiento de iniciativas socioambientales a nivel nacional.</li><li>Elaboración de informes, planes de trabajo, cronogramas de avance y estrategias de seguimiento.</li><li>Gestión de equipos multidisciplinarios.</li><li>Contratista de entidades públicas, principalmente la Aeronáutica Civil y alcaldías locales de Bogotá.</li></ul></details></div></li>
+                <li><span class="yr">2021 a 2022</span><div><h3>Aprendiz auxiliar de proyectos <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Soluciones Integrales TM SAS</p><p class="card-desc">Apoyo en programas de gestión ambiental: recopilación y análisis de datos, informes técnicos y coordinación logística.</p></div></li>
+        <li><span class="yr">2019 a 2020</span><div><h3>Ayudante de construcción <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Mampostería Mosquera SAS</p><p class="card-desc">Apoyo en obra, trabajo en alturas y gestión de los residuos sólidos generados en planta.</p></div></li>
         <li><span class="yr">Disponible</span><div><h3>Consultoría y documentos ambientales <span class="tag tag-orange">Para empresas</span></h3><p class="card-desc">PMA, SGA, matrices legales y ASPI, informes de caracterización, digitalización del RUA y capacitaciones.</p></div></li>
       </ol>
+    
+      <h3 class="sub-h">Trabajo de campo</h3>
+      <p class="card-desc" style="max-width:44rem">Parte de mi experiencia ocurre fuera de la oficina: compensación forestal, muestreos de herbivoría, charlas de sensibilización y visitas a páramos en distintas regiones del país. Puedes verlo en el mapa y en la galería.</p>
+      <div class="dp-actions"><a class="btn-secondary" href="#fieldmap">Ver el mapa de campo</a><a class="btn-secondary" href="#galeria">Ver la galería de fotos</a></div>
     </section>
 
     <section id="recomendaciones" hidden>
@@ -471,12 +555,77 @@
       </div>
         </div>
       </details>
+      <details class="tool" id="t-fuentes">
+        <summary><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span><span class="tool-head"><span class="tool-t">Fuentes y metodología</span><span class="tool-s">De dónde salen los datos y cómo se calculan</span></span></summary>
+        <div class="tool-body">
+          <div class="skillgrid">
+            <div><h4>Simulador</h4><ul><li>Modelos de crecimiento exponencial y logístico.</li><li>La tasa intrínseca se calcula como r = ln(R₀) / T.</li><li>Es un trabajo universitario con fines didácticos.</li></ul></div>
+            <div><h4>Calculadoras</h4><ul><li>Huella de carbono: factores aproximados (electricidad 0,126 kg CO₂e/kWh, gasolina 2,3 kg/L, gas natural 1,9 kg/m³).</li><li>Residuos y agua: supuestos que puedes editar.</li><li>Contrasta los factores con las cifras oficiales vigentes antes de usarlos en un informe.</li></ul></div>
+            <div><h4>Clima y calidad del aire</h4><ul><li>Datos de Open-Meteo.com (licencia CC BY 4.0).</li><li>La calidad del aire es una estimación de modelo, no una medición de estaciones.</li><li>Para estaciones locales: SIATA.</li></ul></div>
+            <div><h4>Análisis de datos</h4><ul><li>Reanálisis ERA5 servido por Open-Meteo.</li><li>Un mes es válido con al menos el 90 % de sus días; un año, con sus 12 meses válidos.</li><li>Tendencia por mínimos cuadrados con intervalo de confianza del 95 %.</li></ul></div>
+          </div>
+        </div>
+      </details>
       </div>
     </section>
+
+    <section id="monitoreo">
+      <h2 class="section-title">Monitoreo ambiental</h2>
+      <p class="sub">Un tablero con datos abiertos en tiempo casi real: la capa de ozono, volcanes, incendios, tormentas y zonas ambientales clave. Toca el mapa y las listas para explorar. Fuentes: NASA (GIBS y EONET), USGS y Open-Meteo.</p>
+      <div class="mon-top"><p class="cap" id="mon-status" aria-live="polite">Esperando para cargar los datos…</p><button type="button" class="btn-secondary" id="mon-refresh">Actualizar</button></div>
+      <div class="wx-grid" id="mon-kpis"></div>
+      <div class="mon-layout">
+        <div>
+          <div class="mon-layers" role="group" aria-label="Capas del mapa">
+            <label><input type="checkbox" id="ly-ozono" checked> Capa de ozono</label>
+            <label><input type="checkbox" id="ly-volc" checked> Volcanes</label>
+            <label><input type="checkbox" id="ly-fire"> Incendios</label>
+            <label><input type="checkbox" id="ly-storm"> Tormentas</label>
+            <label><input type="checkbox" id="ly-zone" checked> Zonas clave</label>
+            <label><input type="checkbox" id="ly-sat"> Imagen satelital</label>
+            <label>Fecha <input type="date" id="ly-date"></label>
+          </div>
+          <div class="fieldmap monmap" id="monmap" role="region" aria-label="Mapa de monitoreo ambiental"></div>
+          <p class="cap" id="mon-note"></p>
+        </div>
+        <aside class="mon-panel" aria-label="Detalle del monitoreo">
+          <div class="tabs mon-tabs" role="tablist" aria-label="Secciones del panel">
+            <button type="button" class="tab" role="tab" aria-selected="true">Volcanes</button>
+            <button type="button" class="tab" role="tab" aria-selected="false">Zonas clave</button>
+            <button type="button" class="tab" role="tab" aria-selected="false">Ozono y UV</button>
+          </div>
+          <div class="mon-pane" id="pane-volc">
+            <h4>Volcanes de referencia</h4><ul class="mon-list" id="volc-list"></ul>
+            <h4>Actividad abierta (NASA EONET)</h4><ul class="mon-list" id="eon-list"></ul>
+          </div>
+          <div class="mon-pane" id="pane-zone" hidden><h4>Zonas ambientales primordiales</h4><ul class="mon-list" id="zone-list"></ul></div>
+          <div class="mon-pane" id="pane-oz" hidden>
+            <h4>Capa de ozono y radiación UV</h4>
+            <p class="card-desc">El mapa muestra la cantidad total de ozono de la atmósfera, medida por satélite. Toca cualquier punto del mapa para ver su índice UV y el ozono en superficie.</p>
+            <div id="uv-box"><p class="cap">Cargando…</p></div>
+          </div>
+          <div id="mon-detail" aria-live="polite"></div>
+        </aside>
+      </div>
+      <details class="dp-det"><summary>Aprende: la capa de ozono</summary>
+        <div class="card-desc" style="max-width:48rem;display:flex;flex-direction:column;gap:.6rem;margin-top:.6rem">
+          <p>La capa de ozono está en la estratosfera y absorbe la mayor parte de la radiación ultravioleta B del Sol. Se mide en unidades Dobson: 100 unidades equivalen a una capa de ozono de 1 mm de espesor si se comprimiera a condiciones estándar.</p>
+          <p>Cada primavera austral (hacia septiembre y octubre) se forma sobre la Antártida el llamado agujero de ozono, una zona con valores muy bajos, normalmente por debajo de unas 220 unidades Dobson. El Protocolo de Montreal, de 1987, redujo el uso de las sustancias que la dañan.</p>
+          <p>El índice UV que ves en el panel depende del ozono, pero también de la altitud, la nubosidad y la hora. En Medellín puede ser alto aun con el cielo nublado.</p>
+        </div></details>
+      <details class="dp-det"><summary>Aprende: volcanes y zonas clave</summary>
+        <div class="card-desc" style="max-width:48rem;display:flex;flex-direction:column;gap:.6rem;margin-top:.6rem">
+          <p>Los volcanes se vigilan con sismómetros, mediciones de gases y deformación del terreno. En Colombia, el Servicio Geológico Colombiano publica los boletines y los niveles de actividad de cada volcán. Aquí solo ves señales abiertas, como eventos de NASA EONET y sismos de USGS, que no reemplazan esos boletines.</p>
+          <p>Las zonas clave son ecosistemas que regulan el clima, el agua y la biodiversidad. Para cada una se muestra el clima actual y un enlace a una fuente donde seguir su estado.</p>
+        </div></details>
+      <p class="cap">Estos datos son de referencia y pueden tardar o fallar. Para decisiones de emergencia consulta siempre a las autoridades oficiales, como el SGC, la UNGRD y el IDEAM.</p>
+    </section>
+
 
 
     <section id="material">
       <h2 class="section-title">Material ilustrativo</h2>
+      <p class="sub">Todo lo que acompaña mi trabajo: guías, plantillas descargables, artículos cortos, el mapa de campo y fotos.</p>
       <h3 class="sub-h">Guías y plantillas</h3>
       <div class="grid-3">
         <a class="card dl" href="https://ambiental-beta.vercel.app/info.html" target="_blank" rel="noopener">
@@ -527,6 +676,22 @@
           <button type="submit" class="btn-primary">Enviar mensaje</button>
           <p class="cap">Se abrirá tu aplicación de correo con el mensaje listo para enviar.</p>
         </form>
+      </div>
+    
+      <h3 class="sub-h">Encuéntrame en</h3>
+      <div class="grid-3 contact-cards">
+        <a class="card dl" href="mailto:bmunozl@unal.edu.co"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span><h3 class="card-title">Correo</h3><p class="card-desc">bmunozl@unal.edu.co</p></a>
+        <a class="card dl" href="https://wa.me/573164197518" target="_blank" rel="noopener"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.7 7L4 20l1.1-5A8 8 0 1 1 21 12z"/></svg></span><h3 class="card-title">WhatsApp</h3><p class="card-desc">Escríbeme un mensaje directo.</p></a>
+        <a class="card dl" href="https://www.linkedin.com/in/camilo-munoz-projects/" target="_blank" rel="noopener"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 11v6M8 8v.01M12 17v-6M12 13c0-2 4-2 4 0v4"/></svg></span><h3 class="card-title">LinkedIn</h3><p class="card-desc">Mi perfil profesional.</p></a>
+        <a class="card dl" href="https://www.instagram.com/xmytux/" target="_blank" rel="noopener"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M17 7v.01"/></svg></span><h3 class="card-title">Instagram</h3><p class="card-desc">@xmytux</p></a>
+        <a class="card dl" href="https://github.com/Mytux" target="_blank" rel="noopener"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2m12 4v-3.5a3 3 0 0 0-1-2.5c3.3-.4 6.5-1.600 6.5-7a5.400 5.400 0 0 0-1.500-3.800 5 5 0 0 0-.1-3.700s-1.200-.4-4 1.500a13.500 13.500 0 0 0-7 0C6.200 2.600 5 3 5 3a5 5 0 0 0-.1 3.700A5.400 5.400 0 0 0 3.500 10.500c0 5.400 3.200 6.600 6.500 7a3 3 0 0 0-1 2.500V21"/></svg></span><h3 class="card-title">GitHub</h3><p class="card-desc">Mi código y mis proyectos.</p></a>
+        <a class="card dl" href="CV-Brahian-Munoz.pdf" download><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span><h3 class="card-title">Hoja de vida</h3><p class="card-desc">Descárgala en PDF.</p></a>
+      </div>
+      <h3 class="sub-h">Preguntas frecuentes</h3>
+      <div class="faq">
+        <details class="dp-det"><summary>¿En qué te puedo ayudar a ti o a tu organización?</summary><p class="card-desc">En planes de manejo y sistemas de gestión ambiental, matrices legales, informes de caracterización, operación de plantas de tratamiento de aguas residuales industriales, digitalización del RUA, capacitaciones ambientales, coordinación de proyectos y analítica de datos.</p></details>
+        <details class="dp-det"><summary>¿Desde dónde trabajas?</summary><p class="card-desc">Vivo y estudio en Medellín, Antioquia, y he trabajado en proyectos en distintas regiones del país.</p></details>
+        <details class="dp-det"><summary>¿Dónde veo cómo trabajas?</summary><p class="card-desc">En <a href="#proyectos">Experiencias</a> está mi trayectoria, en <a href="#herramientas">Herramientas</a> mis análisis y simuladores, y en <a href="#material">Material ilustrativo</a> el mapa de campo, el blog y las fotos.</p></details>
       </div>
     </section>
   </main>
@@ -734,7 +899,15 @@ const ARTICULOS = [
   { t: 'Por qué capacitar al personal operativo mejora los resultados ambientales', f: 'Noviembre de 2026', r: 'Un plan bien escrito no basta si no llega a la operación diaria.',
     x: ['Un plan de manejo ambiental o un sistema de gestión pueden estar muy bien escritos y aun así fallar en la práctica, porque las decisiones ambientales se toman todos los días en la operación: cómo se separan los residuos, cómo se usa el agua o cómo se atiende un derrame.',
         'Por eso las capacitaciones funcionan mejor cuando se ajustan a cada público. El personal ejecutivo necesita entender riesgos y obligaciones; el administrativo, hábitos y procedimientos; y el operativo, instrucciones claras y prácticas para su tarea.',
-        'Una capacitación breve, con ejemplos de la propia empresa y seguimiento posterior, suele rendir más que una charla larga y general.'] }
+        'Una capacitación breve, con ejemplos de la propia empresa y seguimiento posterior, suele rendir más que una charla larga y general.'] },
+  { t: 'Cómo leer el índice de calidad del aire', f: 'Noviembre de 2026', r: 'Los colores del AQI y qué hacer en cada uno.',
+    x: ['El índice de calidad del aire (AQI) resume en un solo número qué tan limpio o contaminado está el aire. En la escala de Estados Unidos, de 0 a 50 es buena, de 51 a 100 moderada, de 101 a 150 dañina para grupos sensibles, de 151 a 200 dañina, de 201 a 300 muy dañina y más de 300 peligrosa.',
+        'El índice se calcula con varios contaminantes, como las partículas finas (PM2.5), el ozono y el dióxido de nitrógeno, y se reporta el que da el valor más alto. Las PM2.5 son tan pequeñas que llegan a los pulmones, por eso suelen ser las que más pesan.',
+        'En la sección de Herramientas puedes ver el AQI de Medellín. Recuerda que ese valor viene de un modelo; para mediciones de estaciones consulta SIATA.'] },
+  { t: 'La capa de ozono: qué es y por qué importa', f: 'Noviembre de 2026', r: 'Un escudo invisible contra la radiación ultravioleta.',
+    x: ['La capa de ozono es una región de la estratosfera con mucho ozono, un gas que absorbe la mayor parte de la radiación ultravioleta B del Sol. Sin ese escudo habría más daño en la piel, los ojos y los ecosistemas.',
+        'En los años ochenta se descubrió que ciertas sustancias, como los CFC, la estaban debilitando, sobre todo sobre la Antártida en primavera austral. El Protocolo de Montreal, firmado en 1987, limitó esas sustancias.',
+        'Hoy puedes ver cómo está la capa de ozono en el apartado de Monitoreo ambiental, con imágenes de satélite de la NASA. Para entender los colores, recuerda que se mide en unidades Dobson.'] }
 ];
 document.getElementById('posts').innerHTML = ARTICULOS.map(a => '<details class="card post"><summary><h3 class="card-title">' + esc(a.t) + '</h3><span class="card-meta">' + esc(a.f) + '</span><span class="card-desc">' + esc(a.r) + '</span></summary><div class="body">' + a.x.map(p => '<p>' + esc(p) + '</p>').join('') + '</div></details>').join('');
 
@@ -820,9 +993,6 @@ document.getElementById('cform').addEventListener('submit', e => {
 /* ===== ANIMACIONES E INTERSECCIONES ===== */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
 document.querySelectorAll('.hero > *, .section-title, .sub-h, .about, .skillgrid, .tl, .cases, .sim, #calc, .grid-3, .posts, .gallery, .contact-box').forEach(el => { el.classList.add('reveal'); io.observe(el); });
-const links = [...document.querySelectorAll('nav a')];
-const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
-document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
 
 /* ===== EFECTO DE SONIDO GTA SAN ANDREAS (CON DESBLOQUEO DE AUDIO) ===== */
 (function() {
@@ -847,47 +1017,6 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   });
 })();
 
-/* ===== BARRA DE EXPLORACION ===== */
-(function () {
-  const SECS = [['inicio', 'Inicio'], ['sobre-mi', 'Sobre mí'], ['proyectos', 'Experiencias'], ['herramientas', 'Herramientas'], ['material', 'Material ilustrativo'], ['contacto', 'Contacto']];
-  const xp = document.createElement('div');
-  xp.className = 'xp'; xp.setAttribute('aria-hidden', 'true');
-  xp.innerHTML = '<span class="xp-lab xp-t">EXP</span><div class="xp-track"><div class="xp-fill"></div></div><span class="xp-lab xp-b">0%</span>';
-  const fill = xp.querySelector('.xp-fill'), pct = xp.querySelector('.xp-b');
-  const marks = SECS.map(([id, nombre]) => {
-    const a = document.createElement('a');
-    a.className = 'xp-mark'; a.href = '#' + id; a.tabIndex = -1;
-    a.innerHTML = '<i></i><span>' + nombre + '</span>';
-    xp.appendChild(a);
-    return { id, a, done: false };
-  });
-  document.body.appendChild(xp);
-  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-  function layout() {
-    marks.forEach(m => {
-      const el = document.getElementById(m.id); if (!el) return;
-      const t = Math.min(1, Math.max(0, (el.getBoundingClientRect().top + window.scrollY) / maxScroll()));
-      m.a.style.top = (t * 100) + '%';
-    });
-  }
-  function update() {
-    const p = Math.min(1, Math.max(0, window.scrollY / maxScroll()));
-    fill.style.height = (p * 100) + '%';
-    pct.textContent = Math.round(p * 100) + '%';
-    marks.forEach(m => {
-      if (m.done) return;
-      const el = document.getElementById(m.id);
-      if (el && el.getBoundingClientRect().top < window.innerHeight * 0.6) { m.done = true; m.a.classList.add('done'); }
-    });
-  }
-  let tick = false;
-  window.addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(() => { update(); tick = false; }); } }, { passive: true });
-  window.addEventListener('resize', () => { layout(); update(); });
-  window.addEventListener('load', () => { layout(); update(); });
-  layout(); update();
-  setTimeout(() => { layout(); update(); }, 1200);
-})();
-
 /* ===== ASISTENTE FLOTANTE (respuestas preparadas, sin conexion a ninguna IA) ===== */
 (function () {
   const norm = t => ' ' + t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9ñ ]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
@@ -905,6 +1034,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     { k: ['clima', 'aire', 'calidad del aire', 'temperatura', 'lluvia', 'pm2 5', 'contaminacion', 'atmosfera', 'tiempo'], a: 'En <a href="#t-wx">Herramientas</a> hay un panel en vivo del clima y la calidad del aire de Medellín, con datos de Open-Meteo. Para mediciones de estaciones locales, la fuente es SIATA.' },
     { k: ['mapa', 'mapas', 'lugares', 'sitios', 'ubicacion', 'ubicaciones', 'donde'], a: 'En <a href="#fieldmap">Material ilustrativo</a> hay un mapa con los sitios de trabajo de campo: Copacabana, San Francisco, Tumaco, Santurbán, Belmira y Bello. Cada punto muestra su foto y su año.' },
     { k: ['analisis', 'datos', 'proyecto de datos', 'precipitacion', 'tendencia', 'reproducible', 'python', 'era5', 'codigo', 'script'], a: 'En <a href="#t-dp">Análisis de datos</a> hay un proyecto reproducible: lluvia y temperatura en Medellín desde 1991, con datos de reanálisis ERA5. Calcula la climatología, la tendencia y las anomalías en tu navegador, y trae el script de Python para repetirlo.' },
+    { k: ['monitoreo', 'ozono', 'volcan', 'volcanes', 'incendios', 'sismos', 'capa de ozono', 'uv', 'tormentas', 'tiempo real', 'ecolive', 'terremotos'], a: 'En <a href="#monitoreo">Monitoreo ambiental</a> hay un tablero interactivo con la capa de ozono (imágenes de la NASA), volcanes, incendios, tormentas y zonas ambientales clave, con datos abiertos en tiempo casi real.' },
     { k: ['gracias', 'genial', 'perfecto', 'excelente', 'chao', 'adios', 'hasta luego'], a: '¡Con gusto! Si te surge otra duda, aquí estaré.' }
   ];
   const FALLBACK = 'No tengo una respuesta preparada para eso. Prueba preguntando por Brahian, sus experiencias, habilidades, herramientas, descargas o contacto, o escríbele directamente desde <a href="#contacto">Contacto</a>.';
@@ -1068,14 +1198,10 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
         markers[i] = L.marker([s.lat, s.lng], { icon: icon, title: s.n, alt: s.n }).addTo(map).bindPopup(html);
       });
       map.fitBounds(SITIOS.map(s => [s.lat, s.lng]), { padding: [40, 40] });
+      window.addEventListener('resize', () => map.invalidateSize());
     } catch (e) { wrap.innerHTML = '<p class="cap" style="padding:1rem">No se pudo cargar el mapa. Los sitios están en la lista de abajo.</p>'; }
   }
-  function loadLeaflet() {
-    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; l.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; l.crossOrigin = ''; document.head.appendChild(l);
-    const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; s.crossOrigin = '';
-    s.onload = init; s.onerror = () => { wrap.innerHTML = '<p class="cap" style="padding:1rem">No se pudo cargar el mapa. Los sitios están en la lista de abajo.</p>'; };
-    document.head.appendChild(s);
-  }
+  function loadLeaflet() { window.mytuxLeaflet(init, () => { wrap.innerHTML = '<p class="cap" style="padding:1rem">No se pudo cargar el mapa. Los sitios están en la lista de abajo.</p>'; }); }
   new IntersectionObserver((es, ob) => { if (es.some(e => e.isIntersecting) && !started) { started = true; ob.disconnect(); loadLeaflet(); } }, { rootMargin: '300px' }).observe(wrap);
 })();
 
@@ -1228,6 +1354,257 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   window.addEventListener('hashchange', () => abrir(location.hash));
   abrir(location.hash);
   document.addEventListener('toggle', () => { setTimeout(() => window.dispatchEvent(new Event('resize')), 40); }, true);
+})();
+
+/* ===== MONITOREO AMBIENTAL: ozono, volcanes, incendios, tormentas y zonas clave (datos abiertos: NASA GIBS y EONET, USGS, Open-Meteo) ===== */
+(function () {
+  const sec = document.getElementById('monitoreo'); if (!sec) return;
+  const $ = id => document.getElementById(id);
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const nf = (v, d) => (v == null || isNaN(v)) ? '–' : Number(v).toLocaleString('es-CO', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 });
+  const get = u => fetch(u).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  const SGC = 'https://www.sgc.gov.co/', GVP = 'https://volcano.si.edu/';
+  const VOLC = [
+    { n: 'Nevado del Ruiz', p: 'Colombia', lat: 4.895, lng: -75.322, l: SGC, ln: 'Servicio Geológico Colombiano' },
+    { n: 'Galeras', p: 'Colombia', lat: 1.22, lng: -77.37, l: SGC, ln: 'Servicio Geológico Colombiano' },
+    { n: 'Puracé', p: 'Colombia', lat: 2.32, lng: -76.4, l: SGC, ln: 'Servicio Geológico Colombiano' },
+    { n: 'Nevado del Huila', p: 'Colombia', lat: 2.93, lng: -76.03, l: SGC, ln: 'Servicio Geológico Colombiano' },
+    { n: 'Cumbal', p: 'Colombia', lat: 0.95, lng: -77.88, l: SGC, ln: 'Servicio Geológico Colombiano' },
+    { n: 'Cotopaxi', p: 'Ecuador', lat: -0.68, lng: -78.44, l: GVP, ln: 'Programa Global de Vulcanismo (Smithsonian)' },
+    { n: 'Popocatépetl', p: 'México', lat: 19.02, lng: -98.62, l: GVP, ln: 'Programa Global de Vulcanismo (Smithsonian)' },
+    { n: 'Volcán de Fuego', p: 'Guatemala', lat: 14.47, lng: -90.88, l: GVP, ln: 'Programa Global de Vulcanismo (Smithsonian)' },
+    { n: 'Kīlauea', p: 'EE. UU. (Hawái)', lat: 19.42, lng: -155.29, l: 'https://www.usgs.gov/programs/VHP', ln: 'USGS Volcano Hazards Program' },
+    { n: 'Etna', p: 'Italia', lat: 37.75, lng: 15.0, l: GVP, ln: 'Programa Global de Vulcanismo (Smithsonian)' }
+  ];
+  const ZONAS = [
+    { n: 'Amazonia', lat: -3.4, lng: -62.2, d: 'La mayor selva tropical del planeta. Regula el clima y alberga una enorme biodiversidad.', l: 'https://www.globalforestwatch.org/', ln: 'Global Forest Watch' },
+    { n: 'Chocó biogeográfico', lat: 5.7, lng: -76.9, d: 'Una de las regiones más lluviosas y biodiversas del mundo, entre Panamá, Colombia y Ecuador.', l: 'https://www.globalforestwatch.org/', ln: 'Global Forest Watch' },
+    { n: 'Páramo de Santurbán', lat: 7.3, lng: -72.87, d: 'Ecosistema de alta montaña que abastece de agua a varias poblaciones de Santander. Lo visité en 2022.', l: 'https://biodiversidad.co/', ln: 'SiB Colombia' },
+    { n: 'Sierra Nevada de Santa Marta', lat: 10.83, lng: -73.7, d: 'El macizo montañoso costero más alto del mundo, con ecosistemas desde la costa hasta la nieve.', l: 'https://biodiversidad.co/', ln: 'SiB Colombia' },
+    { n: 'Gran Barrera de Coral', lat: -18.3, lng: 147.7, d: 'El mayor sistema de arrecifes de coral del planeta, sensible al aumento de la temperatura del mar.', l: 'https://worldview.earthdata.nasa.gov/', ln: 'NASA Worldview' },
+    { n: 'Cuenca del Congo', lat: -0.5, lng: 23.6, d: 'La segunda mayor selva tropical del mundo y un gran almacén de carbono.', l: 'https://www.globalforestwatch.org/', ln: 'Global Forest Watch' },
+    { n: 'Ártico (hielo marino)', lat: 80, lng: 0, d: 'Región donde el hielo marino cambia con las estaciones y con el clima del planeta.', l: 'https://nsidc.org/', ln: 'NSIDC' },
+    { n: 'Antártida (agujero de ozono)', lat: -80, lng: 0, d: 'Cada primavera austral se forma aquí el llamado agujero de la capa de ozono.', l: 'https://ozonewatch.gsfc.nasa.gov/', ln: 'NASA Ozone Watch' }
+  ];
+  const km = (a, b, c, d) => { const R = 6371, r = Math.PI / 180, dl = (c - a) * r, dg = (d - b) * r, x = Math.pow(Math.sin(dl / 2), 2) + Math.cos(a * r) * Math.cos(c * r) * Math.pow(Math.sin(dg / 2), 2); return 2 * R * Math.asin(Math.sqrt(x)); };
+  const uvCat = v => v == null ? '–' : v < 3 ? 'Bajo' : v < 6 ? 'Moderado' : v < 8 ? 'Alto' : v < 11 ? 'Muy alto' : 'Extremo';
+  const iso = d => d.toISOString().slice(0, 10);
+  const addDays = (s, n) => { const d = new Date(s + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return iso(d); };
+  const tile = (l, v, s) => '<div class="wx-tile"><small>' + l + '</small><strong>' + v + '</strong>' + (s ? '<small>' + s + '</small>' : '') + '</div>';
+
+  const S = { volc: null, fire: null, storm: null, quakes: null, uv: null, t: '' };
+  let map = null; const LY = {};
+
+  /* ---------- datos ---------- */
+  const parseEv = ev => {
+    const g = (ev.geometry || []).filter(x => x.type === 'Point'); if (!g.length) return null; const last = g[g.length - 1];
+    return { id: ev.id, title: ev.title, lat: last.coordinates[1], lng: last.coordinates[0], date: last.date, link: (ev.sources && ev.sources[0] && ev.sources[0].url) || ev.link, mag: last.magnitudeValue, unit: last.magnitudeUnit };
+  };
+  const eon = cat => get('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=300&category=' + cat).then(j => (j.events || []).map(parseEv).filter(Boolean));
+  const quakes = () => get('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson').then(j => {
+    const f = j.features || [], top = f.slice().sort((a, b) => b.properties.mag - a.properties.mag)[0];
+    return { n: f.length, top: top ? { m: top.properties.mag, place: top.properties.place } : null };
+  });
+  const uvAt = (lat, lng) => get('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=' + lat + '&longitude=' + lng + '&current=uv_index,ozone&hourly=uv_index&forecast_days=1&timezone=auto').then(j => {
+    const h = (j.hourly && j.hourly.uv_index || []).filter(v => v != null);
+    return { uv: j.current && j.current.uv_index, oz: j.current && j.current.ozone, max: h.length ? Math.max.apply(null, h) : null, time: j.current && j.current.time };
+  });
+
+  /* ---------- interfaz ---------- */
+  function kpis() {
+    const c = x => x == null ? '…' : nf(x.length);
+    $('mon-kpis').innerHTML =
+      tile('Volcanes con actividad reportada', c(S.volc), 'NASA EONET · eventos abiertos') +
+      tile('Incendios activos', c(S.fire), 'NASA EONET · eventos abiertos') +
+      tile('Tormentas severas', c(S.storm), 'NASA EONET · eventos abiertos') +
+      tile('Sismos M4.5+ en 24 h', S.quakes ? nf(S.quakes.n) : '…', S.quakes && S.quakes.top ? 'Mayor: M' + nf(S.quakes.top.m, 1) + ' · ' + esc(S.quakes.top.place) : 'USGS') +
+      tile('Índice UV en Medellín', S.uv ? nf(S.uv.uv, 1) + ' · ' + uvCat(S.uv.uv) : '…', S.uv ? 'Máximo de hoy: ' + nf(S.uv.max, 1) : 'Open-Meteo');
+  }
+  function volcList() {
+    const act = v => S.volc && S.volc.some(e => km(v.lat, v.lng, e.lat, e.lng) < 40);
+    $('volc-list').innerHTML = VOLC.map((v, i) => '<li><button type="button" data-v="' + i + '"><span>' + esc(v.n) + '<small>' + esc(v.p) + '</small></span>' + (act(v) ? '<em class="mon-badge hot">Actividad reportada</em>' : '') + '</button></li>').join('');
+    $('eon-list').innerHTML = S.volc ? (S.volc.length ? S.volc.map((e, i) => '<li><button type="button" data-e="' + i + '"><span>' + esc(e.title) + '<small>' + esc((e.date || '').slice(0, 10)) + '</small></span></button></li>').join('') : '<li class="cap">Ahora mismo no hay eventos volcánicos abiertos en NASA EONET.</li>') : '<li class="cap">Cargando…</li>';
+  }
+  function zoneList() { $('zone-list').innerHTML = ZONAS.map((z, i) => '<li><button type="button" data-z="' + i + '"><span>' + esc(z.n) + '</span></button></li>').join(''); }
+  const fly = (lat, lng, z) => { if (map) map.flyTo([lat, lng], z || 6, { duration: .9 }); };
+  async function selVolc(i) {
+    const v = VOLC[i], box = $('mon-detail'); fly(v.lat, v.lng, 8);
+    box.innerHTML = '<h4>' + esc(v.n) + ' · ' + esc(v.p) + '</h4><p class="cap">Consultando sismos cercanos…</p>';
+    try {
+      const j = await get('https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=' + v.lat + '&longitude=' + v.lng + '&maxradiuskm=100&starttime=' + addDays(iso(new Date()), -30) + '&orderby=time&limit=200');
+      const f = j.features || [], top = f.slice().sort((a, b) => (b.properties.mag || 0) - (a.properties.mag || 0))[0], last = f[0];
+      box.innerHTML = '<h4>' + esc(v.n) + ' · ' + esc(v.p) + '</h4><div class="wx-grid">' + tile('Sismos en 100 km', nf(f.length), 'últimos 30 días (USGS)') + tile('Mayor magnitud', top ? 'M' + nf(top.properties.mag, 1) : '–') + tile('Último sismo', last ? new Date(last.properties.time).toLocaleDateString('es-CO') : '–') + '</div><p class="cap">El catálogo de USGS registra sobre todo sismos de magnitud moderada fuera de Estados Unidos, así que un conteo bajo no significa calma. Para el estado oficial y los niveles de alerta consulta a <a href="' + v.l + '" target="_blank" rel="noopener">' + esc(v.ln) + '</a>.</p>';
+    } catch (e) { box.innerHTML = '<h4>' + esc(v.n) + ' · ' + esc(v.p) + '</h4><p class="cap">No se pudieron consultar los sismos ahora. Estado oficial: <a href="' + v.l + '" target="_blank" rel="noopener">' + esc(v.ln) + '</a>.</p>'; }
+  }
+  async function selZone(i) {
+    const z = ZONAS[i], box = $('mon-detail'); fly(z.lat, z.lng, z.lat > 70 || z.lat < -70 ? 3 : 5);
+    box.innerHTML = '<h4>' + esc(z.n) + '</h4><p class="card-desc">' + esc(z.d) + '</p><p class="cap">Consultando el clima de la zona…</p>';
+    try {
+      const j = await get('https://api.open-meteo.com/v1/forecast?latitude=' + z.lat + '&longitude=' + z.lng + '&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,cloud_cover&timezone=auto'), c = j.current;
+      box.innerHTML = '<h4>' + esc(z.n) + '</h4><p class="card-desc">' + esc(z.d) + '</p><div class="wx-grid">' + tile('Temperatura', nf(c.temperature_2m, 1) + ' °C') + tile('Humedad', nf(c.relative_humidity_2m) + ' %') + tile('Viento', nf(c.wind_speed_10m, 1) + ' km/h') + tile('Nubosidad', nf(c.cloud_cover) + ' %') + '</div><p class="cap">Clima actual en el centro de la zona (Open-Meteo). Para vigilar su estado ambiental: <a href="' + z.l + '" target="_blank" rel="noopener">' + esc(z.ln) + '</a>.</p>';
+    } catch (e) { box.innerHTML = '<h4>' + esc(z.n) + '</h4><p class="card-desc">' + esc(z.d) + '</p><p class="cap">Más información: <a href="' + z.l + '" target="_blank" rel="noopener">' + esc(z.ln) + '</a>.</p>'; }
+  }
+  async function queryUV(lat, lng, label) {
+    const b = $('uv-box'); b.innerHTML = '<p class="cap">Consultando…</p>';
+    try {
+      const u = await uvAt(lat, lng);
+      b.innerHTML = '<h4>' + esc(label || ('Punto ' + lat.toFixed(2) + ', ' + lng.toFixed(2))) + '</h4><div class="wx-grid">' + tile('Índice UV ahora', nf(u.uv, 1), uvCat(u.uv)) + tile('UV máximo de hoy', nf(u.max, 1), uvCat(u.max)) + tile('Ozono en superficie', nf(u.oz) + ' µg/m³', 'no es la capa de ozono') + '</div>';
+    } catch (e) { b.innerHTML = '<p class="cap">No se pudo consultar este punto ahora.</p>'; }
+  }
+
+  /* ---------- mapa ---------- */
+  const OZ = d => 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/OMPS_Ozone_Total_Column/default/' + d + '/GoogleMapsCompatible_Level6/{z}/{y}/{x}.png';
+  const SAT = d => 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.png';
+  const mk = (cls, size) => L.divIcon({ className: '', html: '<span class="mk ' + cls + '"></span>', iconSize: [size || 22, size || 22], iconAnchor: [(size || 22) / 2, (size || 22) / 2], popupAnchor: [0, -10] });
+  function draw() {
+    if (!map) return;
+    ['volc', 'fire', 'storm', 'zone'].forEach(k => LY[k].clearLayers());
+    VOLC.forEach((v, i) => L.marker([v.lat, v.lng], { icon: mk('mk-volc'), title: v.n, alt: v.n }).bindPopup('<strong>' + esc(v.n) + '</strong><br>' + esc(v.p)).on('click', () => selVolc(i)).addTo(LY.volc));
+    (S.volc || []).forEach(e => L.marker([e.lat, e.lng], { icon: mk('mk-hot'), title: e.title, alt: e.title }).bindPopup('<strong>' + esc(e.title) + '</strong><br>' + esc((e.date || '').slice(0, 10)) + (e.link ? '<br><a href="' + esc(e.link) + '" target="_blank" rel="noopener">Fuente</a>' : '')).addTo(LY.volc));
+    (S.fire || []).forEach(e => L.marker([e.lat, e.lng], { icon: mk('mk-fire', 14) }).bindPopup('<strong>' + esc(e.title) + '</strong><br>' + esc((e.date || '').slice(0, 10)) + (e.link ? '<br><a href="' + esc(e.link) + '" target="_blank" rel="noopener">Fuente</a>' : '')).addTo(LY.fire));
+    (S.storm || []).forEach(e => L.marker([e.lat, e.lng], { icon: mk('mk-storm', 16) }).bindPopup('<strong>' + esc(e.title) + '</strong><br>' + esc((e.date || '').slice(0, 10)) + (e.link ? '<br><a href="' + esc(e.link) + '" target="_blank" rel="noopener">Fuente</a>' : '')).addTo(LY.storm));
+    ZONAS.forEach((z, i) => L.marker([z.lat, z.lng], { icon: mk('mk-zone', 20), title: z.n, alt: z.n }).bindPopup('<strong>' + esc(z.n) + '</strong>').on('click', () => selZone(i)).addTo(LY.zone));
+  }
+  function sync() {
+    const on = { ozone: 'ly-ozono', sat: 'ly-sat', volc: 'ly-volc', fire: 'ly-fire', storm: 'ly-storm', zone: 'ly-zone' };
+    Object.keys(on).forEach(k => { if (!LY[k]) return; const want = $(on[k]).checked; if (want && !map.hasLayer(LY[k])) LY[k].addTo(map); if (!want && map.hasLayer(LY[k])) map.removeLayer(LY[k]); });
+  }
+  let okTiles = 0, badTiles = 0, tries = 0;
+  function setDate(d) {
+    $('ly-date').value = d; okTiles = 0; badTiles = 0; if (LY.ozone) LY.ozone.setUrl(OZ(d)); if (LY.sat) LY.sat.setUrl(SAT(d));
+    $('mon-note').textContent = 'Capa de ozono: NASA OMPS, imagen del ' + d + '. Los colores muestran la cantidad total de ozono en la columna de aire (unidades Dobson).';
+  }
+  function initMap() {
+    try {
+      map = L.map($('monmap'), { worldCopyJump: true, minZoom: 2, maxZoom: 9, zoomSnap: .5 }).setView([8, -40], 2);
+      map.createPane('basePane').style.zIndex = 150; map.createPane('satPane').style.zIndex = 240; map.createPane('ozonePane').style.zIndex = 250;
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { pane: 'basePane', maxZoom: 18, attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>' }).addTo(map);
+      const d0 = $('ly-date').value || addDays(iso(new Date()), -1);
+      LY.ozone = L.tileLayer(OZ(d0), { pane: 'ozonePane', opacity: .75, maxNativeZoom: 6, maxZoom: 9, attribution: 'NASA GIBS · OMPS' });
+      LY.sat = L.tileLayer(SAT(d0), { pane: 'satPane', maxNativeZoom: 9, maxZoom: 9, attribution: 'NASA GIBS · VIIRS' });
+      LY.ozone.on('tileload', () => { okTiles++; }).on('tileerror', () => {
+        badTiles++;
+        if (okTiles === 0 && badTiles >= 6) {
+          if (tries < 3) { tries++; setDate(addDays($('ly-date').value, -1)); }
+          else $('mon-note').textContent = 'No se pudo cargar la capa de ozono de la NASA para estas fechas. Prueba otra fecha o abre NASA Worldview.';
+        }
+      });
+      ['volc', 'fire', 'storm', 'zone'].forEach(k => { LY[k] = L.layerGroup(); });
+      draw(); sync(); setDate(d0);
+      map.on('click', e => queryUV(e.latlng.lat, e.latlng.lng));
+      window.addEventListener('resize', () => map.invalidateSize());
+    } catch (e) { $('monmap').innerHTML = '<p class="cap" style="padding:1rem">No se pudo cargar el mapa. Puedes usar las listas de la derecha.</p>'; }
+  }
+
+  /* ---------- carga y eventos ---------- */
+  async function load() {
+    $('mon-status').textContent = 'Actualizando datos…';
+    const r = await Promise.allSettled([eon('volcanoes'), eon('wildfires'), eon('severeStorms'), quakes(), uvAt(6.2442, -75.5812)]);
+    S.volc = r[0].status === 'fulfilled' ? r[0].value : null; S.fire = r[1].status === 'fulfilled' ? r[1].value : null; S.storm = r[2].status === 'fulfilled' ? r[2].value : null;
+    S.quakes = r[3].status === 'fulfilled' ? r[3].value : null; S.uv = r[4].status === 'fulfilled' ? r[4].value : null;
+    kpis(); volcList(); draw();
+    const bad = r.filter(x => x.status !== 'fulfilled').length;
+    $('mon-status').textContent = 'Actualizado a las ' + new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' }) + (bad ? ' · ' + bad + ' de 5 fuentes no respondieron' : '');
+    if (S.uv) $('uv-box').innerHTML = '<h4>Medellín</h4><div class="wx-grid">' + tile('Índice UV ahora', nf(S.uv.uv, 1), uvCat(S.uv.uv)) + tile('UV máximo de hoy', nf(S.uv.max, 1), uvCat(S.uv.max)) + tile('Ozono en superficie', nf(S.uv.oz) + ' µg/m³', 'no es la capa de ozono') + '</div>';
+  }
+  $('ly-date').max = iso(new Date()); $('ly-date').min = '2012-01-25'; $('ly-date').value = addDays(iso(new Date()), -1);
+  zoneList(); volcList(); kpis();
+  sec.addEventListener('click', e => {
+    const b = e.target.closest('button[data-v],button[data-z],button[data-e]'); if (!b) return;
+    if (b.dataset.v != null) selVolc(+b.dataset.v); else if (b.dataset.z != null) selZone(+b.dataset.z); else if (S.volc && S.volc[+b.dataset.e]) { const ev = S.volc[+b.dataset.e]; fly(ev.lat, ev.lng, 8); $('mon-detail').innerHTML = '<h4>' + esc(ev.title) + '</h4><p class="cap">Evento abierto en NASA EONET · ' + esc((ev.date || '').slice(0, 10)) + (ev.link ? ' · <a href="' + esc(ev.link) + '" target="_blank" rel="noopener">Ver fuente</a>' : '') + '</p>'; }
+  });
+  ['ly-ozono', 'ly-sat', 'ly-volc', 'ly-fire', 'ly-storm', 'ly-zone'].forEach(id => $(id).addEventListener('change', () => { if (map) sync(); }));
+  $('ly-date').addEventListener('change', () => { tries = 0; if (map) setDate($('ly-date').value); });
+  $('mon-refresh').onclick = load;
+  const tabs = [...sec.querySelectorAll('.mon-tabs [role="tab"]')], panes = ['pane-volc', 'pane-zone', 'pane-oz'].map($);
+  tabs.forEach((t, i) => t.addEventListener('click', () => { tabs.forEach((x, j) => x.setAttribute('aria-selected', j === i)); panes.forEach((p, j) => p.hidden = j !== i); $('mon-detail').innerHTML = ''; }));
+  let started = false;
+  new IntersectionObserver((es, ob) => {
+    if (es.some(e => e.isIntersecting) && !started) {
+      started = true; ob.disconnect(); load();
+      window.mytuxLeaflet(initMap, () => { $('monmap').innerHTML = '<p class="cap" style="padding:1rem">No se pudo cargar el mapa. Puedes usar las listas de la derecha.</p>'; });
+      setInterval(() => { if (sec.classList.contains('active') && !document.hidden) load(); }, 600000);
+    }
+  }, { rootMargin: '200px' }).observe(sec);
+})();
+
+/* ===== CARGADOR COMPARTIDO DE LEAFLET (mapa de campo y mapa de monitoreo) ===== */
+window.mytuxLeaflet = function (ok, err) {
+  if (window.L) { ok(); return; }
+  (window.__lq = window.__lq || []).push([ok, err]);
+  if (window.__lloading) return; window.__lloading = true;
+  const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; l.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; l.crossOrigin = ''; document.head.appendChild(l);
+  const s = document.createElement('script'); s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; s.crossOrigin = '';
+  s.onload = () => { (window.__lq || []).forEach(q => { try { q[0](); } catch (e) {} }); window.__lq = []; };
+  s.onerror = () => { (window.__lq || []).forEach(q => { try { q[1] && q[1](); } catch (e) {} }); window.__lq = []; window.__lloading = false; };
+  document.head.appendChild(s);
+};
+
+/* ===== BARRA DE EXPLORACION: ahora avanza al visitar cada apartado ===== */
+(function () {
+  const SECS = [['inicio', 'Inicio'], ['sobre-mi', 'Sobre mí'], ['proyectos', 'Experiencias'], ['herramientas', 'Herramientas'], ['monitoreo', 'Monitoreo ambiental'], ['material', 'Material ilustrativo'], ['contacto', 'Contacto']];
+  const xp = document.createElement('div');
+  xp.className = 'xp'; xp.setAttribute('aria-hidden', 'true');
+  xp.innerHTML = '<span class="xp-lab xp-t">EXP</span><div class="xp-track"><div class="xp-fill"></div></div><span class="xp-lab xp-b">0%</span>';
+  const fill = xp.querySelector('.xp-fill'), pct = xp.querySelector('.xp-b');
+  const marks = SECS.map(([id, nombre], i) => {
+    const a = document.createElement('a');
+    a.className = 'xp-mark'; a.href = '#' + id; a.tabIndex = -1; a.style.top = (i / (SECS.length - 1) * 100) + '%';
+    a.innerHTML = '<i></i><span>' + nombre + '</span>';
+    xp.appendChild(a);
+    return { id, a };
+  });
+  document.body.appendChild(xp);
+  const visited = new Set();
+  window.addEventListener('viewchange', e => {
+    visited.add(e.detail);
+    marks.forEach(m => { m.a.classList.toggle('done', visited.has(m.id)); m.a.classList.toggle('now', m.id === e.detail); });
+    const p = visited.size / SECS.length; fill.style.height = (p * 100) + '%'; pct.textContent = Math.round(p * 100) + '%';
+  });
+})();
+
+/* ===== NAVEGACION POR APARTADOS: cada apartado es su propio espacio ===== */
+(function () {
+  const root = document.documentElement;
+  const rec = document.getElementById('recomendaciones'), pro = document.getElementById('proyectos'); if (rec && pro) pro.appendChild(rec);
+  const views = ['inicio', 'sobre-mi', 'proyectos', 'herramientas', 'monitoreo', 'material', 'contacto'].map(id => document.getElementById(id)).filter(Boolean);
+  if (!views.length) return;
+  views.forEach((v, i) => { v.classList.add('view'); const h = v.querySelector(':scope > .section-title'); if (h) h.dataset.n = String(i).padStart(2, '0'); });
+  root.classList.add('has-views');
+  try { history.scrollRestoration = 'manual'; } catch (e) {}
+  let current = null;
+  const navLinks = () => document.querySelectorAll('header nav a[href^="#"]');
+  function showView(v) {
+    if (current === v) return false;
+    views.forEach(x => x.classList.toggle('active', x === v)); current = v;
+    navLinks().forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + v.id));
+    window.dispatchEvent(new CustomEvent('viewchange', { detail: v.id }));
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 60);
+    return true;
+  }
+  function target(hash) {
+    const id = (hash || '').replace(/^#/, '') || 'inicio'; let el = null;
+    try { el = document.getElementById(id); } catch (e) {}
+    if (!el) return null;
+    const v = views.indexOf(el) >= 0 ? el : el.closest('section.view');
+    return v ? { el, v } : null;
+  }
+  function go(hash) {
+    const t = target(hash) || { el: views[0], v: views[0] };
+    const changed = showView(t.v);
+    if (t.el !== t.v) {
+      const d = t.el.closest('details.tool'); if (d) d.open = true;
+      setTimeout(() => t.el.scrollIntoView({ behavior: 'smooth', block: 'start' }), changed ? 90 : 0);
+    } else { window.scrollTo({ top: 0, behavior: changed ? 'auto' : 'smooth' }); }
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
+    const h = a.getAttribute('href'); if (h.length < 2 || !target(h)) return;
+    e.preventDefault(); if (location.hash !== h) { try { history.pushState(null, '', h); } catch (er) { location.hash = h; } } go(h);
+  });
+  window.addEventListener('popstate', () => go(location.hash));
+  window.addEventListener('hashchange', () => go(location.hash));
+  go(location.hash || '#inicio');
 })();
 
 /* ===== INTRODUCCION ANIMADA: Mytux al centro -> holograma femenino -> se convierte en energia -> barra de exploracion ===== */
