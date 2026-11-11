@@ -224,28 +224,6 @@
     .intro-hud { font: 600 .75rem monospace; letter-spacing: .22em; line-height: 1.7; color: #a9bcff; text-align: center; opacity: 0; transition: opacity .8s ease 1s; }
     .intro[data-stage="b"] .intro-hud { opacity: 1; }
 
-    /* ===== Apartados como espacios separados ===== */
-    html.has-views main > section.view:not(.active) { display: none !important; }
-    html.has-views main > section.view.active { animation: viewIn .4s ease; }
-    @keyframes viewIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-    main { min-height: 72vh; }
-    .section-title::before { counter-increment: none; content: attr(data-n); }
-    .xp-mark.now i { box-shadow: 0 0 0 3px rgba(143,207,163,.4); }
-    @media (prefers-reduced-motion: reduce) { html.has-views main > section.view.active { animation: none; } }
-
-    /* ===== Inicio: accesos ===== */
-    #inicio .home-more { grid-column: 1 / -1; grid-row: 2; margin-top: 2.5rem; }
-    .home-h { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.5); }
-    .home-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
-    .home-card { display: flex; flex-direction: column; gap: .4rem; padding: 1.05rem 1.15rem; border: 1px solid rgba(255,255,255,.18); border-radius: 12px; background: rgba(12,16,14,.68); backdrop-filter: blur(6px); color: #f3f5f3; text-decoration: none; transition: border-color .2s, transform .2s; }
-    .home-card:hover { border-color: rgba(143,207,163,.7); transform: translateY(-3px); }
-    .home-card strong { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 1.05rem; }
-    .home-card span:last-child { color: #c9d6cd; font-size: .88rem; }
-    html[data-theme="light"] .home-card { background: rgba(255,255,255,.86); color: #17201a; border-color: rgba(0,0,0,.12); }
-    html[data-theme="light"] .home-card span:last-child { color: #53625a; }
-    html[data-theme="light"] .home-h { color: #17201a; text-shadow: none; }
-    @media (max-width: 640px) { #inicio .home-more { grid-row: auto; } }
-
     /* ===== Contacto y preguntas frecuentes ===== */
     .contact-cards .card { gap: .4rem; }
     .faq { display: flex; flex-direction: column; max-width: 52rem; }
@@ -281,7 +259,25 @@
     .mk-fire { width: 10px; height: 10px; border-radius: 50%; background: #f0b36a; box-shadow: 0 0 6px #f0b36a; }
     .mk-storm { width: 12px; height: 12px; border-radius: 50%; background: #c59ae0; box-shadow: 0 0 6px #c59ae0; }
     .mk-zone { width: 14px; height: 14px; border-radius: 50%; background: #8fcfa3; border: 3px solid #fff; box-shadow: 0 0 0 2px #2f7d4f; }
-    .skillgrid + .skillgrid { margin-top: 2.5rem; }
+    /* ===== Numeración automática de los apartados ===== */
+    main { counter-reset: sec; }
+    .section-title::before { counter-increment: sec; content: "0" counter(sec); }
+
+    /* ===== Iconos de las herramientas con color ===== */
+    details.tool > summary .plat-ic { color: var(--ic, #8fcfa3); border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.05); }
+    @supports (color: color-mix(in srgb, red, blue)) { details.tool > summary .plat-ic { border-color: color-mix(in srgb, var(--ic, #8fcfa3) 55%, transparent); background: color-mix(in srgb, var(--ic, #8fcfa3) 16%, transparent); } }
+    #t-sim { --ic: #8fcfa3; } #t-calc { --ic: #e8c872; } #t-wx { --ic: #7cc4f0; } #t-dp { --ic: #b79cff; } #t-plat { --ic: #f0a58f; } #t-fuentes { --ic: #6fd3c4; }
+    html[data-theme="light"] #t-sim { --ic: #2f7d4f; } html[data-theme="light"] #t-calc { --ic: #a8741a; } html[data-theme="light"] #t-wx { --ic: #1d6fa5; }
+    html[data-theme="light"] #t-dp { --ic: #6b4fd6; } html[data-theme="light"] #t-plat { --ic: #c4553a; } html[data-theme="light"] #t-fuentes { --ic: #1a8a7d; }
+    details.tool > summary .plat-ic svg { stroke-width: 1.9; }
+
+    /* ===== Plataformas: ícono de cada página (favicon) ===== */
+    .plat-ic.plat-fav { background: #ffffff; border-color: rgba(0,0,0,.14); }
+    .plat-fav img { width: 26px; height: 26px; display: block; object-fit: contain; }
+    .plat-fav .fb { display: none; color: #2f7d4f; }
+    .plat-fav.err { background: var(--bg-card); border-color: var(--border-color); }
+    .plat-fav.err img { display: none; }
+    .plat-fav.err .fb { display: block; }
   </style>
 </head>
 <body>
@@ -327,17 +323,6 @@
         </div>
       </div>
       <div class="hero-globe"><img src="assets/mundo.gif" alt="Ilustración de una persona sosteniendo el planeta Tierra bajo un halo de llamas" width="439" height="370"></div>
-      <div class="home-more">
-        <h2 class="home-h">Explora la página</h2>
-        <div class="home-grid">
-          <a class="home-card" href="#sobre-mi"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span><strong>Sobre mí</strong><span>Mi formación, mis habilidades y lo que me mueve.</span></a>
-          <a class="home-card" href="#proyectos"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><strong>Experiencias</strong><span>Mi trabajo y mis proyectos, en una línea de tiempo.</span></a>
-          <a class="home-card" href="#herramientas"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><path d="M7 16c3 0 4-9 10-9"/></svg></span><strong>Herramientas</strong><span>Simulador, calculadoras, clima y análisis de datos.</span></a>
-          <a class="home-card" href="#monitoreo"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3.5 3.5 14.5 0 18M12 3c-3.5 3.5-3.5 14.5 0 18"/></svg></span><strong>Monitoreo ambiental</strong><span>Ozono, volcanes y zonas clave, en tiempo casi real.</span></a>
-          <a class="home-card" href="#material"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span><strong>Material ilustrativo</strong><span>Guías, plantillas, mapa de campo, blog y fotos.</span></a>
-          <a class="home-card" href="#contacto"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span><strong>Contacto</strong><span>Escríbeme o sígueme en mis redes.</span></a>
-        </div>
-      </div>
     </section>
 
     <section id="sobre-mi">
@@ -360,12 +345,6 @@
         <div><h3>Intereses</h3><ul><li>Análisis de datos</li><li>Meteorología</li><li>Ciencias de la atmósfera</li><li>Sostenibilidad y recursos naturales</li></ul></div>
       </div>
     
-      <div class="skillgrid" aria-label="Formación y más">
-        <div><h4>Formación</h4><ul><li>Ingeniería Ambiental · Universidad Nacional de Colombia, sede Medellín (en curso)</li><li>Tecnólogo en Sistemas de Gestión Ambiental · SENA · 2022</li><li>Media técnica en sistemas · SENA · 2018</li></ul></div>
-        <div><h4>Cursos (SENA)</h4><ul><li>Emprendimiento innovador · 40 h</li><li>Derechos fundamentales en el trabajo · 48 h</li><li>Calidad de agua: potable y residual · 40 h</li><li>Primeros auxilios · 40 h</li><li>English Dot Works 1 a 6 · 360 h</li></ul></div>
-        <div><h4>Competencias</h4><ul><li>Liderazgo y trabajo en equipo</li><li>Comunicación asertiva</li><li>Resolución de conflictos</li><li>Creatividad y adaptabilidad</li><li>Gestión del tiempo y enfoque al logro</li></ul></div>
-        <div><h4>Idiomas y fuera del trabajo</h4><ul><li>Inglés (nivel 1 de 5)</li><li>Portugués (nivel 2 de 5)</li><li>Senderismo y videojuegos</li><li>Enseñar y compartir saberes</li></ul></div>
-      </div>
     </section>
 
     <section id="proyectos">
@@ -521,35 +500,35 @@
         <div class="tool-body">
 <div class="grid-3">
         <a class="card dl plat" href="https://biodiversidad.co/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z"/><path d="M5 19l8-8"/></svg></span>
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=biodiversidad.co&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z"/><path d="M5 19l8-8"/></svg></span>
           <h3 class="card-title">SiB Colombia</h3>
           <p class="card-desc">Sistema de Información sobre Biodiversidad de Colombia.</p><span class="card-link">Visitar la plataforma ↗</span></a>
         <a class="card dl plat" href="https://conservation.maps.arcgis.com/home/index.html" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3.5 3.5 14.5 0 18M12 3c-3.5 3.5-3.5 14.5 0 18"/></svg></span>
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=conservation.maps.arcgis.com&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3.5 3.5 14.5 0 18M12 3c-3.5 3.5-3.5 14.5 0 18"/></svg></span>
           <h3 class="card-title">Conservation International</h3>
           <p class="card-desc">Portal de mapas y datos de conservación en ArcGIS.</p><span class="card-link">Visitar la plataforma ↗</span></a>
         <a class="card dl plat" href="https://www.sgc.gov.co/?lang=es-CO" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2-6 4 12 3-9 2 3h5"/></svg></span>
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.sgc.gov.co&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2-6 4 12 3-9 2 3h5"/></svg></span>
           <h3 class="card-title">SGC · Servicio Geológico Colombiano</h3>
           <p class="card-desc">Información geocientífica de Colombia: geología, sismos y amenazas.</p><span class="card-link">Visitar la plataforma ↗</span></a>
         <a class="card dl plat" href="https://qgis.org/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg></span>
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=qgis.org&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg></span>
           <h3 class="card-title">QGIS</h3>
           <p class="card-desc">Sistema de información geográfica de código abierto.</p><span class="card-link">Visitar la plataforma ↗</span></a>
         <a class="card dl plat" href="https://www.minambiente.gov.co/normativa/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.minambiente.gov.co&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span>
           <h3 class="card-title">Normativa · MinAmbiente</h3>
           <p class="card-desc">Normativa del Ministerio de Ambiente y Desarrollo Sostenible.</p><span class="card-link">Visitar la plataforma ↗</span></a>
         <a class="card dl plat" href="https://worldview.earthdata.nasa.gov/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="3.6" transform="rotate(-25 12 12)"/></svg></span>
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=worldview.earthdata.nasa.gov&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="3.6" transform="rotate(-25 12 12)"/></svg></span>
           <h3 class="card-title">NASA Worldview</h3>
           <p class="card-desc">Imágenes satelitales de la Tierra casi en tiempo real.</p><span class="card-link">Visitar la plataforma ↗</span></a>
         <a class="card dl plat" href="https://datacalculus.com/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span>
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=datacalculus.com&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span>
           <h3 class="card-title">DataCalculus</h3>
           <p class="card-desc">Plataforma para crear sitios y aplicaciones conversando con IA.</p><span class="card-link">Visitar la plataforma ↗</span></a>
         <a class="card dl plat" href="https://siata.gov.co/siata_nuevo/" target="_blank" rel="noopener">
-          <span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16" y1="13" x2="16" y2="21"/><line x1="8" y1="13" x2="8" y2="21"/><line x1="12" y1="15" x2="12" y2="23"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg></span>
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=siata.gov.co&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16" y1="13" x2="16" y2="21"/><line x1="8" y1="13" x2="8" y2="21"/><line x1="12" y1="15" x2="12" y2="23"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg></span>
           <h3 class="card-title">SIATA</h3>
           <p class="card-desc">Sistema de Alerta Temprana del valle de Aburrá.</p><span class="card-link">Visitar la plataforma ↗</span></a>
       </div>
@@ -993,6 +972,9 @@ document.getElementById('cform').addEventListener('submit', e => {
 /* ===== ANIMACIONES E INTERSECCIONES ===== */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
 document.querySelectorAll('.hero > *, .section-title, .sub-h, .about, .skillgrid, .tl, .cases, .sim, #calc, .grid-3, .posts, .gallery, .contact-box').forEach(el => { el.classList.add('reveal'); io.observe(el); });
+const links = [...document.querySelectorAll('nav a')];
+const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
 
 /* ===== EFECTO DE SONIDO GTA SAN ANDREAS (CON DESBLOQUEO DE AUDIO) ===== */
 (function() {
@@ -1015,6 +997,47 @@ document.querySelectorAll('.hero > *, .section-title, .sub-h, .about, .skillgrid
       hoverSound.play().catch(() => {});
     }
   });
+})();
+
+/* ===== BARRA DE EXPLORACION ===== */
+(function () {
+  const SECS = [['inicio', 'Inicio'], ['sobre-mi', 'Sobre mí'], ['proyectos', 'Experiencias'], ['herramientas', 'Herramientas'], ['monitoreo', 'Monitoreo ambiental'], ['material', 'Material ilustrativo'], ['contacto', 'Contacto']];
+  const xp = document.createElement('div');
+  xp.className = 'xp'; xp.setAttribute('aria-hidden', 'true');
+  xp.innerHTML = '<span class="xp-lab xp-t">EXP</span><div class="xp-track"><div class="xp-fill"></div></div><span class="xp-lab xp-b">0%</span>';
+  const fill = xp.querySelector('.xp-fill'), pct = xp.querySelector('.xp-b');
+  const marks = SECS.map(([id, nombre]) => {
+    const a = document.createElement('a');
+    a.className = 'xp-mark'; a.href = '#' + id; a.tabIndex = -1;
+    a.innerHTML = '<i></i><span>' + nombre + '</span>';
+    xp.appendChild(a);
+    return { id, a, done: false };
+  });
+  document.body.appendChild(xp);
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  function layout() {
+    marks.forEach(m => {
+      const el = document.getElementById(m.id); if (!el) return;
+      const t = Math.min(1, Math.max(0, (el.getBoundingClientRect().top + window.scrollY) / maxScroll()));
+      m.a.style.top = (t * 100) + '%';
+    });
+  }
+  function update() {
+    const p = Math.min(1, Math.max(0, window.scrollY / maxScroll()));
+    fill.style.height = (p * 100) + '%';
+    pct.textContent = Math.round(p * 100) + '%';
+    marks.forEach(m => {
+      if (m.done) return;
+      const el = document.getElementById(m.id);
+      if (el && el.getBoundingClientRect().top < window.innerHeight * 0.6) { m.done = true; m.a.classList.add('done'); }
+    });
+  }
+  let tick = false;
+  window.addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(() => { update(); tick = false; }); } }, { passive: true });
+  window.addEventListener('resize', () => { layout(); update(); });
+  window.addEventListener('load', () => { layout(); update(); });
+  layout(); update();
+  setTimeout(() => { layout(); update(); }, 1200);
 })();
 
 /* ===== ASISTENTE FLOTANTE (respuestas preparadas, sin conexion a ninguna IA) ===== */
@@ -1356,6 +1379,15 @@ document.querySelectorAll('.hero > *, .section-title, .sub-h, .about, .skillgrid
   document.addEventListener('toggle', () => { setTimeout(() => window.dispatchEvent(new Event('resize')), 40); }, true);
 })();
 
+/* ===== Plataformas: si un ícono de página no carga, se muestra el ícono de respaldo ===== */
+(function () {
+  document.querySelectorAll('.plat-fav img').forEach(i => {
+    const err = () => i.parentNode.classList.add('err');
+    i.addEventListener('error', err);
+    if (i.complete && i.currentSrc && i.naturalWidth === 0) err();
+  });
+})();
+
 /* ===== MONITOREO AMBIENTAL: ozono, volcanes, incendios, tormentas y zonas clave (datos abiertos: NASA GIBS y EONET, USGS, Open-Meteo) ===== */
 (function () {
   const sec = document.getElementById('monitoreo'); if (!sec) return;
@@ -1523,7 +1555,7 @@ document.querySelectorAll('.hero > *, .section-title, .sub-h, .about, .skillgrid
     if (es.some(e => e.isIntersecting) && !started) {
       started = true; ob.disconnect(); load();
       window.mytuxLeaflet(initMap, () => { $('monmap').innerHTML = '<p class="cap" style="padding:1rem">No se pudo cargar el mapa. Puedes usar las listas de la derecha.</p>'; });
-      setInterval(() => { if (sec.classList.contains('active') && !document.hidden) load(); }, 600000);
+      setInterval(() => { if (!document.hidden) load(); }, 600000);
     }
   }, { rootMargin: '200px' }).observe(sec);
 })();
@@ -1539,73 +1571,6 @@ window.mytuxLeaflet = function (ok, err) {
   s.onerror = () => { (window.__lq || []).forEach(q => { try { q[1] && q[1](); } catch (e) {} }); window.__lq = []; window.__lloading = false; };
   document.head.appendChild(s);
 };
-
-/* ===== BARRA DE EXPLORACION: ahora avanza al visitar cada apartado ===== */
-(function () {
-  const SECS = [['inicio', 'Inicio'], ['sobre-mi', 'Sobre mí'], ['proyectos', 'Experiencias'], ['herramientas', 'Herramientas'], ['monitoreo', 'Monitoreo ambiental'], ['material', 'Material ilustrativo'], ['contacto', 'Contacto']];
-  const xp = document.createElement('div');
-  xp.className = 'xp'; xp.setAttribute('aria-hidden', 'true');
-  xp.innerHTML = '<span class="xp-lab xp-t">EXP</span><div class="xp-track"><div class="xp-fill"></div></div><span class="xp-lab xp-b">0%</span>';
-  const fill = xp.querySelector('.xp-fill'), pct = xp.querySelector('.xp-b');
-  const marks = SECS.map(([id, nombre], i) => {
-    const a = document.createElement('a');
-    a.className = 'xp-mark'; a.href = '#' + id; a.tabIndex = -1; a.style.top = (i / (SECS.length - 1) * 100) + '%';
-    a.innerHTML = '<i></i><span>' + nombre + '</span>';
-    xp.appendChild(a);
-    return { id, a };
-  });
-  document.body.appendChild(xp);
-  const visited = new Set();
-  window.addEventListener('viewchange', e => {
-    visited.add(e.detail);
-    marks.forEach(m => { m.a.classList.toggle('done', visited.has(m.id)); m.a.classList.toggle('now', m.id === e.detail); });
-    const p = visited.size / SECS.length; fill.style.height = (p * 100) + '%'; pct.textContent = Math.round(p * 100) + '%';
-  });
-})();
-
-/* ===== NAVEGACION POR APARTADOS: cada apartado es su propio espacio ===== */
-(function () {
-  const root = document.documentElement;
-  const rec = document.getElementById('recomendaciones'), pro = document.getElementById('proyectos'); if (rec && pro) pro.appendChild(rec);
-  const views = ['inicio', 'sobre-mi', 'proyectos', 'herramientas', 'monitoreo', 'material', 'contacto'].map(id => document.getElementById(id)).filter(Boolean);
-  if (!views.length) return;
-  views.forEach((v, i) => { v.classList.add('view'); const h = v.querySelector(':scope > .section-title'); if (h) h.dataset.n = String(i).padStart(2, '0'); });
-  root.classList.add('has-views');
-  try { history.scrollRestoration = 'manual'; } catch (e) {}
-  let current = null;
-  const navLinks = () => document.querySelectorAll('header nav a[href^="#"]');
-  function showView(v) {
-    if (current === v) return false;
-    views.forEach(x => x.classList.toggle('active', x === v)); current = v;
-    navLinks().forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + v.id));
-    window.dispatchEvent(new CustomEvent('viewchange', { detail: v.id }));
-    setTimeout(() => window.dispatchEvent(new Event('resize')), 60);
-    return true;
-  }
-  function target(hash) {
-    const id = (hash || '').replace(/^#/, '') || 'inicio'; let el = null;
-    try { el = document.getElementById(id); } catch (e) {}
-    if (!el) return null;
-    const v = views.indexOf(el) >= 0 ? el : el.closest('section.view');
-    return v ? { el, v } : null;
-  }
-  function go(hash) {
-    const t = target(hash) || { el: views[0], v: views[0] };
-    const changed = showView(t.v);
-    if (t.el !== t.v) {
-      const d = t.el.closest('details.tool'); if (d) d.open = true;
-      setTimeout(() => t.el.scrollIntoView({ behavior: 'smooth', block: 'start' }), changed ? 90 : 0);
-    } else { window.scrollTo({ top: 0, behavior: changed ? 'auto' : 'smooth' }); }
-  }
-  document.addEventListener('click', e => {
-    const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
-    const h = a.getAttribute('href'); if (h.length < 2 || !target(h)) return;
-    e.preventDefault(); if (location.hash !== h) { try { history.pushState(null, '', h); } catch (er) { location.hash = h; } } go(h);
-  });
-  window.addEventListener('popstate', () => go(location.hash));
-  window.addEventListener('hashchange', () => go(location.hash));
-  go(location.hash || '#inicio');
-})();
 
 /* ===== INTRODUCCION ANIMADA: Mytux al centro -> holograma femenino -> se convierte en energia -> barra de exploracion ===== */
 (function () {
