@@ -278,6 +278,21 @@
     .plat-fav.err { background: var(--bg-card); border-color: var(--border-color); }
     .plat-fav.err img { display: none; }
     .plat-fav.err .fb { display: block; }
+
+    /* ===== Servicios adicionales: espacio aparte ===== */
+    #servicios { display: none; }
+    html.at-servicios main > section:not(#servicios) { display: none !important; }
+    html.at-servicios #servicios { display: block; min-height: 70vh; }
+    html.at-servicios .xp { display: none; }
+    #servicios .section-title::before { content: "Extra"; }
+    .srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
+    .srv-card { gap: .9rem; }
+    .srv-head { display: flex; align-items: center; gap: .9rem; }
+    .srv-av { flex: none; width: 3.2rem; height: 3.2rem; border-radius: 50%; display: grid; place-items: center; font: 800 1.1rem "Bricolage Grotesque", system-ui, sans-serif; color: var(--c, #8fcfa3); border: 2px solid var(--c, #8fcfa3); background: rgba(255,255,255,.05); }
+    .srv-head .tag { margin-top: .3rem; }
+    .srv-list { margin: 0 0 0 1.1rem; display: flex; flex-direction: column; gap: .3rem; color: var(--text-muted); font-size: .95rem; }
+    .srv-card .dp-actions { margin-top: auto; }
+    .srv-note { margin-top: 1.5rem; }
   </style>
 </head>
 <body>
@@ -299,6 +314,7 @@
           <li><a href="#herramientas">Herramientas</a></li>
           <li><a href="#monitoreo">Monitoreo ambiental</a></li>
           <li><a href="#material">Material ilustrativo</a></li>
+          <li><a href="#servicios">Servicios adicionales</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
@@ -634,6 +650,14 @@
         <button type="button" id="lb-n" aria-label="Foto siguiente">›</button>
       </div>
     </section>
+
+    <section id="servicios">
+      <h2 class="section-title">Servicios adicionales</h2>
+      <p class="sub">Personas de mi confianza que ofrecen sus servicios. Cada una atiende por su cuenta: los acuerdos los haces directamente con ella.</p>
+      <div class="srv-grid" id="srv-grid"></div>
+      <p class="cap srv-note">¿Ofreces un servicio y quieres aparecer aquí? <a href="#contacto">Escríbeme</a>.</p>
+    </section>
+
 
     <section id="contacto">
       <h2 class="section-title">Contacto</h2>
@@ -1058,6 +1082,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     { k: ['mapa', 'mapas', 'lugares', 'sitios', 'ubicacion', 'ubicaciones', 'donde'], a: 'En <a href="#fieldmap">Material ilustrativo</a> hay un mapa con los sitios de trabajo de campo: Copacabana, San Francisco, Tumaco, Santurbán, Belmira y Bello. Cada punto muestra su foto y su año.' },
     { k: ['analisis', 'datos', 'proyecto de datos', 'precipitacion', 'tendencia', 'reproducible', 'python', 'era5', 'codigo', 'script'], a: 'En <a href="#t-dp">Análisis de datos</a> hay un proyecto reproducible: lluvia y temperatura en Medellín desde 1991, con datos de reanálisis ERA5. Calcula la climatología, la tendencia y las anomalías en tu navegador, y trae el script de Python para repetirlo.' },
     { k: ['monitoreo', 'ozono', 'volcan', 'volcanes', 'incendios', 'sismos', 'capa de ozono', 'uv', 'tormentas', 'tiempo real', 'ecolive', 'terremotos'], a: 'En <a href="#monitoreo">Monitoreo ambiental</a> hay un tablero interactivo con la capa de ozono (imágenes de la NASA), volcanes, incendios, tormentas y zonas ambientales clave, con datos abiertos en tiempo casi real.' },
+    { k: ['servicios', 'servicio', 'adicionales', 'abogado', 'abogados', 'derecho', 'computo', 'computador', 'reparacion', 'amazon', 'amigos', 'recomendados'], a: 'En <a href="#servicios">Servicios adicionales</a> hay personas de mi confianza que ofrecen sus servicios, como asesoría legal en temas de familia y compras, mantenimiento y reparación de equipos de cómputo. Cada una atiende por su cuenta.' },
     { k: ['gracias', 'genial', 'perfecto', 'excelente', 'chao', 'adios', 'hasta luego'], a: '¡Con gusto! Si te surge otra duda, aquí estaré.' }
   ];
   const FALLBACK = 'No tengo una respuesta preparada para eso. Prueba preguntando por Brahian, sus experiencias, habilidades, herramientas, descargas o contacto, o escríbele directamente desde <a href="#contacto">Contacto</a>.';
@@ -1571,6 +1596,45 @@ window.mytuxLeaflet = function (ok, err) {
   s.onerror = () => { (window.__lq || []).forEach(q => { try { q[1] && q[1](); } catch (e) {} }); window.__lq = []; window.__lloading = false; };
   document.head.appendChild(s);
 };
+
+/* ===== SERVICIOS ADICIONALES: un espacio aparte (no aparece en la página larga) ===== */
+const SERVICIOS = [
+  // Agrega más personas copiando uno de estos bloques. Si todavía no tienes su correo o su WhatsApp, déjalos en '' y el botón pedirá el contacto por Brahian.
+  { nombre: 'Michael Carrillo', oficio: 'Abogado de familia',
+    resumen: 'Acompañamiento legal en asuntos de familia, con orientación clara y trato cercano.',
+    servicios: ['Asesoría en derecho de familia', 'Custodia, alimentos y régimen de visitas', 'Divorcios y procesos de familia'],
+    correo: '', whatsapp: '' },
+  { nombre: 'Diego Florez', oficio: 'Tecnología y cómputo',
+    resumen: 'Te ayuda a comprar bien tu tecnología y a mantener tus equipos funcionando.',
+    servicios: ['Compras tecnológicas', 'Servicio de mantenimiento y reparación de equipos de cómputo', 'Compras por Amazon'],
+    correo: '', whatsapp: '' }
+];
+(function () {
+  const root = document.documentElement, sec = document.getElementById('servicios'), host = document.getElementById('srv-grid'); if (!sec || !host) return;
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const OWNER = '573164197518', COL = ['#8fcfa3', '#7cc4f0', '#e8c872', '#b79cff', '#f0a58f', '#6fd3c4'];
+  const ini = n => n.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('');
+  const wa = (num, txt) => 'https://wa.me/' + String(num).replace(/\D/g, '') + '?text=' + encodeURIComponent(txt);
+  host.innerHTML = SERVICIOS.map((p, i) => {
+    const c = COL[i % COL.length], btns = [];
+    if (p.correo) btns.push('<a class="btn-secondary" href="mailto:' + esc(p.correo) + '?subject=' + encodeURIComponent('Desde la página de Mytux Corp.') + '">Correo</a>');
+    if (p.whatsapp) btns.push('<a class="btn-secondary" href="' + wa(p.whatsapp, 'Hola ' + p.nombre + ', te escribo desde la página de Mytux Corp.') + '" target="_blank" rel="noopener">WhatsApp</a>');
+    if (!btns.length) btns.push('<a class="btn-secondary" href="' + wa(OWNER, 'Hola Brahian, vi la página y quiero el contacto de ' + p.nombre + ' (' + p.oficio + ').') + '" target="_blank" rel="noopener">Pedir el contacto</a>');
+    return '<article class="card srv-card"><div class="srv-head"><span class="srv-av" style="--c:' + c + '" aria-hidden="true">' + esc(ini(p.nombre)) + '</span><div><h3 class="card-title">' + esc(p.nombre) + '</h3><span class="tag tag-green">' + esc(p.oficio) + '</span></div></div>' +
+      '<p class="card-desc">' + esc(p.resumen) + '</p><ul class="srv-list">' + p.servicios.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul><div class="dp-actions">' + btns.join('') + '</div></article>';
+  }).join('');
+  /* --- este apartado se abre como una página aparte: oculta la página larga mientras esté activo --- */
+  function route() {
+    if (location.hash === '#servicios') { root.classList.add('at-servicios'); window.scrollTo(0, 0); return; }
+    if (root.classList.contains('at-servicios')) {
+      root.classList.remove('at-servicios');
+      window.dispatchEvent(new Event('resize'));
+      const id = location.hash.slice(1), el = id && document.getElementById(id);
+      setTimeout(() => { if (el) el.scrollIntoView({ block: 'start' }); else window.scrollTo(0, 0); }, 30);
+    }
+  }
+  window.addEventListener('hashchange', route); window.addEventListener('popstate', route); route();
+})();
 
 /* ===== INTRODUCCION ANIMADA: Mytux al centro -> holograma femenino -> se convierte en energia -> barra de exploracion ===== */
 (function () {
