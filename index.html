@@ -4,20 +4,29 @@
   <meta charset="UTF-8">
   <script>try{var t=localStorage.getItem("tema");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Mytux Corp. | Proyectos y Gestión Ambiental</title>
+  <title>Mytux · Ambiente, datos y un poco de IA</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
-  <meta name="description" content="Brahian Camilo Muñoz López · Mytux Corp.: proyectos, simuladores y notas sobre ambiente, datos y atmósfera.">
+  <meta name="description" content="Brahian Camilo Muñoz López · Mytux: ambiente, datos y atmósfera. Proyectos, simuladores, monitoreo ambiental, herramientas y notas, desde Medellín.">
   <meta name="theme-color" content="#0f1110">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CO">
-  <meta property="og:title" content="Mytux Corp. · Brahian Camilo Muñoz López">
-  <meta property="og:description" content="Proyectos, simuladores y notas sobre ambiente, datos y atmósfera.">
+  <meta property="og:title" content="Mytux · Ambiente, datos y un poco de IA">
+  <meta property="og:description" content="Proyectos, simuladores, monitoreo ambiental y notas de Brahian Camilo Muñoz López, desde Medellín.">
   <meta property="og:image" content="https://mytux.github.io/assets/og-image.png">
   <meta property="og:url" content="https://mytux.github.io/">
   <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Brahian Camilo Muñoz López","jobTitle":"Tecnólogo en Sistemas de Gestión Ambiental","affiliation":{"@type":"Organization","name":"Mytux Corp."},"sameAs":["https://www.linkedin.com/in/camilo-munoz-projects/","https://github.com/Mytux","https://www.instagram.com/xmytux/"]}</script>
+  <meta name="twitter:title" content="Mytux · Ambiente, datos y un poco de IA">
+  <meta name="twitter:description" content="Proyectos, simuladores, monitoreo ambiental y notas de Brahian Camilo Muñoz López.">
+  <meta name="twitter:image" content="https://mytux.github.io/assets/og-image.png">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="dark light">
+  <link rel="canonical" href="https://mytux.github.io/">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" as="image" href="assets/hero-fondo.jpg" fetchpriority="high">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mytux.github.io/#sitio","url":"https://mytux.github.io/","name":"Mytux","inLanguage":"es-CO","description":"Ambiente, datos y un poco de IA."},{"@type":"Person","@id":"https://mytux.github.io/#persona","name":"Brahian Camilo Muñoz López","url":"https://mytux.github.io/","jobTitle":"Tecnólogo en Sistemas de Gestión Ambiental","affiliation":{"@type":"Organization","name":"Mytux"},"homeLocation":{"@type":"Place","name":"Medellín, Antioquia, Colombia"},"knowsAbout":["Gestión ambiental","Sistemas de gestión ambiental","Análisis de datos","Meteorología","Ciencias de la atmósfera","Sostenibilidad","Tratamiento de aguas residuales industriales"],"sameAs":["https://www.linkedin.com/in/camilo-munoz-projects/","https://github.com/Mytux","https://www.instagram.com/xmytux/"]}]}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Playfair+Display:wght@800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
     .hero h1.brand-title { font-family: "Playfair Display", Georgia, "Times New Roman", serif; font-weight: 800; color: #ffffff; font-size: clamp(4rem, 13vw, 9rem); line-height: .95; letter-spacing: .01em; }
@@ -293,6 +302,36 @@
     .srv-list { margin: 0 0 0 1.1rem; display: flex; flex-direction: column; gap: .3rem; color: var(--text-muted); font-size: .95rem; }
     .srv-card .dp-actions { margin-top: auto; }
     .srv-note { margin-top: 1.5rem; }
+
+    /* ===== Auditoría: ahora mismo, pie de página y botones flotantes ===== */
+    .now { display: flex; flex-wrap: wrap; gap: .6rem 1rem; align-items: center; margin-bottom: 2rem; }
+    .now-l { font: 700 .75rem monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-green); display: inline-flex; align-items: center; gap: .5rem; }
+    .now-l::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent-green); animation: nowPulse 2s infinite; }
+    @keyframes nowPulse { 0% { box-shadow: 0 0 0 0 rgba(143,207,163,.6); } 70% { box-shadow: 0 0 0 8px rgba(143,207,163,0); } 100% { box-shadow: 0 0 0 0 rgba(143,207,163,0); } }
+    .now ul { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; }
+    .now li { padding: .3rem .85rem; border: 1px solid var(--border-color); border-radius: 9999px; background: var(--bg-card); font-size: .88rem; }
+    footer.site-footer { text-align: left; border-top: 1px solid var(--border-color); padding: 3rem max(1.5rem, calc((100% - 1150px) / 2)) calc(2rem + env(safe-area-inset-bottom, 0px)); color: var(--text-muted); font-size: .92rem; }
+    .foot-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 2rem; }
+    @media (max-width: 800px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .foot-grid { grid-template-columns: 1fr; } }
+    .foot-brand { display: block; font: 800 1.7rem "Playfair Display", Georgia, serif; color: var(--text-main); margin-bottom: .4rem; }
+    .foot-h { font: 700 .78rem monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-green); margin-bottom: .6rem; }
+    footer.site-footer ul { list-style: none; display: flex; flex-direction: column; gap: .35rem; padding: 0; }
+    footer.site-footer a { color: var(--text-muted); text-decoration: none; }
+    footer.site-footer a:hover { color: var(--text-main); text-decoration: underline; }
+    .foot-btns { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; }
+    .foot-btns button, .foot-fact button { font: inherit; font-size: .85rem; padding: .4rem .9rem; border-radius: 9999px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); cursor: pointer; }
+    .foot-btns button:hover, .foot-fact button:hover { border-color: var(--accent-green); }
+    .foot-fact { margin-top: 2rem; display: flex; gap: .75rem 1rem; align-items: center; flex-wrap: wrap; padding: 1rem 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-card); color: var(--text-main); }
+    .foot-fact #fact { flex: 1 1 18rem; }
+    .foot-note { margin-top: 1.25rem; font-size: .8rem; max-width: 62rem; }
+    .fab-small { position: fixed; left: 1rem; z-index: 60; width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); cursor: pointer; display: grid; place-items: center; font-size: 1.05rem; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+    .fab-small:hover { border-color: var(--accent-green); }
+    .snd-toggle { bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+    .to-top { bottom: calc(4.2rem + env(safe-area-inset-bottom, 0px)); opacity: 0; pointer-events: none; transition: opacity .25s; }
+    .to-top.show { opacity: 1; pointer-events: auto; }
+    #t-soft { --ic: #f08fb0; } html[data-theme="light"] #t-soft { --ic: #c2417a; }
+    @media (prefers-reduced-motion: reduce) { .now-l::before { animation: none; } }
   </style>
 </head>
 <body>
@@ -365,6 +404,7 @@
 
     <section id="proyectos">
       <h2 class="section-title">Experiencias</h2>
+      <div class="now"><span class="now-l">Ahora mismo</span><ul><li>Estudiando Ingeniería Ambiental</li><li>Liderando la planeación de AMET</li><li>Coordinando Colombian Virtual Reality</li><li>Aprendiendo de IA, datos y atmósfera</li><li>Puliendo esta página</li></ul></div>
       <ol class="tl">
         <li><span class="yr">2025 a 2026</span><div><h3>Operación de la planta de tratamiento de aguas residuales industriales <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Deli - Anne Rose</p><p class="card-desc">Controles diarios de la calidad del agua, mantenimiento del sistema, indicadores del DGA, control de residuos y gestión de proveedores.</p><details class="dp-det"><summary>Ver funciones</summary><ul class="card-desc"><li>Entrega de los indicadores del DGA y de los reportes de la PTARI.</li><li>Verificaciones semanales y mantenimientos de todo el sistema de tratamiento de aguas.</li><li>Preparación de los químicos para el funcionamiento de la planta.</li><li>Toma de muestras y controles diarios de la calidad del agua de salida.</li><li>Control y tabulación de los residuos generados; manejo de proveedores externos de material orgánico, reciclable e inorgánico.</li><li>Lavado y desinfección de las trampas de grasa, y control del orden en el área de basuras.</li><li>Acompañamiento de la fumigación y reporte de anomalías al área de calidad.</li><li>Cumplimiento de las exigencias del Área Metropolitana.</li></ul></details></div></li>
         <li><span class="yr">2025</span><div><h3>Control, rescate y ahuyentamiento de fauna silvestre <span class="tag tag-green">Finalizado</span></h3><p class="card-meta">Soluciones Integrales TM SAS · Relleno sanitario La Pradera · Corantioquia</p><p class="card-desc">Elaboración de actividades de muestreo, métodos de ahuyentamiento, acompañamiento en rescate y control de fauna silvestre, compilación de base de datos y elaboración de informes para Corantioquia en el relleno sanitario La Pradera.</p><details class="dp-det"><summary>Ver funciones</summary><ul class="card-desc"><li>Actividades de muestreo y métodos de ahuyentamiento de fauna silvestre.</li><li>Acompañamiento en el rescate y el control de fauna.</li><li>Compilación de una base de datos y elaboración de informes para Corantioquia.</li></ul></details></div></li>
@@ -405,15 +445,15 @@
 
         <div class="panel" role="tabpanel">
           <div class="ctrl-grid">
-            <div class="grp"><h4 style="color:var(--accent-green)">Escenario 1 · Población A (plagas)</h4>
+            <div class="grp"><h4 aria-level="3" style="color:var(--accent-green)">Escenario 1 · Población A (plagas)</h4>
               <label><span class="lbl">R₀ (tasa neta) <output id="o-r01"></output></span><input type="range" id="r01" min="0.01" max="50" step="0.1" value="5"></label>
               <label><span class="lbl">T (tiempo generacional) <output id="o-t1"></output></span><input type="range" id="t1" min="0.1" max="50" step="0.1" value="15"></label>
               <p class="metric" id="m1"></p></div>
-            <div class="grp"><h4 style="color:var(--accent-blue)">Escenario 2 · Población B (conservación)</h4>
+            <div class="grp"><h4 aria-level="3" style="color:var(--accent-blue)">Escenario 2 · Población B (conservación)</h4>
               <label><span class="lbl">R₀ (tasa neta) <output id="o-r02"></output></span><input type="range" id="r02" min="0.01" max="50" step="0.01" value="0.75"></label>
               <label><span class="lbl">T (tiempo generacional) <output id="o-t2"></output></span><input type="range" id="t2" min="0.1" max="50" step="0.1" value="12"></label>
               <p class="metric" id="m2"></p></div>
-            <div class="grp"><h4>Configuración global</h4>
+            <div class="grp"><h4 aria-level="3">Configuración global</h4>
               <label><span class="lbl">Población inicial (N₀)</span><input type="number" id="n0" min="1" step="10" value="100"></label>
               <label><span class="lbl">Tiempo máximo <output id="o-tm"></output></span><input type="range" id="tm" min="10" max="100" value="50"></label>
               <div class="cta-group"><button type="button" class="btn-primary" id="play">▶ Reproducir</button><button type="button" class="btn-secondary" id="reset">Reiniciar</button></div></div>
@@ -550,6 +590,53 @@
       </div>
         </div>
       </details>
+      <details class="tool" id="t-soft">
+        <summary><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span><span class="tool-head"><span class="tool-t">Software que uso</span><span class="tool-s">Mi caja de herramientas de todos los días</span></span></summary>
+        <div class="tool-body">
+          <div class="grid-3">
+        <a class="card dl plat" href="https://www.python.org/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.python.org&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Python</h3>
+          <p class="card-desc">Para analizar datos, automatizar cosas y armar análisis que se puedan repetir.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://streamlit.io/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=streamlit.io&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Streamlit</h3>
+          <p class="card-desc">Con él armé mi simulador de ecología de poblaciones.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://plotly.com/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=plotly.com&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Plotly</h3>
+          <p class="card-desc">Gráficas interactivas para que los datos se entiendan mejor.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://code.visualstudio.com/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=code.visualstudio.com&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Visual Studio Code</h3>
+          <p class="card-desc">Donde escribo y reviso el código de esta página.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://github.com/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">GitHub</h3>
+          <p class="card-desc">Aquí vive esta página (con GitHub Pages) y mi código.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://qgis.org/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=qgis.org&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">QGIS</h3>
+          <p class="card-desc">Mapas y análisis geográfico.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://www.canva.com/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.canva.com&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Canva</h3>
+          <p class="card-desc">Piezas visuales, presentaciones y material de capacitación.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://www.microsoft.com/microsoft-365" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.microsoft.com&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Microsoft Office</h3>
+          <p class="card-desc">Informes, hojas de cálculo y presentaciones del día a día.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://claude.ai/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Claude</h3>
+          <p class="card-desc">Una de las IA con las que trabajo y aprendo.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://github.com/features/copilot" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">GitHub Copilot</h3>
+          <p class="card-desc">Un compañero de IA para revisar y escribir código.</p><span class="card-link">Visitar ↗</span></a>
+          </div>
+        </div>
+      </details>
       <details class="tool" id="t-fuentes">
         <summary><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span><span class="tool-head"><span class="tool-t">Fuentes y metodología</span><span class="tool-s">De dónde salen los datos y cómo se calculan</span></span></summary>
         <div class="tool-body">
@@ -566,7 +653,7 @@
 
     <section id="monitoreo">
       <h2 class="section-title">Monitoreo ambiental</h2>
-      <p class="sub">Un tablero con datos abiertos en tiempo casi real: la capa de ozono, volcanes, incendios, tormentas y zonas ambientales clave. Toca el mapa y las listas para explorar. Fuentes: NASA (GIBS y EONET), USGS y Open-Meteo.</p>
+      <p class="sub">Aquí miro cómo va el planeta en tiempo casi real: capa de ozono, volcanes, incendios, tormentas y zonas clave. Toca el mapa y las listas para explorar. Los datos son abiertos (NASA, USGS y Open-Meteo).</p>
       <div class="mon-top"><p class="cap" id="mon-status" aria-live="polite">Esperando para cargar los datos…</p><button type="button" class="btn-secondary" id="mon-refresh">Actualizar</button></div>
       <div class="wx-grid" id="mon-kpis"></div>
       <div class="mon-layout">
@@ -590,12 +677,12 @@
             <button type="button" class="tab" role="tab" aria-selected="false">Ozono y UV</button>
           </div>
           <div class="mon-pane" id="pane-volc">
-            <h4>Volcanes de referencia</h4><ul class="mon-list" id="volc-list"></ul>
-            <h4>Actividad abierta (NASA EONET)</h4><ul class="mon-list" id="eon-list"></ul>
+            <h4 aria-level="3">Volcanes de referencia</h4><ul class="mon-list" id="volc-list"></ul>
+            <h4 aria-level="3">Actividad abierta (NASA EONET)</h4><ul class="mon-list" id="eon-list"></ul>
           </div>
-          <div class="mon-pane" id="pane-zone" hidden><h4>Zonas ambientales primordiales</h4><ul class="mon-list" id="zone-list"></ul></div>
+          <div class="mon-pane" id="pane-zone" hidden><h4 aria-level="3">Zonas ambientales primordiales</h4><ul class="mon-list" id="zone-list"></ul></div>
           <div class="mon-pane" id="pane-oz" hidden>
-            <h4>Capa de ozono y radiación UV</h4>
+            <h4 aria-level="3">Capa de ozono y radiación UV</h4>
             <p class="card-desc">El mapa muestra la cantidad total de ozono de la atmósfera, medida por satélite. Toca cualquier punto del mapa para ver su índice UV y el ozono en superficie.</p>
             <div id="uv-box"><p class="cap">Cargando…</p></div>
           </div>
@@ -620,7 +707,7 @@
 
     <section id="material">
       <h2 class="section-title">Material ilustrativo</h2>
-      <p class="sub">Todo lo que acompaña mi trabajo: guías, plantillas descargables, artículos cortos, el mapa de campo y fotos.</p>
+      <p class="sub">Lo que se me ha ido acumulando por el camino: guías, plantillas, enlaces útiles, artículos cortos, el mapa de campo y fotos.</p>
       <h3 class="sub-h">Guías y plantillas</h3>
       <div class="grid-3">
         <a class="card dl" href="https://ambiental-beta.vercel.app/info.html" target="_blank" rel="noopener">
@@ -632,6 +719,41 @@
         <a class="card dl" href="assets/lista-chequeo-rua.xlsx" download>
           <div class="card-head"><h3 class="card-title">Lista de chequeo para el RUA</h3><span class="tag tag-green">Excel</span></div>
           <p class="card-desc">Pasos para preparar el reporte del Registro Único Ambiental, con responsable, fecha y estado.</p><span class="card-link">Descargar ↓</span></a>
+      </div>
+      <h3 class="sub-h">Enlaces que me sirven</h3>
+      <div class="grid-3">
+        <a class="card dl plat" href="https://www.ideam.gov.co/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.ideam.gov.co&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">IDEAM</h3>
+          <p class="card-desc">El instituto de hidrología, meteorología y estudios ambientales de Colombia.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://www.siac.gov.co/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.siac.gov.co&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">SIAC</h3>
+          <p class="card-desc">El Sistema de Información Ambiental de Colombia: datos y visores del país.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://www.datos.gov.co/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.datos.gov.co&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Datos abiertos Colombia</h3>
+          <p class="card-desc">El portal de datos abiertos del Gobierno de Colombia.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://www.gbif.org/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.gbif.org&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">GBIF</h3>
+          <p class="card-desc">Registros de biodiversidad de todo el mundo; SiB Colombia es su nodo en el país.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://www.inaturalist.org/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.inaturalist.org&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">iNaturalist</h3>
+          <p class="card-desc">Para registrar y reconocer especies con ayuda de la comunidad.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://climate.copernicus.eu/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=climate.copernicus.eu&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Copernicus Climate</h3>
+          <p class="card-desc">Datos y reanálisis del clima, como ERA5.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://ourworldindata.org/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=ourworldindata.org&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">Our World in Data</h3>
+          <p class="card-desc">Gráficas claras sobre clima, energía y ambiente.</p><span class="card-link">Visitar ↗</span></a>
+        <a class="card dl plat" href="https://www.earthdata.nasa.gov/" target="_blank" rel="noopener">
+          <span class="plat-ic plat-fav"><img src="https://www.google.com/s2/favicons?domain=www.earthdata.nasa.gov&amp;sz=64" alt="" width="26" height="26" loading="lazy" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></span>
+          <h3 class="card-title">NASA Earthdata</h3>
+          <p class="card-desc">La puerta de entrada a los datos de observación de la Tierra de la NASA.</p><span class="card-link">Visitar ↗</span></a>
       </div>
       <h3 class="sub-h">Nota Verde · Blog</h3>
       <div class="posts" id="posts"></div>
@@ -653,7 +775,7 @@
 
     <section id="servicios">
       <h2 class="section-title">Servicios adicionales</h2>
-      <p class="sub">Personas de mi confianza que ofrecen sus servicios. Cada una atiende por su cuenta: los acuerdos los haces directamente con ella.</p>
+      <p class="sub">Gente de mi parche que ofrece sus servicios. Cada quien atiende por su cuenta: los acuerdos los haces directo con ellos.</p>
       <div class="srv-grid" id="srv-grid"></div>
       <p class="cap srv-note">¿Ofreces un servicio y quieres aparecer aquí? <a href="#contacto">Escríbeme</a>.</p>
     </section>
@@ -688,7 +810,7 @@
         <a class="card dl" href="https://www.linkedin.com/in/camilo-munoz-projects/" target="_blank" rel="noopener"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 11v6M8 8v.01M12 17v-6M12 13c0-2 4-2 4 0v4"/></svg></span><h3 class="card-title">LinkedIn</h3><p class="card-desc">Mi perfil profesional.</p></a>
         <a class="card dl" href="https://www.instagram.com/xmytux/" target="_blank" rel="noopener"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M17 7v.01"/></svg></span><h3 class="card-title">Instagram</h3><p class="card-desc">@xmytux</p></a>
         <a class="card dl" href="https://github.com/Mytux" target="_blank" rel="noopener"><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2m12 4v-3.5a3 3 0 0 0-1-2.5c3.3-.4 6.5-1.600 6.5-7a5.400 5.400 0 0 0-1.500-3.800 5 5 0 0 0-.1-3.700s-1.200-.4-4 1.500a13.500 13.500 0 0 0-7 0C6.200 2.600 5 3 5 3a5 5 0 0 0-.1 3.700A5.400 5.400 0 0 0 3.500 10.500c0 5.400 3.200 6.600 6.500 7a3 3 0 0 0-1 2.500V21"/></svg></span><h3 class="card-title">GitHub</h3><p class="card-desc">Mi código y mis proyectos.</p></a>
-        <a class="card dl" href="CV-Brahian-Munoz.pdf" download><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span><h3 class="card-title">Hoja de vida</h3><p class="card-desc">Descárgala en PDF.</p></a>
+        <a class="card dl" href="assets/CV-Brahian-Munoz.pdf" download><span class="plat-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></span><h3 class="card-title">Hoja de vida</h3><p class="card-desc">Descárgala en PDF.</p></a>
       </div>
       <h3 class="sub-h">Preguntas frecuentes</h3>
       <div class="faq">
@@ -701,8 +823,19 @@
 
   <a class="wa-float" href="https://wa.me/573164197518?text=Hola%20Brahian%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20hablar%20de%20un%20proyecto." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">💬 WhatsApp</a>
 
-  <footer>
-    <p>© 2026 Mytux Corp. · Todos los derechos reservados.</p>
+  <footer class="site-footer">
+    <div class="foot-grid">
+      <div><strong class="foot-brand">Mytux</strong><p>Hecho en Medellín con mucha curiosidad. Ambiente, datos y un poco de IA.</p></div>
+      <div><p class="foot-h">Navegar</p><ul>
+        <li><a href="#inicio">Inicio</a></li><li><a href="#sobre-mi">Sobre mí</a></li><li><a href="#proyectos">Experiencias</a></li><li><a href="#herramientas">Herramientas</a></li><li><a href="#monitoreo">Monitoreo ambiental</a></li><li><a href="#material">Material ilustrativo</a></li><li><a href="#servicios">Servicios adicionales</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
+      <div><p class="foot-h">Conectemos</p><ul>
+        <li><a href="mailto:bmunozl@unal.edu.co">Correo</a></li><li><a href="https://wa.me/573164197518" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="https://www.linkedin.com/in/camilo-munoz-projects/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://www.instagram.com/xmytux/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://github.com/Mytux" target="_blank" rel="noopener">GitHub</a></li></ul></div>
+      <div><p class="foot-h">Atajos</p><div class="foot-btns">
+        <button type="button" id="foot-share">Compartir esta página</button><button type="button" id="foot-mail">Copiar mi correo</button><button type="button" id="foot-vcf">Guardar mi contacto</button></div></div>
+    </div>
+    <div class="foot-fact"><span class="tag tag-green">Dato verde</span><span id="fact" aria-live="polite"></span><button type="button" id="fact-next">Otro dato</button></div>
+    <p class="cap" id="foot-msg" role="status"></p>
+    <p class="foot-note">Para mostrarte datos y mapas, esta página consulta servicios externos: NASA, USGS, Open-Meteo, OpenStreetMap, Google Fonts y los íconos de algunos sitios. No uso cookies ni te sigo; tu preferencia de tema y de sonido se guarda solo en tu navegador. © <span id="foot-year">2026</span> Mytux.</p>
   </footer>
 
 <script>
@@ -1000,27 +1133,30 @@ const links = [...document.querySelectorAll('nav a')];
 const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
 document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
 
-/* ===== EFECTO DE SONIDO GTA SAN ANDREAS (CON DESBLOQUEO DE AUDIO) ===== */
-(function() {
-  const hoverSound = new Audio('assets/select.mp3');
-  hoverSound.volume = 0.3;
-
-  let audioUnlocked = false;
-  document.addEventListener('click', () => { 
-    audioUnlocked = true; 
-  }, { once: true });
-
-  const hoverTargets = 'a, button, .section-title, .card, input, select, textarea, [role="tab"]';
-  
-  document.addEventListener('mouseover', event => {
-    const target = event.target instanceof Element ? event.target.closest(hoverTargets) : null;
-    if (!target || (event.relatedTarget instanceof Node && target.contains(event.relatedTarget))) return;
-    
-    if (audioUnlocked) {
-      hoverSound.currentTime = 0;
-      hoverSound.play().catch(() => {});
-    }
-  });
+/* ===== SONIDO AL PASAR EL CURSOR (assets/select.mp3), con botón para silenciar y respaldo sintético ===== */
+(function () {
+  const SONIDO = { archivo: 'assets/select.mp3' };   // tu sonido de siempre; si el archivo no carga, se usa un sonido sintético
+  const KEY = 'mytux-sonido'; let on = true; try { on = localStorage.getItem(KEY) !== 'off'; } catch (e) {}
+  let ctx = null, unlocked = false, last = 0;
+  let file = SONIDO.archivo ? new Audio(SONIDO.archivo) : null; if (file) { file.volume = .3; file.addEventListener('error', () => { file = null; }); }
+  ['click', 'keydown', 'touchstart'].forEach(t => document.addEventListener(t, () => { unlocked = true; }, { once: true, passive: true }));
+  function blip() {
+    if (!on || !unlocked) return; const now = performance.now(); if (now - last < 70) return; last = now;
+    if (file) { file.currentTime = 0; file.play().catch(() => {}); return; }
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)(); if (ctx.state === 'suspended') ctx.resume();
+      const t = ctx.currentTime, o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(880, t); o.frequency.exponentialRampToValueAtTime(1320, t + .06);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.05, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + .1);
+      o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t + .12);
+    } catch (e) {}
+  }
+  const targets = 'a, button, summary, .section-title, .card, input, select, textarea, [role="tab"]';
+  document.addEventListener('mouseover', e => { const t = e.target instanceof Element ? e.target.closest(targets) : null; if (!t || (e.relatedTarget instanceof Node && t.contains(e.relatedTarget))) return; blip(); });
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'fab-small snd-toggle';
+  const paint = () => { b.textContent = on ? '🔊' : '🔇'; b.setAttribute('aria-label', on ? 'Silenciar los sonidos de la página' : 'Activar los sonidos de la página'); b.title = on ? 'Sonido: activado' : 'Sonido: silenciado'; };
+  b.onclick = () => { on = !on; try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {} paint(); unlocked = true; if (on) blip(); };
+  paint(); document.body.appendChild(b);
 })();
 
 /* ===== BARRA DE EXPLORACION ===== */
@@ -1064,6 +1200,18 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   setTimeout(() => { layout(); update(); }, 1200);
 })();
 
+/* ===== DATOS VERDES (los usan el pie de página y Somada) ===== */
+const FACTS = [
+  'La capa de ozono se mide en unidades Dobson: 100 unidades equivalen a una capa de 1 mm de espesor si se comprimiera a condiciones estándar.',
+  'Los páramos funcionan como esponjas: almacenan y regulan el agua que luego usan muchas ciudades.',
+  'Colombia es uno de los países más biodiversos del planeta.',
+  'El Protocolo de Montreal, de 1987, ayudó a frenar el daño a la capa de ozono.',
+  'Un reanálisis, como ERA5, mezcla modelos y observaciones para reconstruir el clima del pasado.',
+  'El índice UV puede ser alto incluso con el cielo nublado.',
+  'Las partículas PM2.5 son tan pequeñas que pueden llegar hasta los pulmones.',
+  'Cada primavera austral se forma sobre la Antártida el llamado agujero de ozono.'
+];
+
 /* ===== ASISTENTE FLOTANTE (respuestas preparadas, sin conexion a ninguna IA) ===== */
 (function () {
   const norm = t => ' ' + t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9ñ ]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
@@ -1071,7 +1219,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     { k: ['hola', 'buenas', 'hey', 'saludos', 'buenos dias', 'buenas tardes', 'buenas noches'], a: '¡Hola! Soy Somada, la asistente artificial de Mytux. Puedo contarte sobre Brahian, sus experiencias, habilidades, herramientas, descargas o cómo contactarlo. ¿Qué te gustaría saber?' },
     { k: ['quien', 'brahian', 'camilo', 'perfil', 'presentate', 'mytux', 'sobre mi', 'estudia', 'estudio', 'carrera', 'universidad'], a: 'Brahian Camilo Muñoz López es ingeniero ambiental en formación (Universidad Nacional de Colombia, sede Medellín), tecnólogo en Sistemas de Gestión Ambiental y técnico en sistemas. Su enfoque está en el análisis de datos, la sostenibilidad, la meteorología y las ciencias de la atmósfera. Lo cuenta todo en <a href="#sobre-mi">Sobre mí</a>.' },
     { k: ['experiencia', 'experiencias', 'trabajo', 'trabajos', 'trabajado', 'empleo', 'cargo', 'amet', 'realidad virtual', 'deli', 'anne rose', 'soluciones integrales', 'aeronautica', 'trayectoria'], a: 'Entre 2025 y 2026 fue gestor ambiental en Deli - Anne Rose, operando la planta de tratamiento de aguas residuales industriales. Durante 2025 trabajó en control, rescate y ahuyentamiento de fauna silvestre en el relleno sanitario La Pradera, con Soluciones Integrales TM SAS. Desde 2024 lidera el comité de planeación de AMET (capítulo estudiantil de Ingeniería Ambiental, UNAL Medellín), desde 2023 coordina la fundación Colombian Virtual Reality, y entre 2022 y 2023 coordinó proyectos socioambientales a nivel nacional en Soluciones Integrales TM SAS. Más detalles en <a href="#proyectos">Experiencias</a>.' },
-    { k: ['habilidad', 'habilidades', 'sabe', 'sabes', 'skills', 'capacidades', 'especialidad', 'servicios', 'pma', 'sga', 'rua', 'ptar', 'capacitaciones', 'capacitacion'], a: 'Maneja PMA y SGA, matrices legales y ASPI, informes de caracterización, digitalización del RUA, operación de plantas de tratamiento de aguas residuales industriales, coordinación de proyectos, capacitaciones ambientales empresariales y analítica de datos &amp; Business Intelligence. Míralas en <a href="#sobre-mi">Sobre mí</a>.' },
+    { k: ['habilidad', 'habilidades', 'sabe', 'sabes', 'skills', 'capacidades', 'especialidad', 'pma', 'sga', 'rua', 'ptar', 'capacitaciones', 'capacitacion'], a: 'Maneja PMA y SGA, matrices legales y ASPI, informes de caracterización, digitalización del RUA, operación de plantas de tratamiento de aguas residuales industriales, coordinación de proyectos, capacitaciones ambientales empresariales y analítica de datos &amp; Business Intelligence. Míralas en <a href="#sobre-mi">Sobre mí</a>.' },
     { k: ['herramienta', 'herramientas', 'simulador', 'simulacion', 'calculadora', 'calculadoras', 'huella', 'carbono', 'residuos', 'agua', 'poblacion', 'poblacional', 'ecologia'], a: 'En <a href="#t-sim">Herramientas</a> hay un simulador de ecología de poblaciones (trabajo universitario) y <a href="#t-calc">calculadoras</a> de huella de carbono, residuos y agua. Las calculadoras dan estimaciones aproximadas, con valores que puedes cambiar.' },
     { k: ['descarga', 'descargas', 'descargar', 'plantilla', 'plantillas', 'excel', 'matriz', 'chequeo', 'lista', 'cv', 'hoja de vida', 'curriculum', 'pdf'], a: 'Puedes descargar la <a href="assets/matriz-legal-ambiental.xlsx" download>plantilla de matriz legal ambiental</a>, la <a href="assets/lista-chequeo-rua.xlsx" download>lista de chequeo del RUA</a> y la <a href="assets/CV-Brahian-Munoz.pdf" download>hoja de vida</a>.' },
     { k: ['contacto', 'contactar', 'escribir', 'escribirle', 'correo', 'email', 'whatsapp', 'telefono', 'celular', 'linkedin', 'instagram', 'github', 'redes', 'hablar'], a: 'Puedes escribirle a bmunozl@unal.edu.co, por <a href="https://wa.me/573164197518" target="_blank" rel="noopener">WhatsApp</a>, por LinkedIn o Instagram (@xmytux). También hay un formulario en <a href="#contacto">Contacto</a>.' },
@@ -1083,6 +1231,11 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
     { k: ['analisis', 'datos', 'proyecto de datos', 'precipitacion', 'tendencia', 'reproducible', 'python', 'era5', 'codigo', 'script'], a: 'En <a href="#t-dp">Análisis de datos</a> hay un proyecto reproducible: lluvia y temperatura en Medellín desde 1991, con datos de reanálisis ERA5. Calcula la climatología, la tendencia y las anomalías en tu navegador, y trae el script de Python para repetirlo.' },
     { k: ['monitoreo', 'ozono', 'volcan', 'volcanes', 'incendios', 'sismos', 'capa de ozono', 'uv', 'tormentas', 'tiempo real', 'ecolive', 'terremotos'], a: 'En <a href="#monitoreo">Monitoreo ambiental</a> hay un tablero interactivo con la capa de ozono (imágenes de la NASA), volcanes, incendios, tormentas y zonas ambientales clave, con datos abiertos en tiempo casi real.' },
     { k: ['servicios', 'servicio', 'adicionales', 'abogado', 'abogados', 'derecho', 'computo', 'computador', 'reparacion', 'amazon', 'amigos', 'recomendados'], a: 'En <a href="#servicios">Servicios adicionales</a> hay personas de mi confianza que ofrecen sus servicios, como asesoría legal en temas de familia y compras, mantenimiento y reparación de equipos de cómputo. Cada una atiende por su cuenta.' },
+    { k: ['dato verde', 'dato curioso', 'curiosidad', 'sabias que', 'dime un dato'], a: () => 'Dato verde: ' + FACTS[(Math.random() * FACTS.length) | 0] },
+    { k: ['software', 'programas', 'stack', 'python', 'vscode', 'qgis', 'canva', 'copilot', 'claude', 'streamlit', 'plotly', 'office', 'que usas', 'que utilizas'], a: 'Trabaja con Python, Streamlit y Plotly para analizar datos y armar simuladores; VS Code y GitHub para escribir y publicar; QGIS para mapas; Canva y Microsoft Office para diseño e informes; y herramientas de IA como Claude y GitHub Copilot. Están en <a href="#t-soft">Herramientas</a>.' },
+    { k: ['enlaces', 'links', 'recursos', 'portales', 'ideam', 'siac', 'gbif', 'inaturalist', 'copernicus'], a: 'En <a href="#material">Material ilustrativo</a> hay una lista de enlaces que le sirven: IDEAM, SIAC, datos abiertos de Colombia, GBIF, iNaturalist, Copernicus, Our World in Data y NASA Earthdata.' },
+    { k: ['senderismo', 'caminatas', 'caminar', 'hiking', 'montana', 'montanas'], a: 'Le encanta el senderismo. Mira las fotos de páramos y trabajo de campo en <a href="#galeria">la galería</a> y el <a href="#fieldmap">mapa de campo</a>.' },
+    { k: ['videojuegos', 'videojuego', 'gamer', 'gaming', 'jugar'], a: 'En su tiempo libre se le ve haciendo senderismo o jugando videojuegos.' },
     { k: ['gracias', 'genial', 'perfecto', 'excelente', 'chao', 'adios', 'hasta luego'], a: '¡Con gusto! Si te surge otra duda, aquí estaré.' }
   ];
   const FALLBACK = 'No tengo una respuesta preparada para eso. Prueba preguntando por Brahian, sus experiencias, habilidades, herramientas, descargas o contacto, o escríbele directamente desde <a href="#contacto">Contacto</a>.';
@@ -1090,7 +1243,7 @@ document.querySelectorAll('main section[id]').forEach(sec => so.observe(sec));
   function answer(q) {
     const t = norm(q); let best = null, score = 0;
     KB.forEach(e => { const n = e.k.filter(k => t.includes(' ' + k + ' ')).length; if (n > score) { score = n; best = e; } });
-    return best ? best.a : FALLBACK;
+    return best ? (typeof best.a === 'function' ? best.a() : best.a) : FALLBACK;
   }
   const fab = document.createElement('button');
   fab.type = 'button'; fab.className = 'bot-fab'; fab.setAttribute('aria-label', 'Abrir a Somada, la asistente de la página'); fab.setAttribute('aria-expanded', 'false'); fab.textContent = '💬';
@@ -1636,10 +1789,48 @@ const SERVICIOS = [
   window.addEventListener('hashchange', route); window.addEventListener('popstate', route); route();
 })();
 
+/* ===== ARCHIVOS DESCARGABLES: se buscan en assets/ y, si no están ahí, en la raíz ===== */
+(function () {
+  const NAMES = ['CV-Brahian-Munoz.pdf', 'matriz-legal-ambiental.xlsx', 'lista-chequeo-rua.xlsx'], found = {};
+  const exists = u => fetch(u, { method: 'HEAD' }).then(r => r.ok).catch(() => false);
+  NAMES.forEach(async n => {
+    for (const u of ['assets/' + n, n]) { if (await exists(u)) { found[n] = u; break; } }
+    if (found[n]) document.querySelectorAll('a[href$="' + n + '"]').forEach(a => a.setAttribute('href', found[n]));
+  });
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href$=".pdf"], a[href$=".xlsx"]'); if (!a) return;
+    const n = NAMES.find(x => (a.getAttribute('href') || '').endsWith(x)); if (n && found[n]) a.setAttribute('href', found[n]);
+  }, true);
+})();
+
+/* ===== PIE DE PÁGINA: dato verde, compartir, copiar correo, guardar contacto y volver arriba ===== */
+(function () {
+  const $ = id => document.getElementById(id), msg = $('foot-msg'); if (!msg) return;
+  const say = t => { msg.textContent = t; clearTimeout(say.t); say.t = setTimeout(() => { msg.textContent = ''; }, 3500); };
+  $('foot-year').textContent = new Date().getFullYear();
+  let order = [], i = 0;
+  const shuffle = () => { order = FACTS.map((_, k) => k).sort(() => Math.random() - .5); i = 0; };
+  const next = () => { if (i >= order.length) shuffle(); $('fact').textContent = FACTS[order[i++]]; };
+  shuffle(); next(); $('fact-next').onclick = next;
+  $('foot-share').onclick = async () => {
+    const data = { title: document.title, text: 'Mira la página de Mytux: ambiente, datos y un poco de IA.', url: location.origin + location.pathname };
+    try { if (navigator.share) { await navigator.share(data); return; } await navigator.clipboard.writeText(data.url); say('Enlace copiado'); }
+    catch (e) { if (!e || e.name !== 'AbortError') say('No se pudo compartir; copia el enlace de la barra del navegador.'); }
+  };
+  $('foot-mail').onclick = async () => { try { await navigator.clipboard.writeText('bmunozl@unal.edu.co'); say('Correo copiado'); } catch (e) { say('Mi correo: bmunozl@unal.edu.co'); } };
+  $('foot-vcf').onclick = () => {
+    const v = ['BEGIN:VCARD', 'VERSION:3.0', 'N:Muñoz López;Brahian Camilo;;;', 'FN:Brahian Camilo Muñoz López', 'ORG:Mytux', 'TITLE:Ambiente, datos y atmósfera', 'TEL;TYPE=CELL:+573164197518', 'EMAIL:bmunozl@unal.edu.co', 'URL:' + location.origin + location.pathname, 'END:VCARD'].join('\r\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([v], { type: 'text/vcard;charset=utf-8' })); a.download = 'Brahian-Munoz.vcf'; document.body.appendChild(a); a.click(); a.remove(); say('Contacto guardado');
+  };
+  const up = document.createElement('button'); up.type = 'button'; up.className = 'fab-small to-top'; up.textContent = '↑'; up.setAttribute('aria-label', 'Volver arriba'); up.title = 'Volver arriba';
+  up.onclick = () => window.scrollTo({ top: 0 }); document.body.appendChild(up);
+  let tick = false; window.addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(() => { up.classList.toggle('show', window.scrollY > 700); tick = false; }); } }, { passive: true });
+})();
+
 /* ===== INTRODUCCION ANIMADA: Mytux al centro -> holograma femenino -> se convierte en energia -> barra de exploracion ===== */
 (function () {
   try {
-  const CFG = { video: 'assets/intro.mp4', titleMs: 1700, holoEnd: 5400, chargeMs: 700, maxMs: 15000 };
+  const CFG = { video: '', titleMs: 1700, holoEnd: 5400, chargeMs: 700, maxMs: 15000 };
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const root = document.documentElement; root.style.overflow = 'hidden';
   const ov = document.createElement('div');
@@ -1858,8 +2049,7 @@ const SERVICIOS = [
   later(() => { if (!started) { ov.dataset.stage = 'b'; tHolo = performance.now(); } }, CFG.titleMs);
   later(() => { if (!started) tCharge = performance.now(); }, CFG.holoEnd);
   later(() => { if (!started) finish(); }, CFG.holoEnd + CFG.chargeMs);
-  v.src = CFG.video;
-  const pr = v.play(); if (pr && pr.catch) pr.catch(() => {});
+  if (CFG.video) { v.src = CFG.video; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
   skip.focus();
   } catch (err) { document.querySelectorAll('.intro').forEach(e => e.remove()); document.documentElement.style.overflow = ''; }
 })();
